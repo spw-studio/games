@@ -1,0 +1,376 @@
+{
+  "cardapio": {
+    "categorias": [
+      {
+        "id": "lancamentos",
+        "nome": "Lançamentos"
+      },
+      {
+        "id": "entradas",
+        "nome": "Entradas"
+      },
+      {
+        "id": "saladas",
+        "nome": "Saladas"
+      },
+      {
+        "id": "camaroes",
+        "nome": "Camarões"
+      },
+      {
+        "id": "carnes",
+        "nome": "Carnes"
+      },
+      {
+        "id": "peixes",
+        "nome": "Peixes"
+      },
+      {
+        "id": "moquecas",
+        "nome": "Moquecas e Peixadas"
+      },
+      {
+        "id": "frutos-do-mar",
+        "nome": "Frutos do Mar"
+      },
+      {
+        "id": "lagostas",
+        "nome": "Lagostas"
+      },
+      {
+        "id": "frango",
+        "nome": "Frango"
+      },
+      {
+        "id": "kids",
+        "nome": "Kids"
+      },
+      {
+        "id": "inclusivos",
+        "nome": "Inclusivos"
+      },
+      {
+        "id": "gelatos",
+        "nome": "Gelatos"
+      },
+      {
+        "id": "sobremesas",
+        "nome": "Sobremesas"
+      },
+      {
+        "id": "tortas",
+        "nome": "Tortas Inteiras"
+      },
+      {
+        "id": "bebidas",
+        "nome": "Bebidas"
+      }
+    ],
+    "itens": [
+      {
+        "id_prato": "bacalhau-bras",
+        "nome": "Bacalhau à Brás",
+        "categoria": "lancamentos",
+        "descricao": "Clássico português feito com lombo de bacalhau desfiado refogado no azeite de oliva com ovos cremosos e batata palha crocante, finalizado com salsinha e azeitonas Azapa.",
+        "imagem": "/images/cardapio/bacalhau-a-bras.png",
+        "tags_alimentares": [
+          "Peixes",
+          "Ovo",
+          "Glúten",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Batata palha crocante",
+          "Azeitonas Azapa"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "5099",
+            "porcao": "Meia Porção",
+            "detalhe_peso": "250g de Bacalhau",
+            "preco": 147.00
+          },
+          {
+            "codigo": "5098",
+            "porcao": "Porção Inteira",
+            "detalhe_peso": "500g de Bacalhau",
+            "preco": 289.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-al-mare-rosso",
+        "nome": "Camarão al Mare Rosso",
+        "categoria": "lancamentos",
+        "descricao": "06 unidades de camarões GG salteados com alho, cebola e manjericão, envolvidos em molho de tomate italiano fresco com parmesão, servidos com fettuccine.",
+        "imagem": "/images/cardapio/camarao-al-mare-rosso.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Fettuccine ao molho de tomate fresco"
+        ],
+        "possui_variacoes": false,
+        "codigo": "3136",
+        "preco": 154.00
+      },
+      {
+        "id_prato": "bombinha-camarao",
+        "nome": "Bombinha de Camarão",
+        "categoria": "lancamentos",
+        "descricao": "Bolinhas crocantes recheadas com camarão, cream cheese e Catupiry, empanadas e acompanhadas de molho cremoso de maionese e mostarda levemente picante.",
+        "imagem": "/images/cardapio/bombinha-camarao.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Molho cremoso de maionese e mostarda"
+        ],
+        "possui_variacoes": false,
+        "codigo": "1295",
+        "preco": 59.00
+      },
+      {
+        "id_prato": "arpao-pescador",
+        "nome": "Arpão do Pescador",
+        "categoria": "lancamentos",
+        "descricao": "Camarões GG defumados e grelhados no charbroiler, servidos com delicioso molho provençal e alho frito laminado.",
+        "imagem": "/images/cardapio/arpao-pescador.png",
+        "tags_alimentares": [
+          "Crustáceos"
+        ],
+        "acompanhamentos": [
+          "Molho provençal",
+          "Alho frito laminado"
+        ],
+        "possui_variacoes": false,
+        "codigo": "1296",
+        "preco": 102.00
+      },
+      {
+        "id_prato": "camarao-pistola-alho",
+        "nome": "Camarão Pistola ao Alho",
+        "categoria": "lancamentos",
+        "descricao": "Majestosos camarões Pistola (tamanho GG) refogados em azeite fervilhante, lâminas de alho dourado e um leve toque de pimenta. Inspirado no clássico Gambas al Ajillo. Acompanha pão rústico para aproveitar o molho.",
+        "imagem": "/images/cardapio/camarao-pistola-alho.png",
+        "tags_alimentares": [
+          "Crustáceos"
+        ],
+        "acompanhamentos": [
+          "Pão rústico"
+        ],
+        "possui_variacoes": false,
+        "codigo": "1297",
+        "preco": 116.00
+      },
+      {
+        "id_prato": "surf-and-turf",
+        "nome": "Coco Bambu Surf and Turf",
+        "categoria": "lancamentos",
+        "descricao": "Tornedor de filé mignon grelhado, acompanhado de camarões GG grelhados e finalizado com um cremoso molho de frutos do mar perfumado com salsinha fresca. Servido com arroz à parte.",
+        "imagem": "/images/cardapio/surf-and-turf.png",
+        "tags_alimentares": [
+          "Carnes",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Arroz branco"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "6130",
+            "porcao": "Meia Porção",
+            "detalhe_peso": "200g de Carne e 03 Camarões GG",
+            "preco": 176.00
+          },
+          {
+            "codigo": "6129",
+            "porcao": "Porção Inteira",
+            "detalhe_peso": "400g de Carne e 06 Camarões GG",
+            "preco": 264.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-ao-forno",
+        "nome": "Camarão ao Forno",
+        "categoria": "camaroes",
+        "descricao": "Camarões inteiros (com cabeça) levados ligeiramente ao forno, regados com suave molho provençal. Acompanha risoto de limão siciliano.",
+        "imagem": "/images/cardapio/camarao-ao-forno.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Risoto de limão siciliano"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3009",
+            "porcao": "600g de Camarão",
+            "preco": 147.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-em-crosta",
+        "nome": "Camarão em Crosta",
+        "categoria": "camaroes",
+        "descricao": "Camarões em crosta de pão de alho. Acompanha salada de alface americana, tomate, azeitona verde, palmito, pimentão e cebola. Acompanha risoto de limão siciliano.",
+        "imagem": "/images/cardapio/camarao-em-crosta.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Salada fresca",
+          "Risoto de limão siciliano"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3017",
+            "porcao": "2 Pessoas - 380g de Camarão",
+            "preco": 215.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-ipanema",
+        "nome": "Camarão Ipanema",
+        "categoria": "camaroes",
+        "descricao": "Camarões salteados no azeite com alho, cebola, pimentão, coentro e tomate. Servidos sobre arroz regado com um toque de leite de coco e batata palha.",
+        "imagem": "/images/cardapio/camarao-ipanema.png",
+        "tags_alimentares": [
+          "Crustáceos"
+        ],
+        "acompanhamentos": [
+          "Arroz com leite de coco",
+          "Batata palha"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3061",
+            "porcao": "2 Pessoas - 220g de Camarão",
+            "preco": 173.00
+          },
+          {
+            "codigo": "3026",
+            "porcao": "4 Pessoas - 380g de Camarão",
+            "preco": 241.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-mucuripe",
+        "nome": "Camarão Mucuripe",
+        "categoria": "camaroes",
+        "descricao": "Camarões com espaguete italiano coberto com delicioso molho de tomate fresco acrescido de tomate seco, nata, azeitona preta e rúcula.",
+        "imagem": "/images/cardapio/camarao-mucuripe.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Espaguete italiano ao molho de tomate fresco"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3089",
+            "porcao": "2 Pessoas - 220g de Camarão",
+            "preco": 185.00
+          },
+          {
+            "codigo": "3032",
+            "porcao": "4 Pessoas - 380g de Camarão",
+            "preco": 272.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-provençal",
+        "nome": "Camarão Provençal",
+        "categoria": "camaroes",
+        "descricao": "Camarões puxados no azeite extra virgem, alho e cebola, flambados com vinho branco, aromatizados com ervas de Provence, com molho de tomate fresco. Servido sobre fettuccine italiano com molho à base de creme de leite e um toque de limão siciliano.",
+        "imagem": "/images/cardapio/camarao-provençal.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Fettuccine ao molho cremoso"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3035",
+            "porcao": "420g de Camarão",
+            "preco": 252.00
+          }
+        ]
+      },
+      {
+        "id_prato": "carbonara-coco-bambu",
+        "nome": "Carbonara Coco Bambu",
+        "categoria": "camaroes",
+        "descricao": "Carbonara de camarão com fettuccine e molho feito com gema de ovo, queijo parmesão, creme de leite fresco, pimenta do reino, bacon e finalizado com farofa crocante de panko.",
+        "imagem": "/images/cardapio/carbonara-coco-bambu.png",
+        "tags_alimentares": [
+          "Ovo",
+          "Glúten",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Fettuccine ao molho carbonara",
+          "Farofa crocante de panko"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3065",
+            "porcao": "2 Pessoas - 220g de Camarão",
+            "preco": 228.00
+          },
+          {
+            "codigo": "3040",
+            "porcao": "4 Pessoas - 380g de Camarão",
+            "preco": 361.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-grelhado",
+        "nome": "Camarão Grelhado",
+        "categoria": "camaroes",
+        "descricao": "Um prato rico em proteína com 8 unidades de camarões grandes grelhados com tomate, brócolis, abóbora, abobrinha, palmito, cenoura, batata e cebola.",
+        "imagem": "/images/cardapio/camarao-grelhado.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Legumes variados"
+        ],
+        "possui_variacoes": false,
+        "codigo": "3022",
+        "preco": 104.00
+      }
+    ]
+  }
+}
