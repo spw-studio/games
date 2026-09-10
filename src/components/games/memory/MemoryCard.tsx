@@ -125,16 +125,18 @@ export function MemoryCard({
                     {product.nome}
                   </span>
                 </div>
+
+              </div>
+
+              {/* Descrição textual do prato */}
+              <div className="my-auto overflow-y-auto pr-1 py-1 space-y-1">
                 {categoryName && (
                   <span className="rounded bg-brand-50 px-1.5 py-0.5 text-[9px] font-semibold text-brand-800 border border-brand-200 shrink-0">
                     {categoryName}
                   </span>
                 )}
-              </div>
-
-              {/* Descrição textual do prato */}
-              <div className="my-auto overflow-y-auto pr-1 py-1 space-y-1">
                 <p className="text-[11px] sm:text-xs text-gray-700 leading-relaxed font-normal">
+
                   {product.descricao}
                 </p>
                 {product.acompanhamentos && product.acompanhamentos.length > 0 && (
