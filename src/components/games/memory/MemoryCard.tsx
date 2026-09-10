@@ -56,9 +56,8 @@ export function MemoryCard({
       aria-disabled={disabled || card.isMatched}
     >
       <div
-        className={`relative h-full w-full rounded-2xl shadow-md transition-transform duration-300 [transform-style:preserve-3d] ${
-          isFlipped ? '[transform:rotateY(180deg)]' : 'group-hover:-translate-y-1'
-        } ${card.isMatched ? 'ring-2 ring-emerald-500 shadow-emerald-500/20 shadow-lg' : ''}`}
+        className={`relative h-full w-full rounded-2xl shadow-md transition-transform duration-300 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : 'group-hover:-translate-y-1'
+          } ${card.isMatched ? 'ring-2 ring-emerald-500 shadow-emerald-500/20 shadow-lg' : ''}`}
       >
         {/* =========================================================
             FACE FRONTAL (CARTA OCULTA)
@@ -122,7 +121,7 @@ export function MemoryCard({
               <div className="flex items-center justify-between gap-1 border-b border-cream-200 pb-1.5">
                 <div className="flex items-center gap-1.5 text-brand-800">
                   <FileText className="w-3.5 h-3.5 text-gold-600 shrink-0" />
-                  <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-brand-900 truncate">
+                  <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-brand-900">
                     {product.nome}
                   </span>
                 </div>

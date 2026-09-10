@@ -59,11 +59,10 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all ${
-                  isActive
+                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all ${isActive
                     ? 'bg-white/10 text-gold-200 shadow-sm border border-gold-400/30'
                     : 'text-cream-200/80 hover:bg-white/5 hover:text-white'
-                }`}
+                  }`}
               >
                 <Icon className="h-4 w-4" />
                 <span>{link.label}</span>
@@ -86,7 +85,7 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
               <span className="block text-[10px] text-cream-200/60 uppercase tracking-wider font-light">
                 Jogador
               </span>
-              <span className="block text-xs sm:text-sm font-semibold text-gold-200 truncate max-w-[110px] sm:max-w-[140px]">
+              <span className="block text-xs sm:text-sm font-semibold text-gold-200 max-w-[110px] sm:max-w-[140px]">
                 {player ? player.nome : 'Visitante'}
               </span>
             </div>
@@ -107,9 +106,8 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
             <Link
               key={link.href}
               href={link.href}
-              className={`flex flex-col items-center gap-1 rounded-lg px-3 py-1 text-[11px] font-medium transition-colors ${
-                isActive ? 'text-gold-300 font-semibold' : 'text-cream-300/70 hover:text-white'
-              }`}
+              className={`flex flex-col items-center gap-1 rounded-lg px-3 py-1 text-[11px] font-medium transition-colors ${isActive ? 'text-gold-300 font-semibold' : 'text-cream-300/70 hover:text-white'
+                }`}
             >
               <Icon className="h-4 w-4" />
               <span>{link.label}</span>
