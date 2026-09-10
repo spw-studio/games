@@ -370,6 +370,419 @@
         "possui_variacoes": false,
         "codigo": "3022",
         "preco": 104.00
+      },
+      {
+        "id_prato": "camarao-coco-bambu",
+        "nome": "Camarão Coco Bambu",
+        "categoria": "camaroes",
+        "descricao": "Camarões recheados com Catupiry® e empanados, servidos sobre arroz cremoso com camarão, ervilhas e presunto, cobertos com molho branco e gratinados com muçarela e parmesão. Acompanha batata palha artesanal.",
+        "imagem": "/images/cardapio/camarao-coco-bambu.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose",
+          "Leite"
+        ],
+        "acompanhamentos": [
+          "Arroz cremoso com camarão, ervilhas e presunto",
+          "Batata palha artesanal"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3107",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "276g de Camarão",
+            "preco": 228.00
+          },
+          {
+            "codigo": "3056",
+            "porcao": "3 Pessoas",
+            "detalhe_peso": "409g de Camarão",
+            "preco": 270.00
+          },
+          {
+            "codigo": "3014",
+            "porcao": "6 Pessoas",
+            "detalhe_peso": "758g de Camarão",
+            "preco": 440.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-coco-brasil",
+        "nome": "Camarão Coco Brasil",
+        "categoria": "camaroes",
+        "descricao": "Camarões empanados recheados com Catupiry®, servidos sobre arroz cremoso de moqueca com camarão e coentro, cobertos com batata palha. Acompanha farofa de panko com bacon e pimenta-da-jamaica.",
+        "imagem": "/images/cardapio/camarao-coco-brasil.png",
+        "tags_alimentares": [
+          "Ovo",
+          "Glúten",
+          "Peixes",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Arroz de moqueca cremoso",
+          "Farofa de panko com bacon"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3100",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "276g de Camarão",
+            "preco": 209.00
+          },
+          {
+            "codigo": "3055",
+            "porcao": "3 Pessoas",
+            "detalhe_peso": "409g de Camarão",
+            "preco": 252.00
+          },
+          {
+            "codigo": "3011",
+            "porcao": "6 Pessoas",
+            "detalhe_peso": "758g de Camarão",
+            "preco": 426.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-noronha",
+        "nome": "Camarão Grelhado Fernando de Noronha",
+        "categoria": "camaroes",
+        "descricao": "Camarões salteados no azeite e alho, acompanhados de legumes, palmito, batata recheada, tomates cereja e muçarela de búfala, cobertos com escalivada leve e óleo de ervas. Servido com arroz de brócolis.",
+        "imagem": "/images/cardapio/camarao-noronha.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Arroz de brócolis",
+          "Legumes variados"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3018",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "380g de Camarão",
+            "preco": 215.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-internacional",
+        "nome": "Camarão Internacional",
+        "categoria": "camaroes",
+        "descricao": "Camarões servidos sobre arroz cremoso com ervilhas e presunto, envolvidos em molho branco e gratinados com muçarela e parmesão. Acompanha batata palha artesanal.",
+        "imagem": "/images/cardapio/camarao-internacional.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose",
+          "Leite"
+        ],
+        "acompanhamentos": [
+          "Arroz cremoso com ervilhas e presunto",
+          "Batata palha artesanal"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3060",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "220g de Camarão",
+            "preco": 185.00
+          },
+          {
+            "codigo": "3025",
+            "porcao": "4 Pessoas",
+            "detalhe_peso": "380g de Camarão",
+            "preco": 272.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-jurere",
+        "nome": "Camarão Jurerê",
+        "categoria": "camaroes",
+        "descricao": "Camarões salteados no azeite com alho e cebola, flambados no vinho branco e aromatizados com ervas de Provence. Servidos com molho de tomate fresco sobre fettuccine italiano ao creme de leite e limão siciliano.",
+        "imagem": "/images/cardapio/camarao-jurere.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose"
+        ],
+        "acompanhamentos": [
+          "Fettuccine ao molho cremoso"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3029",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "220g de Camarão",
+            "preco": 194.00
+          },
+          {
+            "codigo": "3122",
+            "porcao": "4 Pessoas",
+            "detalhe_peso": "380g de Camarão",
+            "preco": 274.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-monaco",
+        "nome": "Camarão Mônaco",
+        "categoria": "camaroes",
+        "descricao": "Camarões empanados servidos com risoto de aspargos e parmesão, finalizados com lâminas de amêndoas torradas.",
+        "imagem": "/images/cardapio/camarao-monaco.png",
+        "tags_alimentares": [
+          "Ovo",
+          "Glúten",
+          "Crustáceos",
+          "Lactose",
+          "Oleaginosas"
+        ],
+        "acompanhamentos": [
+          "Risoto de aspargos e parmesão",
+          "Amêndoas torradas"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3071",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "220g de Camarão",
+            "preco": 165.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-siciliano",
+        "nome": "Camarão Siciliano",
+        "categoria": "camaroes",
+        "descricao": "06 camarões recheados com Catupiry® e empanados, servidos sobre risoto de limão siciliano, decorados com salsinha e acompanhados de batata palha.",
+        "imagem": "/images/cardapio/camarao-siciliano.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose",
+          "Ovo",
+          "Leite"
+        ],
+        "acompanhamentos": [
+          "Risoto de limão siciliano",
+          "Batata palha artesanal"
+        ],
+        "possui_variacoes": false,
+        "codigo": "3101",
+        "preco": 166.00
+      },
+      {
+        "id_prato": "praia-boa-viagem",
+        "nome": "Praia de Boa Viagem",
+        "categoria": "camaroes",
+        "descricao": "Camarões refogados com alho e cebola, flambados no vinho branco. Servidos sobre espaguete ao molho bechamel e espinafre, gratinados com muçarela e parmesão.",
+        "imagem": "/images/cardapio/praia-boa-viagem.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose",
+          "Leite"
+        ],
+        "acompanhamentos": [
+          "Espaguete ao molho bechamel e espinafre"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3066",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "220g de Camarão",
+            "preco": 187.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-florentina",
+        "nome": "Camarão Florentina",
+        "categoria": "camaroes",
+        "descricao": "Camarões refogados com alho e cebola, flambados no vinho branco. Servidos sobre espaguete ao molho bechamel e espinafre, gratinados com muçarela e parmesão.",
+        "imagem": "/images/cardapio/camarao-florentina.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose",
+          "Leite"
+        ],
+        "acompanhamentos": [
+          "Espaguete ao molho bechamel e espinafre"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3057",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "220g de Camarão",
+            "preco": 198.00
+          },
+          {
+            "codigo": "3020",
+            "porcao": "4 Pessoas",
+            "detalhe_peso": "380g de Camarão",
+            "preco": 284.00
+          }
+        ]
+      },
+      {
+        "id_prato": "praia-buzios",
+        "nome": "Praia de Búzios",
+        "categoria": "camaroes",
+        "descricao": "Arroz de leite com queijo coalho coberto com camarões refogados com coentro, cebola, alho, tomate fresco e nata. Gratinado com queijo coalho e coberto com batata palha.",
+        "imagem": "/images/cardapio/praia-buzios.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose",
+          "Leite"
+        ],
+        "acompanhamentos": [
+          "Arroz de leite com queijo coalho",
+          "Batata palha artesanal"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3067",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "220g de Camarão",
+            "preco": 173.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-iracema",
+        "nome": "Camarão Iracema",
+        "categoria": "camaroes",
+        "descricao": "Arroz de queijo coalho coberto com camarões refogados com coentro, cebola, alho, tomate fresco e nata. Gratinado com queijo coalho e servido com mandioca frita.",
+        "imagem": "/images/cardapio/camarao-iracema.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose",
+          "Leite"
+        ],
+        "acompanhamentos": [
+          "Arroz de queijo coalho",
+          "Mandioca frita"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3062",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "220g de Camarão",
+            "preco": 185.00
+          },
+          {
+            "codigo": "3027",
+            "porcao": "4 Pessoas",
+            "detalhe_peso": "380g de Camarão",
+            "preco": 253.00
+          }
+        ]
+      },
+      {
+        "id_prato": "praia-olinda",
+        "nome": "Praia de Olinda",
+        "categoria": "camaroes",
+        "descricao": "Camarões refogados com alho e cebola, servidos sobre arroz cremoso com manjericão, envolvido em molho branco e gratinado com muçarela. Acompanha batata palha.",
+        "imagem": "/images/cardapio/praia-olinda.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose",
+          "Leite"
+        ],
+        "acompanhamentos": [
+          "Arroz cremoso com manjericão",
+          "Batata palha artesanal"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3069",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "220g de Camarão",
+            "preco": 173.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-mediterraneo",
+        "nome": "Camarão Mediterrâneo",
+        "categoria": "camaroes",
+        "descricao": "Camarões refogados no azeite com alho e cebola, servidos sobre arroz cremoso com manjericão, cobertos com molho branco e gratinados com muçarela e parmesão. Acompanha batata palha.",
+        "imagem": "/images/cardapio/camarao-mediterraneo.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos",
+          "Lactose",
+          "Leite"
+        ],
+        "acompanhamentos": [
+          "Arroz cremoso com manjericão",
+          "Batata palha artesanal"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3064",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "220g de Camarão",
+            "preco": 184.00
+          },
+          {
+            "codigo": "3031",
+            "porcao": "4 Pessoas",
+            "detalhe_peso": "380g de Camarão",
+            "preco": 255.00
+          }
+        ]
+      },
+      {
+        "id_prato": "camarao-scampi",
+        "nome": "Camarão Scampi",
+        "categoria": "camaroes",
+        "descricao": "Espaguete com camarões, manteiga, alho, bacon crocante, parmesão, farinha panko e limão siciliano.",
+        "imagem": "/images/cardapio/camarao-scampi.png",
+        "tags_alimentares": [
+          "Glúten",
+          "Crustáceos"
+        ],
+        "acompanhamentos": [
+          "Espaguete ao molho Scampi"
+        ],
+        "possui_variacoes": true,
+        "variacoes": [
+          {
+            "codigo": "3085",
+            "porcao": "2 Pessoas",
+            "detalhe_peso": "220g de Camarão",
+            "preco": 154.00
+          },
+          {
+            "codigo": "3083",
+            "porcao": "4 Pessoas",
+            "detalhe_peso": "380g de Camarão",
+            "preco": 254.00
+          }
+        ]
       }
     ]
   }
