@@ -60,8 +60,8 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
                 key={link.href}
                 href={link.href}
                 className={`flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all ${isActive
-                    ? 'bg-white/10 text-gold-200 shadow-sm border border-gold-400/30'
-                    : 'text-cream-200/80 hover:bg-white/5 hover:text-white'
+                  ? 'bg-white/10 text-gold-200 shadow-sm border border-gold-400/30'
+                  : 'text-cream-200/80 hover:bg-white/5 hover:text-white'
                   }`}
               >
                 <Icon className="h-4 w-4" />
@@ -75,20 +75,10 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenPlayerModal}
-            className="flex items-center gap-2.5 rounded-xl bg-white/10 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-medium text-white hover:bg-white/15 border border-white/10 transition-all active:scale-95"
+            className="flex items-center gap-2.5 rounded-full bg-white/10 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-medium text-white hover:bg-white/15 border border-white/10 transition-all active:scale-95"
             title="Clique para editar seu nome"
           >
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/40">
-              <User className="h-4 w-4" />
-            </div>
-            <div className="text-left">
-              <span className="block text-[10px] text-cream-200/60 uppercase tracking-wider font-light">
-                Jogador
-              </span>
-              <span className="block text-xs sm:text-sm font-semibold text-gold-200 max-w-[110px] sm:max-w-[140px]">
-                {player ? player.nome : 'Visitante'}
-              </span>
-            </div>
+            <User className="h-4 w-4" />
           </button>
         </div>
       </div>
