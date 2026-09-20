@@ -111,7 +111,7 @@ export function MemoryCard({
                   {product.nome}
                 </span>
                 <span className="mt-0.5 text-[10px] uppercase tracking-wider text-gold-600 font-semibold">
-                  Foto do Prato
+                  Categoria: {product.categoria}
                 </span>
               </div>
             </div>
