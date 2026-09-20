@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import Link from 'next/link';
-import { Brain, HelpCircle, BadgeDollarSign, Utensils, Play, Sparkles } from 'lucide-react';
+import { Brain, HelpCircle, BadgeDollarSign, Utensils, Play, Sparkles, Wine, Search } from 'lucide-react';
 import { getAllGames } from '@/lib/games/registry';
 
 export default function JogosPage() {
@@ -16,6 +16,10 @@ export default function JogosPage() {
         return <HelpCircle className="h-8 w-8 text-gold-300" />;
       case 'BadgeDollarSign':
         return <BadgeDollarSign className="h-8 w-8 text-gold-300" />;
+      case 'Wine':
+        return <Wine className="h-8 w-8 text-gold-300" />;
+      case 'Search':
+        return <Search className="h-8 w-8 text-gold-300" />;
       default:
         return <Utensils className="h-8 w-8 text-gold-300" />;
     }

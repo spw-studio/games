@@ -17,6 +17,7 @@ import {
   BadgeDollarSign,
   Utensils,
   History,
+  Wine,
 } from 'lucide-react';
 import {
   AreaChart,
@@ -63,6 +64,8 @@ export default function HomePage() {
         return <HelpCircle className="h-7 w-7 text-gold-300" />;
       case 'BadgeDollarSign':
         return <BadgeDollarSign className="h-7 w-7 text-gold-300" />;
+      case 'Wine':
+        return <Wine className="h-7 w-7 text-gold-300" />;
       default:
         return <Utensils className="h-7 w-7 text-gold-300" />;
     }

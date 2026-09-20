@@ -787,6 +787,237 @@
             "preco": 254.00
           }
         ]
+      },
+      {
+        "id_prato": "caipirinha-tradicional",
+        "nome": "Caipirinha Tradicional",
+        "categoria": "drinks",
+        "descricao": "Clássico brasileiro elaborado com cachaça artesanal, limão fresco macerado, açúcar e cubos de gelo.",
+        "imagem": "/images/cardapio/caipirinha.png",
+        "tags_alimentares": [],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7001",
+        "preco": 32.00,
+        "ingredientes": [
+          "Cachaça",
+          "Limão",
+          "Açúcar",
+          "Gelo"
+        ]
+      },
+      {
+        "id_prato": "mojito-cubano",
+        "nome": "Mojito Cubano",
+        "categoria": "drinks",
+        "descricao": "Refrescante coquetel de origem caribenha com rum branco, folhas de hortelã fresca, suco de limão, açúcar, água com gás e gelo.",
+        "imagem": "/images/cardapio/mojito.png",
+        "tags_alimentares": [],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7002",
+        "preco": 36.00,
+        "ingredientes": [
+          "Rum Branco",
+          "Hortelã",
+          "Limão",
+          "Açúcar",
+          "Água com Gás",
+          "Gelo"
+        ]
+      },
+      {
+        "id_prato": "gin-tonica-classico",
+        "nome": "Gin Tônica Clássico",
+        "categoria": "drinks",
+        "descricao": "Harmoniosa combinação botânica de gin premium, água tônica cristalina, rodelas de limão siciliano, bagas de zimbro e muito gelo.",
+        "imagem": "/images/cardapio/gin-tonica.png",
+        "tags_alimentares": [],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7003",
+        "preco": 39.00,
+        "ingredientes": [
+          "Gin",
+          "Água Tônica",
+          "Limão Siciliano",
+          "Zimbro",
+          "Gelo"
+        ]
+      },
+      {
+        "id_prato": "aperol-spritz",
+        "nome": "Aperol Spritz",
+        "categoria": "drinks",
+        "descricao": "Ícone do aperitivo italiano composto por Aperol, espumante Prosecco, um splash de água com gás, meia-lua de laranja e gelo.",
+        "imagem": "/images/cardapio/aperol-spritz.png",
+        "tags_alimentares": [],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7004",
+        "preco": 42.00,
+        "ingredientes": [
+          "Aperol",
+          "Espumante Prosecco",
+          "Água com Gás",
+          "Laranja",
+          "Gelo"
+        ]
+      },
+      {
+        "id_prato": "moscow-mule",
+        "nome": "Moscow Mule",
+        "categoria": "drinks",
+        "descricao": "Servido na tradicional caneca de cobre: vodka destilada, suco de limão taiti, xarope aromático de gengibre e suave espuma artesanal de gengibre com gelo.",
+        "imagem": "/images/cardapio/moscow-mule.png",
+        "tags_alimentares": [],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7005",
+        "preco": 38.00,
+        "ingredientes": [
+          "Vodka",
+          "Suco de Limão",
+          "Xarope de Gengibre",
+          "Espuma de Gengibre",
+          "Gelo"
+        ]
+      },
+      {
+        "id_prato": "pina-colada",
+        "nome": "Piña Colada",
+        "categoria": "drinks",
+        "descricao": "Bebida cremosa tropical que equilibra rum branco suave, leite de coco aveludado, suco de abacaxi selecionado, leite condensado e gelo batido.",
+        "imagem": "/images/cardapio/pina-colada.png",
+        "tags_alimentares": [
+          "Lactose",
+          "Leite"
+        ],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7006",
+        "preco": 37.00,
+        "ingredientes": [
+          "Rum Branco",
+          "Leite de Coco",
+          "Suco de Abacaxi",
+          "Leite Condensado",
+          "Gelo"
+        ]
+      },
+      {
+        "id_prato": "margarita-classica",
+        "nome": "Margarita Tradicional",
+        "categoria": "drinks",
+        "descricao": "Clássico mexicano combinando tequila prata pura, licor fino de laranja Cointreau, suco de limão fresco e borda decorada com crosta de sal marinho.",
+        "imagem": "/images/cardapio/margarita.png",
+        "tags_alimentares": [],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7007",
+        "preco": 40.00,
+        "ingredientes": [
+          "Tequila Prata",
+          "Licor de Laranja",
+          "Suco de Limão",
+          "Sal",
+          "Gelo"
+        ]
+      },
+      {
+        "id_prato": "negroni",
+        "nome": "Negroni Clássico",
+        "categoria": "drinks",
+        "descricao": "Coquetel secular italiano que reúne partes iguais de gin seco, bitter Campari e vermute tinto doce, finalizado com twist aromático de casca de laranja.",
+        "imagem": "/images/cardapio/negroni.png",
+        "tags_alimentares": [],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7008",
+        "preco": 44.00,
+        "ingredientes": [
+          "Gin",
+          "Campari",
+          "Vermute Tinto",
+          "Casca de Laranja",
+          "Gelo"
+        ]
+      },
+      {
+        "id_prato": "dry-martini",
+        "nome": "Dry Martini",
+        "categoria": "drinks",
+        "descricao": "A sofisticação máxima em taça martini: gin London Dry gelado, toque sutil de vermute dry e azeitona verde premium espetada no palito.",
+        "imagem": "/images/cardapio/dry-martini.png",
+        "tags_alimentares": [],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7009",
+        "preco": 45.00,
+        "ingredientes": [
+          "Gin",
+          "Vermute Dry",
+          "Azeitona Verde",
+          "Gelo"
+        ]
+      },
+      {
+        "id_prato": "caipiroska-morango",
+        "nome": "Caipiroska de Morango",
+        "categoria": "drinks",
+        "descricao": "Variação vibrante e frutada preparada com vodka selecionada, morangos frescos macerados na taça, açúcar e pedras de gelo.",
+        "imagem": "/images/cardapio/caipiroska-morango.png",
+        "tags_alimentares": [],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7010",
+        "preco": 35.00,
+        "ingredientes": [
+          "Vodka",
+          "Morango",
+          "Açúcar",
+          "Gelo"
+        ]
+      },
+      {
+        "id_prato": "cuba-libre",
+        "nome": "Cuba Libre",
+        "categoria": "drinks",
+        "descricao": "Combinação clássica de rum carta ouro envelhecido, refrigerante de cola gelado, gotas de suco de limão taiti fresco e pedras de gelo.",
+        "imagem": "/images/cardapio/cuba-libre.png",
+        "tags_alimentares": [],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7011",
+        "preco": 32.00,
+        "ingredientes": [
+          "Rum Ouro",
+          "Refrigerante de Cola",
+          "Limão",
+          "Gelo"
+        ]
+      },
+      {
+        "id_prato": "coquetel-frutas-sem-alcool",
+        "nome": "Coquetel de Frutas Tropical",
+        "categoria": "drinks",
+        "descricao": "Opção refrescante sem álcool preparada com suco de laranja natural, suco de abacaxi fresco, xarope de groselha, leite condensado e gelo batido.",
+        "imagem": "/images/cardapio/coquetel-frutas.png",
+        "tags_alimentares": [
+          "Lactose",
+          "Leite"
+        ],
+        "acompanhamentos": [],
+        "possui_variacoes": false,
+        "codigo": "7012",
+        "preco": 28.00,
+        "ingredientes": [
+          "Suco de Laranja",
+          "Suco de Abacaxi",
+          "Groselha",
+          "Leite Condensado",
+          "Gelo"
+        ]
       }
     ]
   }

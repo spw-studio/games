@@ -50,22 +50,29 @@ export function calculateOverallStats(
     }
     totalAccuracy += item.accuracy;
 
-    const metrics = item.metrics as {
-      bestStreak?: number;
-      matches?: number;
-      errors?: number;
-    } | undefined;
+    const metrics = item.metrics as Record<string, unknown> | undefined;
 
     if (metrics) {
       if (typeof metrics.bestStreak === 'number' && metrics.bestStreak > bestStreak) {
         bestStreak = metrics.bestStreak;
       }
-      if (typeof metrics.matches === 'number') {
-        totalMatches += metrics.matches;
-      }
-      if (typeof metrics.errors === 'number') {
-        totalErrors += metrics.errors;
-      }
+
+      const itemMatches =
+        typeof metrics.matches === 'number'
+          ? metrics.matches
+          : typeof metrics.correctDrinks === 'number'
+          ? metrics.correctDrinks
+          : 0;
+
+      const itemErrors =
+        typeof metrics.errors === 'number'
+          ? metrics.errors
+          : typeof metrics.incorrectDrinks === 'number'
+          ? metrics.incorrectDrinks
+          : 0;
+
+      totalMatches += itemMatches;
+      totalErrors += itemErrors;
     }
   }
 

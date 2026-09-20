@@ -234,7 +234,7 @@ export default function PerfilPage() {
               <span>Gráficos de Desempenho e Evolução</span>
             </h2>
             <p className="text-xs text-gray-500 mt-0.5">
-              Acompanhe seu aprimoramento a cada rodada de memorização
+              Acompanhe seu aprimoramento a cada rodada de treinamento
             </p>
           </div>
 
@@ -402,10 +402,10 @@ export default function PerfilPage() {
               A cada partida completada, seus gráficos de pontuação, precisão e velocidade serão atualizados automaticamente.
             </p>
             <Link
-              href="/jogos/memoria"
+              href="/jogos"
               className="mt-5 inline-flex items-center gap-2 rounded-xl bg-brand-800 hover:bg-brand-900 px-5 py-2.5 text-xs font-bold text-white shadow transition-all"
             >
-              Jogar Agora
+              Escolher um Jogo
             </Link>
           </div>
         )}
@@ -448,7 +448,7 @@ export default function PerfilPage() {
                         {new Date(item.playedAt).toLocaleString('pt-BR')}
                       </td>
                       <td className="px-4 py-3 font-semibold text-brand-950 whitespace-nowrap">
-                        {item.gameId === 'memoria' ? 'Jogo da Memória' : item.gameId}
+                        {games.find((g) => g.id === item.gameId)?.nome || (item.gameId === 'memoria' ? 'Jogo da Memória' : item.gameId === 'montar-drink' ? 'Montar Drink' : item.gameId)}
                       </td>
                       <td className="px-4 py-3 uppercase text-[10px] font-bold text-gray-500">
                         {item.difficulty}

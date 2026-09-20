@@ -24,6 +24,7 @@ export interface Product {
   preco?: number;
   variacoes?: ProductVariation[];
   acompanhamentos?: string[];
+  ingredientes?: string[];
 }
 
 export interface CardapioRaw {

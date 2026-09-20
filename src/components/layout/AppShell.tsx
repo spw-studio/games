@@ -19,7 +19,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       />
 
       {/* Conteúdo Principal */}
-      <main className="flex-1 pb-16 pt-6">
+      <main className="flex-1 pb-16 pt-6 bg-one-page">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {children}
         </div>

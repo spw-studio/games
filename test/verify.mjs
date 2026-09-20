@@ -96,11 +96,11 @@ if (accuracy !== 71) {
 console.log('OK: Acurácia calculada perfeitamente como 71%!');
 
 console.log('=== TESTE 5: DINAMISMO - ADICIONAR CATEGORIA E PRODUTO SEM ALTERAR CÓDIGO ===');
-const fakeNewCategory = { id: 'sobremesas', nome: 'Sobremesas Especiais' };
+const fakeNewCategory = { id: 'sobremesas-especiais', nome: 'Sobremesas Especiais' };
 const fakeNewProduct = {
   id_prato: 'cocada-ao-forno',
   nome: 'Cocada ao Forno com Sorvete',
-  categoria: 'sobremesas',
+  categoria: 'sobremesas-especiais',
   descricao: 'Deliciosa cocada cremosa assada ao forno servida quente com sorvete de creme artesanal.',
   tags_alimentares: ['Lactose', 'Glúten'],
   possui_variacoes: false,

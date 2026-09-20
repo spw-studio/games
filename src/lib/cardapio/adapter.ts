@@ -38,6 +38,7 @@ export function normalizeCardapio(data?: CardapioRaw): NormalizedCardapio {
         preco: item.preco,
         variacoes: Array.isArray(item.variacoes) ? item.variacoes : [],
         acompanhamentos: Array.isArray(item.acompanhamentos) ? item.acompanhamentos : [],
+        ingredientes: Array.isArray(item.ingredientes) ? item.ingredientes : [],
       };
 
       productMap[item.id_prato] = normalizedItem;
