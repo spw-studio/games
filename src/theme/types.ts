@@ -1,4 +1,4 @@
-export type GameThemeId = 'default' | 'memoria' | 'caca-palavras' | 'montar-drink';
+export type GameThemeId = string;
 
 export interface ThemeTokens {
   background: string;

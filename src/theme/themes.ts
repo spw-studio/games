@@ -21,7 +21,7 @@ export const GLOBAL_THEME: ThemeTokens = {
   shadowElevated: '0 20px 40px rgb(68 16 13 / 0.12)',
 };
 
-export const GAME_THEME_OVERRIDES: Record<GameThemeId, ThemeOverride> = {
+export const GAME_THEME_OVERRIDES: Record<string, ThemeOverride> = {
   default: {},
   memoria: {
     secondary: '#DBB674',

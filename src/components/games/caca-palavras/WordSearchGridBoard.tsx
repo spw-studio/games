@@ -100,8 +100,8 @@ export function WordSearchGridBoard({
       aria-label="Grade do caça-palavras"
       className={`inline-block select-none rounded-2xl border-2 p-2 sm:p-3 shadow-xl transition-all duration-200 ${
         wrongFlash
-          ? 'border-rose-400 bg-rose-50 shadow-rose-200'
-          : 'border-brand-200 bg-white shadow-brand-100/50'
+          ? 'border-danger bg-danger/10 shadow-danger/20'
+          : 'border-border bg-surface shadow-card'
       }`}
       onMouseLeave={onGridMouseLeave}
       onTouchStart={handleTouchStart}
@@ -137,14 +137,14 @@ export function WordSearchGridBoard({
                   cellSizeClass,
                   'flex items-center justify-center rounded font-mono font-bold cursor-pointer transition-all duration-100 select-none',
                   isFoundHighlight
-                    ? 'text-white scale-105 shadow-md ring-2 ring-white/80 z-10'
+                    ? 'text-primary-foreground scale-105 shadow-md ring-2 ring-primary-foreground/80 z-10'
                     : isPreview
-                    ? 'bg-brand-800 text-white scale-110 z-10 shadow-md ring-1 ring-brand-700'
+                    ? 'bg-primary text-primary-foreground scale-110 z-10 shadow-md ring-1 ring-primary'
                     : isCellWordFound
-                    ? 'text-brand-900'
+                    ? 'text-primary'
                     : isPartOfWord
-                    ? 'text-brand-900 hover:bg-brand-100'
-                    : 'text-gray-500 hover:bg-gray-100',
+                    ? 'text-primary hover:bg-muted'
+                    : 'text-muted-foreground hover:bg-muted',
                 ]
                   .filter(Boolean)
                   .join(' ')}

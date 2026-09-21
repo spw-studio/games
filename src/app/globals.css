@@ -4,7 +4,6 @@
 
 :root {
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --color-primary: #44100D;
   --theme-background: #FAF8F5;
   --theme-foreground: #1A0A09;
   --theme-surface: #FFFFFF;
@@ -34,12 +33,6 @@ body {
   flex-direction: column;
 }
 
-.theme-root {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
 /* Suporte para animações 3D de flip */
 .perspective-1000 {
   perspective: 1000px;
@@ -64,16 +57,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #F4EFEA;
+  background: var(--theme-muted);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C89D5C;
+  background: var(--theme-secondary);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #44100D;
+  background: var(--theme-primary);
 }
 
 .bg-one-page {

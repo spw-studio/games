@@ -2,7 +2,7 @@
 
 Plataforma web completa de treinamento e capacitação para equipes de restaurantes, baseada em um catálogo de produtos normalizado (`cardapio.json`).
 
-Projetada com uma arquitetura modular multi-jogos e independente de banco de dados externo, iniciando com o **Jogo da Memória Gastronômico** (associação entre a foto do prato e sua descrição detalhada).
+Projetada com uma arquitetura modular multi-jogos e independente de banco de dados externo. Atualmente inclui o **Jogo da Memória Gastronômico**, o **Montar Drink** e o **Caça-Palavras**.
 
 ---
 
@@ -19,11 +19,13 @@ A plataforma transforma o cardápio oficial do restaurante na **única fonte de 
 
 - **Framework:** [Next.js](https://nextjs.org/) (App Router, React Server & Client Components)
 - **Linguagem:** [TypeScript](https://www.typescriptlang.org/) (Tipagem estrita para produtos, cartas e métricas)
-- **Estilização:** [Tailwind CSS](https://tailwindcss.com/) com paleta gastronômica nobre (`#44100D` como cor primária e acentos dourados)
+- **Estilização:** [Tailwind CSS](https://tailwindcss.com/) com CSS Variables e tokens semânticos de tema
 - **Ícones:** [Lucide React](https://lucide.dev/)
 - **Visualização de Dados:** [Recharts](https://recharts.org/) (Gráficos de evolução temporal)
 - **Animações e Efeitos:** CSS 3D Transforms (Flip de cartas da memória) e [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti)
 - **Persistência:** `localStorage` com abstração à prova de SSR e Hydration Mismatch
+- **Autenticação opcional:** NextAuth com provedor Google
+- **Validação:** Zod
 
 ---
 
@@ -50,7 +52,7 @@ Abra [http://localhost:3000](http://localhost:3000) no seu navegador para utiliz
 
 ---
 
-## 5. Login com Google
+## 5. Login com Google (opcional)
 
 O projeto possui autenticação Google via NextAuth. Para habilitá-la:
 
@@ -60,7 +62,7 @@ O projeto possui autenticação Google via NextAuth. Para habilitá-la:
 4. Copie `.env.example` para `.env.local` e preencha `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` e `NEXTAUTH_SECRET`.
 5. Reinicie o servidor de desenvolvimento.
 
-Em produção, substitua os endereços locais pelo domínio publicado e configure as mesmas variáveis no provedor de hospedagem. O login protege a sessão da conta Google; o histórico de partidas continua armazenado localmente no navegador até a integração com um banco de dados.
+Em produção, substitua os endereços locais pelo domínio publicado e configure as mesmas variáveis no provedor de hospedagem. A autenticação é opcional para executar os jogos; o histórico de partidas continua armazenado localmente no navegador.
 
 ## 6. Build de Produção
 
@@ -71,9 +73,38 @@ npm run build
 npm run start
 ```
 
----
+## 7. Sistema de Temas
 
-## 6. Como Adicionar um Novo Produto
+O visual utiliza um tema global aplicado no layout raiz e overrides opcionais por jogo. A implementação está em `src/theme/` e usa somente CSS Variables, Tailwind CSS e React.
+
+O fluxo é:
+
+```text
+Tema global
+  ↓
+Override opcional do jogo
+  ↓
+ThemeProvider
+  ↓
+Componentes da plataforma e do jogo
+```
+
+Os tokens principais incluem `background`, `foreground`, `surface`, `primary`, `secondary`, `border`, `muted`, `success`, `warning`, `danger`, além de radius e sombras.
+
+O registro de jogos pode declarar um tema:
+
+```ts
+{
+  id: 'memoria',
+  nome: 'Jogo da Memória',
+  rota: '/jogos/memoria',
+  theme: 'memoria'
+}
+```
+
+Quando `theme` não é informado, o jogo utiliza automaticamente o tema `default`. Um tema específico precisa sobrescrever somente os tokens diferentes do tema global.
+
+## 8. Como Adicionar um Novo Produto
 
 Qualquer novo produto deve ser adicionado **apenas** no arquivo `src/data/cardapio.json`. **Nenhum código React precisa ser alterado.**
 
@@ -110,7 +141,7 @@ Exemplo de inserção no array `cardapio.itens`:
 
 ---
 
-## 7. Como Adicionar uma Nova Categoria
+## 9. Como Adicionar uma Nova Categoria
 
 Basta adicionar a categoria ao array `cardapio.categorias` em `src/data/cardapio.json`:
 
@@ -127,7 +158,7 @@ A nova categoria aparecerá **automaticamente** no seletor do Jogo da Memória e
 
 ---
 
-## 8. Como Adicionar Imagens dos Pratos
+## 10. Como Adicionar Imagens dos Pratos
 
 1. Adicione o arquivo de imagem no diretório:
    ```
@@ -141,7 +172,7 @@ A nova categoria aparecerá **automaticamente** no seletor do Jogo da Memória e
 
 ---
 
-## 9. Como Adicionar um Novo Jogo
+## 11. Como Adicionar um Novo Jogo
 
 A plataforma foi construída para permitir a inclusão de novos jogos seguindo o princípio Open/Closed:
 
@@ -157,15 +188,17 @@ A plataforma foi construída para permitir a inclusão de novos jogos seguindo o
      rota: "/jogos/quiz",
      ativo: true,
      icone: "HelpCircle",
-     categoria: "Conhecimento Rápido"
+     categoria: "Conhecimento Rápido",
+     theme: "default"
    }
    ```
+   Use um tema específico somente quando o jogo precisar de uma identidade própria. Nesse caso, adicione apenas os overrides necessários em `src/theme/themes.ts`.
 5. **Consuma os produtos:** Use `getAllProducts()` ou `getProductsByCategory()` de `lib/cardapio/queries.ts`.
 6. **Persista os resultados:** Chame `recordResult(result)` do hook `useGameStorage()`. A Home e a página de Perfil exibirão automaticamente o jogo ativo e suas estatísticas.
 
 ---
 
-## 10. Como Funciona o localStorage
+## 12. Como Funciona o localStorage
 
 A camada de persistência reside centralizada em `src/lib/storage/`:
 - `keys.ts`: Chaves centralizadas:
@@ -177,7 +210,7 @@ A camada de persistência reside centralizada em `src/lib/storage/`:
 
 ---
 
-## 11. Como Limpar os Dados Locais
+## 13. Como Limpar os Dados Locais
 
 Você pode limpar os dados locais de duas formas:
 1. **Pela Interface:** Acesse a página **Desempenho** (`/perfil`) e clique no botão **"Zerar Histórico"**.
@@ -185,9 +218,9 @@ Você pode limpar os dados locais de duas formas:
 
 ---
 
-## 12. Como Fazer Deploy na Vercel
+## 14. Como Fazer Deploy na Vercel
 
-A aplicação não requer variáveis de ambiente obrigatórias, nem banco de dados externo, operando de forma 100% autônoma no frontend.
+A aplicação não requer banco de dados externo. Os jogos funcionam sem login, mas o login Google exige as variáveis de ambiente descritas na seção de autenticação.
 
 1. Faça push do código para o GitHub/GitLab.
 2. Acesse [vercel.com](https://vercel.com) e clique em **"Add New Project"**.
@@ -197,7 +230,7 @@ A aplicação não requer variáveis de ambiente obrigatórias, nem banco de dad
 
 ---
 
-## 13. Estrutura de Pastas
+## 15. Estrutura de Pastas
 
 ```
 src/
@@ -207,19 +240,23 @@ src/
 │   ├── page.tsx                  # Home / Dashboard inicial
 │   ├── jogos/
 │   │   ├── page.tsx              # Hub com vitrine de jogos
+│   │   ├── caca-palavras/
+│   │   │   └── page.tsx          # Página do Caça-Palavras
 │   │   ├── memoria/
 │   │   │   └── page.tsx          # Página do Jogo da Memória
+│   │   ├── montar-drink/
+│   │   │   └── page.tsx          # Página do Montar Drink
 │   │   └── resultado/
 │   │       └── page.tsx          # Tela de resultado e novo recorde
+│   ├── api/
+│   │   └── auth/[...nextauth]/    # Endpoint do NextAuth
 │   └── perfil/
-│       └── page.tsx              # Perfil, 3 gráficos Recharts e histórico
+│       └── page.tsx              # Perfil, gráficos Recharts e histórico
 ├── components/
 │   ├── games/
-│   │   └── memory/
-│   │       ├── MemoryBoard.tsx   # Motor do jogo e grid responsivo
-│   │       ├── MemoryCard.tsx    # Carta com animação flip 3D e ARIA
-│   │       ├── MemoryConfig.tsx  # Configuração com categorias dinâmicas
-│   │       └── MemoryHUD.tsx     # HUD em tempo real (pontos, pares, tempo)
+│   │   │   ├── caca-palavras/    # Configuração, HUD, grade, lista e resultado
+│   │   │   ├── memory/           # Tabuleiro, cartas, configuração e HUD
+│   │   │   └── montar-drink/     # Configuração, jogo, ingredientes e resultado
 │   ├── layout/
 │   │   └── AppShell.tsx          # Shell cliente com Navbar e Footer
 │   └── ui/
@@ -231,6 +268,11 @@ src/
 ├── data/
 │   ├── cardapio.json             # Catálogo normalizado (Fonte de Verdade)
 │   └── games.ts                  # Definições centrais de jogos
+├── theme/
+│   ├── ThemeProvider.tsx          # Injeta tokens CSS do tema ativo
+│   ├── resolve-theme.ts           # Combina tema global e override do jogo
+│   ├── themes.ts                  # Tokens globais e overrides
+│   └── types.ts                   # Tipos dos tokens de tema
 ├── hooks/
 │   ├── useGameStorage.ts         # Hook reativo para histórico e recordes
 │   ├── useGameTimer.ts           # Cronômetro seguro com cleanup
@@ -240,7 +282,9 @@ src/
 │   │   ├── adapter.ts            # Normalizador de dados brutos
 │   │   └── queries.ts            # Consultas (getAllProducts, etc.)
 │   ├── games/
-│   │   └── registry.ts           # Registro dinâmico de jogos
+│   │   ├── drinkAssembly.ts      # Regras do Montar Drink
+│   │   ├── registry.ts           # Registro dinâmico de jogos
+│   │   └── word-search-engine.ts # Motor do Caça-Palavras
 │   ├── scoring/
 │   │   └── memory.ts             # Motor matemático de pontuação
 │   ├── statistics/
@@ -260,5 +304,6 @@ src/
     └── statistics.ts             # Tipos de estatísticas e séries Recharts
 public/
 └── images/
-    └── cardapio/                 # Diretório de fotos dos pratos
+  ├── bg/                       # Padrões e fundos da plataforma
+  └── cardapio/                 # Fotos dos pratos e drinks
 ```

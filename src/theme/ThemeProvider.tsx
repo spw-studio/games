@@ -17,7 +17,7 @@ export function ThemeProvider({ children, themeId = 'default' }: ThemeProviderPr
   }, {} as Record<string, string>) as CSSProperties;
 
   return (
-    <div className="theme-root" data-theme={themeId} style={style}>
+    <div data-theme={themeId} style={style}>
       {children}
     </div>
   );

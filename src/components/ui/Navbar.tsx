@@ -35,7 +35,7 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <span className="font-serif text-lg sm:text-xl font-bold tracking-wider text-white">
+              <span className="font-serif text-lg sm:text-xl font-bold tracking-wider text-primary-foreground">
                 GASTRONOMIA
               </span>
                 <span className="rounded bg-secondary/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-secondary border border-secondary/30">
@@ -63,7 +63,7 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
                 href={link.href}
                 className={`flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all ${isActive
                   ? 'bg-primary-foreground/10 text-secondary shadow-sm border border-secondary/30'
-                  : 'text-cream-200/80 hover:bg-white/5 hover:text-white'
+                  : 'text-primary-foreground/80 hover:bg-primary-foreground/5 hover:text-primary-foreground'
                   }`}
               >
                 <Icon className="h-4 w-4" />
@@ -78,7 +78,7 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
           {status === 'authenticated' ? (
             <button
               onClick={() => signOut()}
-              className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/15 border border-white/10 transition-all active:scale-95"
+              className="flex items-center gap-2 rounded-full bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary-foreground/15 border border-primary-foreground/10 transition-all active:scale-95"
               title={`Sair de ${session.user?.email || 'sua conta Google'}`}
             >
               <span className="hidden lg:inline max-w-32 truncate">{session.user?.email}</span>
@@ -87,7 +87,7 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
           ) : status !== 'loading' ? (
             <button
               onClick={() => signIn('google')}
-              className="flex items-center gap-2 rounded-full bg-white px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-semibold text-primary hover:bg-cream-50 transition-all active:scale-95"
+              className="flex items-center gap-2 rounded-full bg-primary-foreground px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-semibold text-primary hover:bg-surface transition-all active:scale-95"
               title="Entrar com Google"
             >
               <span>Entrar com Google</span>
@@ -95,7 +95,7 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
           ) : null}
           <button
             onClick={onOpenPlayerModal}
-            className="flex items-center gap-2.5 rounded-full bg-white/10 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-medium text-white hover:bg-white/15 border border-white/10 transition-all active:scale-95"
+            className="flex items-center gap-2.5 rounded-full bg-primary-foreground/10 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-medium text-primary-foreground hover:bg-primary-foreground/15 border border-primary-foreground/10 transition-all active:scale-95"
             title="Clique para editar seu nome"
           >
             <User className="h-4 w-4" />
