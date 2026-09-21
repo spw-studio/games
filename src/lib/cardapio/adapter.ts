@@ -1,86 +1,45 @@
 import rawCardapio from '@/data/cardapio.json';
-import { CardapioRaw, Category, NormalizedCardapio, Product } from '@/types/cardapio';
+import { CardapioRaw, Category, NormalizedCardapio, Product, RawProduct, RawCategory, ProductVariation } from '@/types/cardapio';
 import { validateMenuCatalog } from './schema';
 
-function normalizeCategory(category?: Partial<Category>): Category | null {
+function normalizeCategory(category?: RawCategory): Category | null {
   if (!category || !category.id) {
     return null;
   }
 
-  const name = category.name ?? category.nome ?? category.id;
-  const description = category.description ?? category.descricao;
-  const icon = category.icon ?? category.icone;
-
   return {
     id: category.id,
-    name,
-    description,
-    icon,
-    nome: name,
-    descricao: description ?? '',
-    icone: icon,
+    name: category.nome || category.id,
+    description: category.descricao,
+    icon: category.icone,
   };
 }
 
-function normalizeProduct(item?: Partial<Product>): Product | null {
-  if (!item || (!item.id && !item.id_prato)) {
+function normalizeProduct(item?: RawProduct): Product | null {
+  if (!item || !item.id_prato) {
     return null;
   }
 
-  const id = item.id ?? item.id_prato ?? '';
-  const name = item.name ?? item.nome ?? 'Produto sem nome';
-  const categoryId = item.categoryId ?? item.categoria ?? 'outros';
-  const description = item.description ?? item.descricao ?? '';
-  const image = item.image ?? item.imagem ?? '';
-  const dietaryTags = Array.isArray(item.dietaryTags)
-    ? item.dietaryTags
-    : Array.isArray(item.tags_alimentares)
-      ? item.tags_alimentares
-      : [];
-  const hasVariations = Boolean(item.hasVariations ?? item.possui_variacoes);
-  const code = item.code ?? item.codigo;
-  const price = item.price ?? item.preco;
-  const variations = Array.isArray(item.variations)
-    ? item.variations
-    : Array.isArray(item.variacoes)
-      ? item.variacoes
-      : [];
-  const accompaniments = Array.isArray(item.accompaniments)
-    ? item.accompaniments
-    : Array.isArray(item.acompanhamentos)
-      ? item.acompanhamentos
-      : [];
-  const ingredients = Array.isArray(item.ingredients)
-    ? item.ingredients
-    : Array.isArray(item.ingredientes)
-      ? item.ingredientes
-      : [];
+  const productVariations: ProductVariation[] = (item.variacoes ?? []).map((variation) => ({
+    code: variation.codigo,
+    portion: variation.porcao,
+    weightDetail: variation.detalhe_peso,
+    price: variation.preco,
+  }));
 
   return {
-    id,
-    name,
-    categoryId,
-    description,
-    image,
-    dietaryTags,
-    hasVariations,
-    code,
-    price,
-    variations,
-    accompaniments,
-    ingredients,
-    id_prato: id,
-    nome: name,
-    categoria: categoryId,
-    descricao: description,
-    imagem: image,
-    tags_alimentares: dietaryTags,
-    possui_variacoes: hasVariations,
-    codigo: code,
-    preco: price,
-    variacoes: variations,
-    acompanhamentos: accompaniments,
-    ingredientes: ingredients,
+    id: item.id_prato,
+    name: item.nome || 'Produto sem nome',
+    categoryId: item.categoria || 'outros',
+    description: item.descricao || '',
+    image: item.imagem || '',
+    dietaryTags: item.tags_alimentares ?? [],
+    hasVariations: Boolean(item.possui_variacoes),
+    code: item.codigo,
+    price: item.preco,
+    variations: productVariations,
+    accompaniments: item.acompanhamentos ?? [],
+    ingredients: item.ingredientes ?? [],
   };
 }
 
@@ -106,19 +65,12 @@ export function normalizeCardapio(data?: CardapioRaw): NormalizedCardapio {
 
   const categoryMap: Record<string, Category> = {};
   for (const cat of categorias) {
-    categoryMap[cat.id] = {
-      ...cat,
-      name: cat.name || cat.nome || cat.id,
-      nome: cat.nome || cat.name || cat.id,
-    };
+    categoryMap[cat.id] = cat;
   }
 
   const productMap: Record<string, Product> = {};
   for (const item of itens) {
     productMap[item.id] = item;
-    if (item.id_prato && item.id_prato !== item.id) {
-      productMap[item.id_prato] = item;
-    }
   }
 
   return {

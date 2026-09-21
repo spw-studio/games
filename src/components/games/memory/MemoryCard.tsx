@@ -151,9 +151,9 @@ export function MemoryCard({
 
               <div className="flex items-center justify-between border-t border-cream-200 pt-1.5 text-[10px] text-gray-500">
                 <span className="italic text-gold-700 font-medium">Associe à foto correspondente</span>
-                {product.preco && (
+                {product.price !== undefined && (
                   <span className="font-semibold text-brand-900">
-                    R$ {product.preco.toFixed(2)}
+                    R$ {product.price.toFixed(2)}
                   </span>
                 )}
               </div>

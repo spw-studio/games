@@ -56,7 +56,7 @@ export function MemoryBoard({
     const deck: IMemoryCard[] = [];
 
     selected.forEach((prod, index) => {
-      const productId = prod.id || prod.id_prato;
+      const productId = prod.id;
       lookup[productId] = prod;
 
       // Carta A: Imagem

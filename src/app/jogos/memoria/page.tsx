@@ -38,7 +38,7 @@ export default function MemoryGamePage() {
   const categoryMap = useMemo(() => {
     const map: Record<string, string> = { todas: 'Todas as Categorias' };
     categories.forEach((cat) => {
-      map[cat.id] = cat.nome;
+      map[cat.id] = cat.name;
     });
     return map;
   }, [categories]);

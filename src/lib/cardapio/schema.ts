@@ -103,54 +103,39 @@ export function validateMenuCatalog(data: unknown) {
 }
 
 export function normalizeLegacyCategory(category: Partial<Category>): Category {
-  const id = category.id ?? category.nome ?? 'categoria-sem-id';
-  const normalizedName = category.name ?? category.nome ?? id;
+  const id = category.id ?? 'categoria-sem-id';
+  const normalizedName = category.name ?? id;
 
   return {
     id,
     name: normalizedName,
-    description: category.description ?? category.descricao,
-    icon: category.icon ?? category.icone,
-    nome: normalizedName,
-    descricao: category.description ?? category.descricao ?? '',
-    icone: category.icon ?? category.icone,
+    description: category.description,
+    icon: category.icon,
   };
 }
 
 export function normalizeLegacyProduct(product: Partial<Product>): Product {
-  const id = product.id ?? product.id_prato ?? 'produto-sem-id';
-  const name = product.name ?? product.nome ?? 'Produto sem nome';
-  const categoryId = product.categoryId ?? product.categoria ?? 'outros';
-  const description = product.description ?? product.descricao ?? '';
-  const ingredients = product.ingredients ?? product.ingredientes ?? [];
-  const dietaryTags = product.dietaryTags ?? product.tags_alimentares ?? [];
-  const variations = product.variations ?? product.variacoes ?? [];
-  const accompaniments = product.accompaniments ?? product.acompanhamentos ?? [];
+  const id = product.id ?? 'produto-sem-id';
+  const name = product.name ?? 'Produto sem nome';
+  const categoryId = product.categoryId ?? 'outros';
+  const description = product.description ?? '';
+  const ingredients = product.ingredients ?? [];
+  const dietaryTags = product.dietaryTags ?? [];
+  const variations = product.variations ?? [];
+  const accompaniments = product.accompaniments ?? [];
 
   return {
     id,
     name,
     categoryId,
     description,
-    image: product.image ?? product.imagem,
+    image: product.image,
     dietaryTags,
-    hasVariations: Boolean(product.hasVariations ?? product.possui_variacoes),
-    code: product.code ?? product.codigo,
-    price: product.price ?? product.preco,
+    hasVariations: Boolean(product.hasVariations),
+    code: product.code,
+    price: product.price,
     variations: variations as ProductVariation[],
     accompaniments,
     ingredients,
-    id_prato: id,
-    nome: name,
-    categoria: categoryId,
-    descricao: description,
-    imagem: product.image ?? product.imagem,
-    tags_alimentares: dietaryTags,
-    possui_variacoes: Boolean(product.hasVariations ?? product.possui_variacoes),
-    codigo: product.code ?? product.codigo,
-    preco: product.price ?? product.preco,
-    variacoes: variations as ProductVariation[],
-    acompanhamentos: accompaniments,
-    ingredientes: ingredients,
   };
 }

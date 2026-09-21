@@ -15,7 +15,7 @@ export function getAllProducts(): Product[] {
  */
 export function getProductById(id: string): Product | undefined {
   const { productMap } = getNormalizedCardapio();
-  return productMap[id] ?? Object.values(productMap).find((item) => item.id === id || item.id_prato === id);
+  return productMap[id] ?? Object.values(productMap).find((item) => item.id === id);
 }
 
 /**

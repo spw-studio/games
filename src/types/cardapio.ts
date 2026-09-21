@@ -3,8 +3,10 @@ export interface Category {
   name: string;
   description?: string;
   icon?: string;
+}
 
-  // Legacy compatibility
+export interface RawCategory {
+  id: string;
   nome: string;
   descricao?: string;
   icone?: string;
@@ -15,8 +17,9 @@ export interface ProductVariation {
   portion: string;
   weightDetail?: string;
   price: number;
+}
 
-  // Legacy compatibility
+export interface RawProductVariation {
   codigo: string;
   porcao: string;
   detalhe_peso?: string;
@@ -35,9 +38,10 @@ export interface Product {
   price?: number;
   variations?: ProductVariation[];
   accompaniments?: string[];
-  ingredients?: string[];
+  ingredients: string[];
+}
 
-  // Legacy compatibility
+export interface RawProduct {
   id_prato: string;
   nome: string;
   categoria: string;
@@ -47,15 +51,15 @@ export interface Product {
   possui_variacoes: boolean;
   codigo?: string;
   preco?: number;
-  variacoes?: ProductVariation[];
+  variacoes?: RawProductVariation[];
   acompanhamentos?: string[];
-  ingredientes?: string[];
+  ingredientes: string[];
 }
 
 export interface CardapioRaw {
   cardapio: {
-    categorias: Category[];
-    itens: Product[];
+    categorias: RawCategory[];
+    itens: RawProduct[];
   };
 }
 
