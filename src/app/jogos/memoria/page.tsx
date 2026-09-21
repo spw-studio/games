@@ -11,6 +11,7 @@ import { MemoryConfig } from '@/components/games/memory/MemoryConfig';
 import { MemoryBoard } from '@/components/games/memory/MemoryBoard';
 import { ThemeProvider } from '@/theme/ThemeProvider';
 import { getGameById } from '@/lib/games/registry';
+import { LoadingScreen } from '@/components/ui/LoadingScreen';
 
 const memoryTheme = getGameById('memoria')?.theme ?? 'default';
 
@@ -21,6 +22,7 @@ export default function MemoryGamePage() {
 
   // Estados da partida
   const [gameState, setGameState] = useState<'config' | 'playing'>('config');
+  const [isStarting, setIsStarting] = useState(false);
   const [gameConfig, setGameConfig] = useState<{
     category: string;
     pairCount: number;
@@ -53,8 +55,12 @@ export default function MemoryGamePage() {
     pairCount: number;
     difficulty: GameDifficulty;
   }) => {
-    setGameConfig(config);
-    setGameState('playing');
+    setIsStarting(true);
+    window.setTimeout(() => {
+      setGameConfig(config);
+      setGameState('playing');
+      setIsStarting(false);
+    }, 350);
   };
 
   const handleFinishGame = (result: GameResult<MemoryMetrics>) => {
@@ -89,6 +95,7 @@ export default function MemoryGamePage() {
         />
       )}
       </div>
+      {isStarting && <LoadingScreen label="Preparando o jogo da memória..." />}
     </ThemeProvider>
   );
 }

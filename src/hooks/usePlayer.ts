@@ -38,13 +38,8 @@ export function usePlayer() {
       return;
     }
 
-    if (existing) {
-      setPlayer(existing);
-      touchPlayerActivity();
-    } else {
-      // Abre o modal de primeiro acesso caso não exista perfil
-      setIsModalOpen(true);
-    }
+    setPlayer(null);
+    setIsModalOpen(false);
     setIsLoaded(true);
   }, [session, status]);
 

@@ -6,10 +6,13 @@ import { DrinkAssemblyGame } from '@/components/games/montar-drink/DrinkAssembly
 import { DrinkAssemblyResult } from '@/components/games/montar-drink/DrinkAssemblyResult';
 import { ThemeProvider } from '@/theme/ThemeProvider';
 import { getGameById } from '@/lib/games/registry';
+import { LoadingScreen } from '@/components/ui/LoadingScreen';
+import { useState } from 'react';
 
 const drinkTheme = getGameById('montar-drink')?.theme ?? 'default';
 
 export default function MontarDrinkPage() {
+  const [isStarting, setIsStarting] = useState(false);
   const {
     gameState,
     allEligibleDrinks,
@@ -34,13 +37,21 @@ export default function MontarDrinkPage() {
     restart,
   } = useDrinkAssembly();
 
+  const handleStartGame = (config: Parameters<typeof startGame>[0]) => {
+    setIsStarting(true);
+    window.setTimeout(() => {
+      startGame(config);
+      setIsStarting(false);
+    }, 350);
+  };
+
   return (
     <ThemeProvider themeId={drinkTheme}>
     <div className="py-2 animate-in fade-in duration-300">
       {gameState === 'config' && (
         <DrinkAssemblyConfig
           availableDrinks={allEligibleDrinks}
-          onStartGame={startGame}
+          onStartGame={handleStartGame}
         />
       )}
 
@@ -73,6 +84,7 @@ export default function MontarDrinkPage() {
         />
       )}
     </div>
+    {isStarting && <LoadingScreen label="Preparando o Montar Drink..." />}
     </ThemeProvider>
   );
 }

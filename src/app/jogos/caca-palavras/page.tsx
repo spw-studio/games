@@ -9,17 +9,31 @@ import { WordSearchResult } from '@/components/games/caca-palavras/WordSearchRes
 import { normalizeForGrid } from '@/lib/games/word-search-engine';
 import { ThemeProvider } from '@/theme/ThemeProvider';
 import { getGameById } from '@/lib/games/registry';
+import { LoadingScreen } from '@/components/ui/LoadingScreen';
+import { useState } from 'react';
 
 const wordSearchTheme = getGameById('caca-palavras')?.theme ?? 'default';
 
 function CacaPalavrasContent() {
   const game = useWordSearchGame();
+  const [isStarting, setIsStarting] = useState(false);
+
+  const handleStartGame = (config: Parameters<typeof game.startGame>[0]) => {
+    setIsStarting(true);
+    window.setTimeout(() => {
+      game.startGame(config);
+      setIsStarting(false);
+    }, 350);
+  };
 
   if (game.phase === 'config') {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center py-8">
-        <WordSearchConfig onStart={game.startGame} />
-      </div>
+      <>
+        <div className="min-h-[60vh] flex items-center justify-center py-8">
+          <WordSearchConfig onStart={handleStartGame} />
+        </div>
+        {isStarting && <LoadingScreen label="Preparando o caça-palavras..." />}
+      </>
     );
   }
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import './globals.css';
 import { AppShell } from '@/components/layout/AppShell';
 import { ThemeProvider } from '@/theme/ThemeProvider';
@@ -29,7 +30,9 @@ export default function RootLayout({
         <AuthProvider>
           <AudioProvider>
             <ThemeProvider>
-              <AppShell>{children}</AppShell>
+              <Suspense fallback={null}>
+                <AppShell>{children}</AppShell>
+              </Suspense>
             </ThemeProvider>
           </AudioProvider>
         </AuthProvider>
