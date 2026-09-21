@@ -26,9 +26,9 @@ export function MemoryCard({
   let ariaLabel = 'Revelar carta oculta';
   if (isFlipped) {
     if (card.type === 'image') {
-      ariaLabel = `Carta de imagem do ${product.nome}`;
+      ariaLabel = `Carta de imagem do ${product.name}`;
     } else {
-      ariaLabel = `Carta de descrição do ${product.nome}`;
+      ariaLabel = `Carta de descrição do ${product.name}`;
     }
   }
 
@@ -100,18 +100,18 @@ export function MemoryCard({
             <div className="relative flex h-full w-full flex-col justify-between bg-cream-50">
               <div className="relative h-32 sm:h-40 md:h-44 w-full">
                 <ProductImage
-                  src={product.imagem}
-                  alt={product.nome}
-                  category={product.categoria}
+                  src={product.image}
+                  alt={product.name}
+                  category={product.categoryId}
                   className="h-full w-full"
                 />
               </div>
               <div className="flex flex-1 flex-col justify-center px-3 py-2 text-center bg-white border-t border-cream-200">
                 <span className="font-serif text-xs sm:text-sm font-bold text-brand-900 line-clamp-2 leading-tight">
-                  {product.nome}
+                  {product.name}
                 </span>
                 <span className="mt-0.5 text-[10px] uppercase tracking-wider text-gold-600 font-semibold">
-                  Categoria: {product.categoria}
+                  Categoria: {product.categoryId}
                 </span>
               </div>
             </div>
@@ -122,7 +122,7 @@ export function MemoryCard({
                 <div className="flex items-center gap-1.5 text-brand-800">
                   <FileText className="w-3.5 h-3.5 text-gold-600 shrink-0" />
                   <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-brand-900">
-                    {product.nome}
+                    {product.name}
                   </span>
                 </div>
 
@@ -137,13 +137,13 @@ export function MemoryCard({
                 )}
                 <p className="text-[11px] sm:text-xs text-gray-700 leading-relaxed font-normal">
 
-                  {product.descricao}
+                  {product.description}
                 </p>
-                {product.acompanhamentos && product.acompanhamentos.length > 0 && (
+                {(product.accompaniments ?? []).length > 0 && (
                   <div className="pt-0.5">
                     <span className="text-[10px] font-semibold text-brand-900">Acomp: </span>
                     <span className="text-[10px] text-gray-600 italic">
-                      {product.acompanhamentos.join(', ')}
+                      {(product.accompaniments ?? []).join(', ')}
                     </span>
                   </div>
                 )}

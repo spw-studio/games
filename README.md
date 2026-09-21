@@ -50,7 +50,19 @@ Abra [http://localhost:3000](http://localhost:3000) no seu navegador para utiliz
 
 ---
 
-## 5. Build de Produção
+## 5. Login com Google
+
+O projeto possui autenticação Google via NextAuth. Para habilitá-la:
+
+1. Crie um projeto no [Google Cloud Console](https://console.cloud.google.com/), configure a tela de consentimento OAuth e crie um cliente OAuth do tipo **Aplicativo da Web**.
+2. Em **Origens JavaScript autorizadas**, adicione `http://localhost:3000`.
+3. Em **URIs de redirecionamento autorizados**, adicione `http://localhost:3000/api/auth/callback/google`.
+4. Copie `.env.example` para `.env.local` e preencha `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` e `NEXTAUTH_SECRET`.
+5. Reinicie o servidor de desenvolvimento.
+
+Em produção, substitua os endereços locais pelo domínio publicado e configure as mesmas variáveis no provedor de hospedagem. O login protege a sessão da conta Google; o histórico de partidas continua armazenado localmente no navegador até a integração com um banco de dados.
+
+## 6. Build de Produção
 
 Para validar os tipos TypeScript e compilar a versão estática otimizada:
 

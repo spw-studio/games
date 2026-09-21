@@ -7,20 +7,20 @@ import { getNormalizedCardapio } from './adapter';
  * Mapeia os ingredientes para membros do grupo (GroupMember).
  */
 export function adaptProductToGroup(product: Product): Group {
-  const rawIngredients = Array.isArray(product.ingredientes) ? product.ingredientes : [];
+  const rawIngredients = product.ingredients ?? [];
 
   const members: GroupMember[] = rawIngredients.map((ingName, idx) => ({
-    id: `${product.id_prato}_ing_${idx}`,
+    id: `${product.id}_ing_${idx}`,
     name: ingName.trim(),
     isDistractor: false,
   }));
 
   return {
-    id: product.id_prato,
-    name: product.nome,
-    description: product.descricao,
-    image: product.imagem,
-    category: product.categoria,
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    image: product.image,
+    category: product.categoryId,
     members,
   };
 }
@@ -33,9 +33,14 @@ export function getDrinkGroups(categoryId?: string): Group[] {
   const { itens } = getNormalizedCardapio();
 
   const filtered = itens.filter((item) => {
+    const currentCategory = item.categoryId;
     const isCategoryMatch =
-      !categoryId || categoryId === 'todas' || item.categoria === categoryId || item.categoria === 'drinks';
-    const hasIngredients = Array.isArray(item.ingredientes) && item.ingredientes.length >= 2;
+      !categoryId ||
+      categoryId === 'todas' ||
+      currentCategory === categoryId ||
+      currentCategory === 'drinks';
+    const ingredients = item.ingredients ?? [];
+    const hasIngredients = ingredients.length >= 2;
     return isCategoryMatch && hasIngredients;
   });
 
@@ -69,15 +74,15 @@ export function getDishAcompanhamentosGroups(): Group[] {
   const { itens } = getNormalizedCardapio();
 
   return itens
-    .filter((item) => Array.isArray(item.acompanhamentos) && item.acompanhamentos.length >= 1)
+    .filter((item) => Array.isArray(item.accompaniments) && item.accompaniments.length >= 1)
     .map((item) => ({
-      id: item.id_prato,
-      name: item.nome,
-      description: item.descricao,
-      image: item.imagem,
-      category: item.categoria,
-      members: (item.acompanhamentos || []).map((acomp, idx) => ({
-        id: `${item.id_prato}_acomp_${idx}`,
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      image: item.image,
+      category: item.categoryId,
+      members: (item.accompaniments ?? []).map((acomp, idx) => ({
+        id: `${item.id}_acomp_${idx}`,
         name: acomp.trim(),
         isDistractor: false,
       })),

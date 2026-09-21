@@ -261,12 +261,12 @@ export function useWordSearchGame() {
       setConfig(cfg);
 
       const drinks = getProductsByCategory('drinks').filter(
-        (p) => p.ingredientes && p.ingredientes.length >= 3
+        (p) => (p.ingredients ?? []).length >= 3
       );
       if (drinks.length === 0) return;
 
       const drink = drinks[Math.floor(Math.random() * drinks.length)];
-      const ingredients = drink.ingredientes || [];
+      const ingredients = drink.ingredients ?? [];
 
       const distractorCount = DISTRACTOR_COUNT[cfg.difficulty];
       const shuffledDistractors = ALL_POSSIBLE_DISTRACTORS
@@ -278,9 +278,9 @@ export function useWordSearchGame() {
       const size = GRID_SIZE[cfg.difficulty];
       const newGrid = buildWordSearchGrid(allWords, size);
 
-      setCurrentDrinkName(drink.nome);
-      setCurrentDrinkDesc(drink.descricao || '');
-      setCurrentDrinkImage(drink.imagem || '');
+      setCurrentDrinkName(drink.name);
+      setCurrentDrinkDesc(drink.description ?? '');
+      setCurrentDrinkImage(drink.image ?? '');
       setTargetWords(ingredients);
       setGrid(newGrid);
       setFoundCells([]);

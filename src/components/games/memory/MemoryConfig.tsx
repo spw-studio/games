@@ -73,7 +73,7 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
               const count = getMemoryEligibleProducts(cat.id).length;
               return (
                 <option key={cat.id} value={cat.id}>
-                  {cat.nome} ({count} pratos)
+                  {cat.name} ({count} pratos)
                 </option>
               );
             })}

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { ChefHat, Gamepad2, Home, Trophy, User, Sparkles } from 'lucide-react';
 import { PlayerProfile } from '@/types/player';
 
@@ -12,6 +13,7 @@ interface NavbarProps {
 
 export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
   const pathname = usePathname();
+  const { data: session, status } = useSession();
 
   const navLinks = [
     { href: '/', label: 'Início', icon: Home },
@@ -73,6 +75,24 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
 
         {/* Perfil do Jogador */}
         <div className="flex items-center gap-3">
+          {status === 'authenticated' ? (
+            <button
+              onClick={() => signOut()}
+              className="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/15 border border-white/10 transition-all active:scale-95"
+              title={`Sair de ${session.user?.email || 'sua conta Google'}`}
+            >
+              <span className="hidden lg:inline max-w-32 truncate">{session.user?.email}</span>
+              <span className="text-secondary">Sair</span>
+            </button>
+          ) : status !== 'loading' ? (
+            <button
+              onClick={() => signIn('google')}
+              className="flex items-center gap-2 rounded-full bg-white px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-semibold text-primary hover:bg-cream-50 transition-all active:scale-95"
+              title="Entrar com Google"
+            >
+              <span>Entrar com Google</span>
+            </button>
+          ) : null}
           <button
             onClick={onOpenPlayerModal}
             className="flex items-center gap-2.5 rounded-full bg-white/10 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-medium text-white hover:bg-white/15 border border-white/10 transition-all active:scale-95"

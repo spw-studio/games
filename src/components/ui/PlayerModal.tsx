@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { signIn } from 'next-auth/react';
 import { ChefHat, Sparkles, UserCheck } from 'lucide-react';
 
 interface PlayerModalProps {
@@ -109,6 +110,16 @@ export function PlayerModal({
           </div>
 
           <div className="mt-6">
+            {isFirstVisit && (
+              <button
+                type="button"
+                onClick={() => signIn('google')}
+                className="mb-3 w-full flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-3.5 text-sm font-semibold text-gray-800 shadow-sm hover:bg-gray-50 active:scale-[0.99] transition-all focus:outline-none focus:ring-2 focus:ring-brand-700 focus:ring-offset-2"
+              >
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs font-bold text-[#4285F4] shadow-sm">G</span>
+                <span>Continuar com Google</span>
+              </button>
+            )}
             <button
               type="submit"
               className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand-800 px-5 py-3.5 text-sm font-semibold text-white shadow-md hover:bg-brand-900 active:scale-[0.99] transition-all focus:outline-none focus:ring-2 focus:ring-brand-700 focus:ring-offset-2"

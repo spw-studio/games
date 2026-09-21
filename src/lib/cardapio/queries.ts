@@ -1,5 +1,6 @@
 import { Category, Product } from '@/types/cardapio';
 import { getNormalizedCardapio } from './adapter';
+import { validateCatalogData } from './validation';
 
 /**
  * Retorna todos os produtos do cardápio normalizado.
@@ -14,7 +15,7 @@ export function getAllProducts(): Product[] {
  */
 export function getProductById(id: string): Product | undefined {
   const { productMap } = getNormalizedCardapio();
-  return productMap[id];
+  return productMap[id] ?? Object.values(productMap).find((item) => item.id === id || item.id_prato === id);
 }
 
 /**
@@ -42,7 +43,8 @@ export function getProductsByCategory(categoryId?: string): Product[] {
   if (!categoryId || categoryId === 'todas') {
     return all;
   }
-  return all.filter((product) => product.categoria === categoryId);
+
+  return all.filter((product) => product.categoryId === categoryId);
 }
 
 /**
@@ -54,8 +56,8 @@ export function getProductsByCategory(categoryId?: string): Product[] {
 export function getMemoryEligibleProducts(categoryId?: string): Product[] {
   const products = getProductsByCategory(categoryId);
   return products.filter((product) => {
-    const hasDescription = Boolean(product.descricao && product.descricao.trim().length > 0);
-    const hasName = Boolean(product.nome && product.nome.trim().length > 0);
+    const hasDescription = Boolean(product.description && product.description.trim().length > 0);
+    const hasName = Boolean(product.name && product.name.trim().length > 0);
     return hasDescription && hasName;
   });
 }
@@ -69,21 +71,10 @@ export function validateCatalog(): {
   missingCategoryItems: string[];
   missingDescriptionItems: string[];
 } {
-  const { itens, categoryMap } = getNormalizedCardapio();
-  const warnings: string[] = [];
-  const missingCategoryItems: string[] = [];
-  const missingDescriptionItems: string[] = [];
-
-  for (const item of itens) {
-    if (!categoryMap[item.categoria]) {
-      missingCategoryItems.push(item.id_prato);
-      warnings.push(`Produto "${item.nome}" (${item.id_prato}) possui categoria inexistente: "${item.categoria}"`);
-    }
-    if (!item.descricao || item.descricao.trim() === '') {
-      missingDescriptionItems.push(item.id_prato);
-      warnings.push(`Produto "${item.nome}" (${item.id_prato}) não possui descrição cadastrada.`);
-    }
-  }
+  const { itens, categorias } = getNormalizedCardapio();
+  const { warnings, missingCategoryItems, missingDescriptionItems } = validateCatalogData({
+    cardapio: { categorias, itens },
+  });
 
   return { warnings, missingCategoryItems, missingDescriptionItems };
 }

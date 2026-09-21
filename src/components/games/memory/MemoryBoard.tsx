@@ -56,13 +56,14 @@ export function MemoryBoard({
     const deck: IMemoryCard[] = [];
 
     selected.forEach((prod, index) => {
-      lookup[prod.id_prato] = prod;
+      const productId = prod.id || prod.id_prato;
+      lookup[productId] = prod;
 
       // Carta A: Imagem
       deck.push({
-        id: `${prod.id_prato}-image-${index}`,
-        pairId: prod.id_prato,
-        productId: prod.id_prato,
+        id: `${productId}-image-${index}`,
+        pairId: productId,
+        productId,
         type: 'image',
         isFlipped: false,
         isMatched: false,
@@ -70,9 +71,9 @@ export function MemoryBoard({
 
       // Carta B: Descrição
       deck.push({
-        id: `${prod.id_prato}-desc-${index}`,
-        pairId: prod.id_prato,
-        productId: prod.id_prato,
+        id: `${productId}-desc-${index}`,
+        pairId: productId,
+        productId,
         type: 'description',
         isFlipped: false,
         isMatched: false,
@@ -310,7 +311,7 @@ export function MemoryBoard({
               key={card.id}
               card={card}
               product={product}
-              categoryName={categoryMap[product.categoria]}
+              categoryName={categoryMap[product.categoryId]}
               onClick={handleCardClick}
               disabled={isCheckingMatch || isFinished}
             />
