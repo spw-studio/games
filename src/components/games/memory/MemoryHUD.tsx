@@ -2,6 +2,7 @@
 
 import { Clock, Flame, RotateCcw, Target, Trophy, XCircle } from 'lucide-react';
 import { GameDifficulty } from '@/types/game';
+import { GameSoundToggle } from '@/components/audio/GameSoundToggle';
 
 interface MemoryHUDProps {
   score: number;
@@ -52,14 +53,17 @@ export function MemoryHUD({
           </span>
         </div>
 
-        <button
-          onClick={onRestart}
-          className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold text-gray-600 hover:bg-cream-100 hover:text-brand-900 transition-colors"
-          title="Reiniciar esta partida"
-        >
-          <RotateCcw className="w-3.5 h-3.5" />
-          <span>Reiniciar</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <GameSoundToggle />
+          <button
+            onClick={onRestart}
+            className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold text-gray-600 hover:bg-cream-100 hover:text-brand-900 transition-colors"
+            title="Reiniciar esta partida"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>Reiniciar</span>
+          </button>
+        </div>
       </div>
 
       {/* Grid de Métricas Principais (PONTOS, PARES, TEMPO, ERROS, STREAK) */}

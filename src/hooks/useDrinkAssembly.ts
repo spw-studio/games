@@ -10,6 +10,7 @@ import {
   GroupMember,
 } from '@/types/grouping';
 import { useGameTimer } from './useGameTimer';
+import { useAudio } from '@/components/audio/AudioProvider';
 import { useGameStorage } from './useGameStorage';
 import { usePlayer } from './usePlayer';
 import {
@@ -31,6 +32,7 @@ export function useDrinkAssembly() {
   const { player } = usePlayer();
   const { recordResult } = useGameStorage();
   const timer = useGameTimer();
+  const { play } = useAudio();
 
   // Estados de tela e configuração
   const [gameState, setGameState] = useState<'config' | 'playing' | 'finished'>('config');
@@ -121,9 +123,10 @@ export function useDrinkAssembly() {
       roundStartTimeRef.current = Date.now();
 
       setGameState('playing');
+      play('click');
       return true;
     },
-    [allIngredients, timer]
+    [allIngredients, timer, play]
   );
 
   // Alternar seleção de ingrediente
@@ -138,8 +141,9 @@ export function useDrinkAssembly() {
           return [...prev, ingredientId];
         }
       });
+      play('click');
     },
-    [isConfirmed]
+    [isConfirmed, play]
   );
 
   // Confirmar a montagem do drink atual
@@ -158,6 +162,7 @@ export function useDrinkAssembly() {
     );
     setEvaluation(resultEval);
     setIsConfirmed(true);
+    play(resultEval.isPerfectMatch ? 'success' : 'error');
 
     const newStreak = resultEval.isPerfectMatch ? streak + 1 : 0;
     const updatedBestStreak = Math.max(bestStreak, newStreak);
@@ -195,6 +200,7 @@ export function useDrinkAssembly() {
     streak,
     bestStreak,
     config.difficulty,
+    play,
   ]);
 
   // Avançar para o próximo drink ou finalizar
@@ -218,6 +224,7 @@ export function useDrinkAssembly() {
       roundStartTimeRef.current = Date.now();
     } else {
       // Fim da partida!
+      play('complete');
       timer.pause();
       const finalDuration = timer.seconds;
 
@@ -277,6 +284,7 @@ export function useDrinkAssembly() {
     player?.id,
     score,
     recordResult,
+    play,
   ]);
 
   // Encerrar partida antecipadamente (salvando se houver progresso)

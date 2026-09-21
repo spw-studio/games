@@ -1,14 +1,16 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { usePlayer } from '@/hooks/usePlayer';
 import { Navbar } from '@/components/ui/Navbar';
 import { PlayerModal } from '@/components/ui/PlayerModal';
+import { AudioSettingsPanel } from '@/components/audio/AudioSettingsPanel';
 import { ChefHat, Heart } from 'lucide-react';
 import Link from 'next/link';
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { player, isLoaded, isModalOpen, setIsModalOpen, setPlayerName } = usePlayer();
+  const [isAudioSettingsOpen, setIsAudioSettingsOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -16,6 +18,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <Navbar
         player={player}
         onOpenPlayerModal={() => setIsModalOpen(true)}
+        onOpenAudioSettings={() => setIsAudioSettingsOpen(true)}
       />
 
       {/* Conteúdo Principal */}
@@ -60,6 +63,10 @@ export function AppShell({ children }: { children: ReactNode }) {
           </p>
         </div>
       </footer>
+      <AudioSettingsPanel
+        isOpen={isAudioSettingsOpen}
+        onClose={() => setIsAudioSettingsOpen(false)}
+      />
     </div>
   );
 }

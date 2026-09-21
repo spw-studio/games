@@ -1,6 +1,7 @@
 'use client';
 
 import { Clock, Zap, X, Lightbulb, Search } from 'lucide-react';
+import { GameSoundToggle } from '@/components/audio/GameSoundToggle';
 
 interface WordSearchHUDProps {
   foundCount: number;
@@ -68,6 +69,7 @@ export function WordSearchHUD({
 
         {/* Right: Timer + Controls */}
         <div className="flex items-center gap-2">
+          <GameSoundToggle />
           {/* Wrong attempts */}
           {wrongAttempts > 0 && (
             <div className="flex items-center gap-1 text-danger text-xs font-medium bg-danger/20 rounded-control px-2 py-1">

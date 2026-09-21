@@ -12,6 +12,7 @@ import { useGameStorage } from './useGameStorage';
 import { usePlayer } from './usePlayer';
 import { GameDifficulty, GameResult } from '@/types/game';
 import { WordSearchConfigState, WordSearchGrid } from '@/types/word-search';
+import { useAudio } from '@/components/audio/AudioProvider';
 
 type GamePhase = 'config' | 'playing' | 'result';
 
@@ -54,6 +55,7 @@ const ALL_POSSIBLE_DISTRACTORS = [
 export function useWordSearchGame() {
   const { player } = usePlayer();
   const { recordResult } = useGameStorage();
+  const { play } = useAudio();
 
   const [phase, setPhase] = useState<GamePhase>('config');
   const [config, setConfig] = useState<WordSearchConfigState>({
@@ -109,6 +111,7 @@ export function useWordSearchGame() {
       finalElapsed: number
     ) => {
       stopTimer();
+      play('complete');
 
       const totalWords = finalGrid.totalWords;
       const foundWords = finalFoundIndexes.size;
@@ -131,7 +134,7 @@ export function useWordSearchGame() {
       recordResult(result);
       setPhase('result');
     },
-    [stopTimer, config, player, recordResult]
+    [stopTimer, config, player, recordResult, play]
   );
 
   // ---- Check if all ingredient words are found ----
@@ -202,6 +205,7 @@ export function useWordSearchGame() {
         });
 
         const newScore = scoringResult.finalScore;
+        play('success');
 
         setFoundCells((prev) => [...prev, newFoundCells]);
         setFoundWordIndexes(newFoundIndexes);
@@ -213,6 +217,7 @@ export function useWordSearchGame() {
 
         checkAllFound(newFoundIndexes, updatedGrid, targetWords, newScore, wrongAttempts, hintsUsed, newBestStreak);
       } else if (wordIndex < 0) {
+        play('error');
         setWrongAttempts((prev) => prev + 1);
         setStreak(0);
         setWrongFlash(true);
@@ -222,7 +227,7 @@ export function useWordSearchGame() {
       setSelectingFrom(null);
       setHoverCell(null);
     },
-    [grid, foundWordIndexes, streak, bestStreak, wrongAttempts, hintsUsed, config.difficulty, checkAllFound, targetWords]
+    [grid, foundWordIndexes, streak, bestStreak, wrongAttempts, hintsUsed, config.difficulty, checkAllFound, targetWords, play]
   );
 
   // Mouse/touch handlers
@@ -295,6 +300,7 @@ export function useWordSearchGame() {
       setIsMouseDown(false);
       setElapsedSeconds(0);
       setPhase('playing');
+      play('click');
 
       setTimeout(() => {
         startTimeRef.current = Date.now();
@@ -303,7 +309,7 @@ export function useWordSearchGame() {
         }, 1000);
       }, 100);
     },
-    [stopTimer]
+    [stopTimer, play]
   );
 
   // ---- Hint ----
@@ -331,6 +337,8 @@ export function useWordSearchGame() {
       );
 
     if (unFoundTargets.length === 0) return;
+
+    play('hint');
 
     const { pw, i } = unFoundTargets[0];
     const delta = directionDeltas[pw.direction];
@@ -372,7 +380,7 @@ export function useWordSearchGame() {
     setStreak(0);
 
     checkAllFound(newFoundIndexes, updatedGrid, targetWords, newScore, wrongAttempts, newHints, bestStreak);
-  }, [grid, foundWordIndexes, targetWords, hintsUsed, wrongAttempts, config.difficulty, bestStreak, checkAllFound]);
+  }, [grid, foundWordIndexes, targetWords, hintsUsed, wrongAttempts, config.difficulty, bestStreak, checkAllFound, play]);
 
   // Current preview cells
   const selectionPreviewCells: Array<{ row: number; col: number }> =

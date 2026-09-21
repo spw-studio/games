@@ -23,6 +23,7 @@ A plataforma transforma o cardápio oficial do restaurante na **única fonte de 
 - **Ícones:** [Lucide React](https://lucide.dev/)
 - **Visualização de Dados:** [Recharts](https://recharts.org/) (Gráficos de evolução temporal)
 - **Animações e Efeitos:** CSS 3D Transforms (Flip de cartas da memória) e [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti)
+- **Áudio:** [Howler.js](https://howlerjs.com/) com efeitos sonoros gerados em memória e controle global de volume
 - **Persistência:** `localStorage` com abstração à prova de SSR e Hydration Mismatch
 - **Autenticação opcional:** NextAuth com provedor Google
 - **Validação:** Zod
@@ -104,7 +105,20 @@ O registro de jogos pode declarar um tema:
 
 Quando `theme` não é informado, o jogo utiliza automaticamente o tema `default`. Um tema específico precisa sobrescrever somente os tokens diferentes do tema global.
 
-## 8. Como Adicionar um Novo Produto
+## 8. Áudio e Configurações
+
+Os jogos possuem efeitos sonoros para interações, acertos, erros, dicas e conclusão de partida. O áudio é controlado pelo `AudioProvider` e utiliza Howler.js sem arquivos externos de áudio: os efeitos curtos são gerados como tons WAV em memória.
+
+O usuário pode:
+
+- Abrir **Configurações de som** pelo botão de ajustes na barra superior.
+- Ativar ou desativar os efeitos sonoros globalmente.
+- Ajustar o volume e testar o som pelo painel.
+- Usar o botão de volume diretamente no HUD durante uma partida.
+
+As preferências são persistidas no `localStorage` do navegador.
+
+## 9. Como Adicionar um Novo Produto
 
 Qualquer novo produto deve ser adicionado **apenas** no arquivo `src/data/cardapio.json`. **Nenhum código React precisa ser alterado.**
 
@@ -141,7 +155,7 @@ Exemplo de inserção no array `cardapio.itens`:
 
 ---
 
-## 9. Como Adicionar uma Nova Categoria
+## 10. Como Adicionar uma Nova Categoria
 
 Basta adicionar a categoria ao array `cardapio.categorias` em `src/data/cardapio.json`:
 
@@ -158,7 +172,7 @@ A nova categoria aparecerá **automaticamente** no seletor do Jogo da Memória e
 
 ---
 
-## 10. Como Adicionar Imagens dos Pratos
+## 11. Como Adicionar Imagens dos Pratos
 
 1. Adicione o arquivo de imagem no diretório:
    ```
@@ -172,7 +186,7 @@ A nova categoria aparecerá **automaticamente** no seletor do Jogo da Memória e
 
 ---
 
-## 11. Como Adicionar um Novo Jogo
+## 12. Como Adicionar um Novo Jogo
 
 A plataforma foi construída para permitir a inclusão de novos jogos seguindo o princípio Open/Closed:
 
@@ -198,7 +212,7 @@ A plataforma foi construída para permitir a inclusão de novos jogos seguindo o
 
 ---
 
-## 12. Como Funciona o localStorage
+## 13. Como Funciona o localStorage
 
 A camada de persistência reside centralizada em `src/lib/storage/`:
 - `keys.ts`: Chaves centralizadas:
@@ -210,7 +224,7 @@ A camada de persistência reside centralizada em `src/lib/storage/`:
 
 ---
 
-## 13. Como Limpar os Dados Locais
+## 14. Como Limpar os Dados Locais
 
 Você pode limpar os dados locais de duas formas:
 1. **Pela Interface:** Acesse a página **Desempenho** (`/perfil`) e clique no botão **"Zerar Histórico"**.
@@ -218,7 +232,7 @@ Você pode limpar os dados locais de duas formas:
 
 ---
 
-## 14. Como Fazer Deploy na Vercel
+## 15. Como Fazer Deploy na Vercel
 
 A aplicação não requer banco de dados externo. Os jogos funcionam sem login, mas o login Google exige as variáveis de ambiente descritas na seção de autenticação.
 
@@ -230,7 +244,7 @@ A aplicação não requer banco de dados externo. Os jogos funcionam sem login, 
 
 ---
 
-## 15. Estrutura de Pastas
+## 16. Estrutura de Pastas
 
 ```
 src/
@@ -259,6 +273,10 @@ src/
 │   │   │   └── montar-drink/     # Configuração, jogo, ingredientes e resultado
 │   ├── layout/
 │   │   └── AppShell.tsx          # Shell cliente com Navbar e Footer
+│   ├── audio/
+│   │   ├── AudioProvider.tsx     # Estado global e reprodução via Howler
+│   │   ├── AudioSettingsPanel.tsx # Painel global de áudio
+│   │   └── GameSoundToggle.tsx   # Toggle de som nos HUDs dos jogos
 │   └── ui/
 │       ├── Navbar.tsx            # Cabeçalho com marca e identificação
 │       ├── PlayerModal.tsx       # Modal de boas-vindas / edição de nome

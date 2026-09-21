@@ -3,6 +3,7 @@ import './globals.css';
 import { AppShell } from '@/components/layout/AppShell';
 import { ThemeProvider } from '@/theme/ThemeProvider';
 import { AuthProvider } from '@/components/auth/AuthProvider';
+import { AudioProvider } from '@/components/audio/AudioProvider';
 
 export const metadata: Metadata = {
   title: 'Gastronomia Academy - Plataforma de Jogos e Aprendizagem',
@@ -26,9 +27,11 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className="antialiased selection:bg-primary selection:text-secondary">
         <AuthProvider>
-          <ThemeProvider>
-            <AppShell>{children}</AppShell>
-          </ThemeProvider>
+          <AudioProvider>
+            <ThemeProvider>
+              <AppShell>{children}</AppShell>
+            </ThemeProvider>
+          </AudioProvider>
         </AuthProvider>
       </body>
     </html>

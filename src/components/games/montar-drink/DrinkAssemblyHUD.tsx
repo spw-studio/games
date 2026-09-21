@@ -1,6 +1,7 @@
 'use client';
 
 import { Trophy, Clock, Flame, CheckCircle2, XCircle, RotateCcw } from 'lucide-react';
+import { GameSoundToggle } from '@/components/audio/GameSoundToggle';
 
 interface DrinkAssemblyHUDProps {
   currentIndex: number;
@@ -40,6 +41,7 @@ export function DrinkAssemblyHUD({
         </div>
 
         <div className="flex items-center gap-2">
+          <GameSoundToggle />
           {(correctDrinks > 0 || incorrectDrinks > 0) && onQuit && (
             <button
               type="button"

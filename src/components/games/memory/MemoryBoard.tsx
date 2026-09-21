@@ -8,6 +8,7 @@ import { GAME_CONFIG } from '@/config/game-config';
 import { calculateAccuracy, calculateMemoryScore } from '@/lib/scoring/memory';
 import { pickRandomItems, shuffleArray } from '@/lib/utils/shuffle';
 import { useGameTimer } from '@/hooks/useGameTimer';
+import { useAudio } from '@/components/audio/AudioProvider';
 import { MemoryCard } from './MemoryCard';
 import { MemoryHUD } from './MemoryHUD';
 
@@ -46,6 +47,7 @@ export function MemoryBoard({
   const [isFinished, setIsFinished] = useState<boolean>(false);
 
   const timer = useGameTimer();
+  const { play } = useAudio();
   const startTimeRef = useRef<number | null>(null);
 
   // 1. Inicializa o tabuleiro ao montar
@@ -111,6 +113,7 @@ export function MemoryBoard({
     (finalMatches: number, finalErrors: number, finalMoves: number, finalStreak: number) => {
       timer.pause();
       setIsFinished(true);
+      play('complete');
 
       const elapsed = timer.seconds;
       const breakdown = calculateMemoryScore({
@@ -167,7 +170,7 @@ export function MemoryBoard({
         onFinishGame(result);
       }, 1000);
     },
-    [timer, difficulty, pairCount, playerId, category, onFinishGame]
+    [timer, difficulty, pairCount, playerId, category, onFinishGame, play]
   );
 
   // Clique na carta
@@ -181,6 +184,8 @@ export function MemoryBoard({
     if (clickedCard.isFlipped || clickedCard.isMatched) return;
     // 4. Não permite clicar duas vezes na mesma carta
     if (flippedCards.some((c) => c.id === clickedCard.id)) return;
+
+    play('click');
 
     // Inicia o cronômetro no primeiro clique válido (Requisito 27)
     if (!hasStartedFlipping) {
@@ -210,6 +215,7 @@ export function MemoryBoard({
 
       if (isMatch) {
         // MATCH ENCONTRADO
+        play('success');
         const newMatchedPairs = new Set(matchedPairs);
         newMatchedPairs.add(cardA.pairId);
         setMatchedPairs(newMatchedPairs);
@@ -238,6 +244,7 @@ export function MemoryBoard({
         }
       } else {
         // COMBINAÇÃO ERRADA
+        play('error');
         const newErrors = errors + 1;
         setErrors(newErrors);
         setStreak(0); // Reinicia o streak de acertos consecutivos

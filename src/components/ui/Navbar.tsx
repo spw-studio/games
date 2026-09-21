@@ -3,15 +3,16 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { ChefHat, Gamepad2, Home, Trophy, User, Sparkles } from 'lucide-react';
+import { ChefHat, Gamepad2, Home, Trophy, User, Settings } from 'lucide-react';
 import { PlayerProfile } from '@/types/player';
 
 interface NavbarProps {
   player: PlayerProfile | null;
   onOpenPlayerModal?: () => void;
+  onOpenAudioSettings?: () => void;
 }
 
-export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
+export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: NavbarProps) {
   const pathname = usePathname();
   const { data: session, status } = useSession();
 
@@ -99,6 +100,15 @@ export function Navbar({ player, onOpenPlayerModal }: NavbarProps) {
             title="Clique para editar seu nome"
           >
             <User className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={onOpenAudioSettings}
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/15 border border-primary-foreground/10 transition-all active:scale-95"
+            title="Configurações de som"
+            aria-label="Abrir configurações de som"
+          >
+            <Settings className="h-4 w-4" />
           </button>
         </div>
       </div>
