@@ -9,6 +9,10 @@ import { usePlayer } from '@/hooks/usePlayer';
 import { useGameStorage } from '@/hooks/useGameStorage';
 import { MemoryConfig } from '@/components/games/memory/MemoryConfig';
 import { MemoryBoard } from '@/components/games/memory/MemoryBoard';
+import { ThemeProvider } from '@/theme/ThemeProvider';
+import { getGameById } from '@/lib/games/registry';
+
+const memoryTheme = getGameById('memoria')?.theme ?? 'default';
 
 export default function MemoryGamePage() {
   const router = useRouter();
@@ -65,7 +69,8 @@ export default function MemoryGamePage() {
   };
 
   return (
-    <div className="py-2 animate-in fade-in duration-300">
+    <ThemeProvider themeId={memoryTheme}>
+      <div className="py-2 animate-in fade-in duration-300">
       {gameState === 'config' ? (
         <MemoryConfig
           categories={categories}
@@ -83,6 +88,7 @@ export default function MemoryGamePage() {
           onRestart={handleRestart}
         />
       )}
-    </div>
+      </div>
+    </ThemeProvider>
   );
 }

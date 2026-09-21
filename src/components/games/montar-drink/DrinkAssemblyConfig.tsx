@@ -66,7 +66,7 @@ export function DrinkAssemblyConfig({
   return (
     <div className="mx-auto max-w-2xl space-y-8 animate-in fade-in zoom-in-95 duration-300">
       {/* Banner Principal com Identidade #44100D */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800 p-8 text-white shadow-2xl border border-gold-400/20">
+      <div className="relative overflow-hidden rounded-card bg-primary p-8 text-primary-foreground shadow-elevated border border-secondary/20">
         <div className="absolute inset-0 bg-[radial-gradient(#C89D5C_1px,transparent_1px)] [background-size:20px_20px] opacity-10" />
 
         <div className="relative z-10 flex flex-col items-center text-center">
@@ -115,7 +115,7 @@ export function DrinkAssemblyConfig({
         </div>
       ) : (
         /* Formulário de Configuração */
-        <div className="rounded-3xl bg-white border border-cream-300 p-6 sm:p-8 shadow-xl space-y-8">
+        <div className="rounded-card bg-surface border border-border p-6 sm:p-8 shadow-elevated space-y-8">
           {/* 1. Quantidade de Drinks */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -141,8 +141,8 @@ export function DrinkAssemblyConfig({
                     onClick={() => setSelectedQuantity(opt.value)}
                     className={`rounded-2xl py-3 px-2 text-center font-bold text-sm sm:text-base transition-all duration-200 border-2 active:scale-95 cursor-pointer ${
                       isSelected
-                        ? 'bg-brand-900 text-gold-300 border-brand-950 shadow-md shadow-brand-950/20'
-                        : 'bg-white text-gray-700 border-cream-300 hover:border-brand-800/40 hover:bg-cream-50'
+                        ? 'bg-primary text-secondary border-primary shadow-card'
+                        : 'bg-surface text-foreground border-border hover:border-primary/40 hover:bg-surface-hover'
                     }`}
                   >
                     {opt.label}
@@ -164,8 +164,8 @@ export function DrinkAssemblyConfig({
                 onClick={() => setSelectedCategory('drinks')}
                 className={`p-4 rounded-2xl border-2 text-left transition-all active:scale-95 cursor-pointer ${
                   selectedCategory === 'drinks'
-                    ? 'bg-brand-900 text-white border-brand-950 shadow-md'
-                    : 'bg-white text-gray-800 border-cream-300 hover:border-brand-800/40'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-card'
+                    : 'bg-surface text-foreground border-border hover:border-primary/40'
                 }`}
               >
                 <span className="block font-bold text-sm sm:text-base">
@@ -185,8 +185,8 @@ export function DrinkAssemblyConfig({
                 onClick={() => setSelectedCategory('todas')}
                 className={`p-4 rounded-2xl border-2 text-left transition-all active:scale-95 cursor-pointer ${
                   selectedCategory === 'todas'
-                    ? 'bg-brand-900 text-white border-brand-950 shadow-md'
-                    : 'bg-white text-gray-800 border-cream-300 hover:border-brand-800/40'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-card'
+                    : 'bg-surface text-foreground border-border hover:border-primary/40'
                 }`}
               >
                 <span className="block font-bold text-sm sm:text-base">
@@ -219,8 +219,8 @@ export function DrinkAssemblyConfig({
                     onClick={() => setSelectedDifficulty(diff.id)}
                     className={`p-4 rounded-2xl border-2 text-left transition-all active:scale-95 cursor-pointer flex flex-col justify-between ${
                       isSelected
-                        ? 'bg-brand-900 text-white border-brand-950 shadow-md'
-                        : 'bg-white text-gray-800 border-cream-300 hover:border-brand-800/40 hover:bg-cream-50'
+                        ? 'bg-primary text-primary-foreground border-primary shadow-card'
+                        : 'bg-surface text-foreground border-border hover:border-primary/40 hover:bg-surface-hover'
                     }`}
                   >
                     <div>
@@ -257,7 +257,7 @@ export function DrinkAssemblyConfig({
             <button
               type="button"
               onClick={handleStart}
-              className="w-full flex items-center justify-center gap-3 rounded-2xl bg-brand-900 hover:bg-brand-950 text-gold-300 border-2 border-gold-400/30 py-4 px-6 text-lg font-bold shadow-xl transition-all duration-200 active:scale-[0.98] cursor-pointer"
+              className="w-full flex items-center justify-center gap-3 rounded-control bg-primary hover:bg-primary/90 text-secondary border-2 border-secondary/30 py-4 px-6 text-lg font-bold shadow-elevated transition-all duration-200 active:scale-[0.98] cursor-pointer"
             >
               <Play className="h-5 w-5 fill-gold-300 text-gold-300" />
               <span>INICIAR PARTIDA</span>

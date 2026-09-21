@@ -27,7 +27,7 @@ export function DrinkAssemblyHUD({
   const progressPercent = Math.round((currentNumber / totalDrinks) * 100);
 
   return (
-    <div className="rounded-3xl bg-white border border-cream-300 p-4 sm:p-5 shadow-lg space-y-3">
+    <div className="rounded-card bg-surface border border-border p-4 sm:p-5 shadow-card space-y-3">
       {/* Topo do HUD: Progresso e Contador */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -76,7 +76,7 @@ export function DrinkAssemblyHUD({
       {/* Grid de Estatísticas em Tempo Real */}
       <div className="grid grid-cols-5 gap-2 pt-1">
         {/* Pontuação */}
-        <div className="flex flex-col items-center justify-center p-2 rounded-2xl bg-cream-100/70 border border-cream-200">
+        <div className="flex flex-col items-center justify-center p-2 rounded-control bg-muted/70 border border-border">
           <div className="flex items-center gap-1 text-gold-700 text-[11px] font-bold uppercase tracking-wider">
             <Trophy className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Pontos</span>

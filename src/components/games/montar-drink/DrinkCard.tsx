@@ -13,7 +13,7 @@ export function DrinkCard({ drink }: DrinkCardProps) {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-white border border-cream-300 shadow-xl transition-all duration-300">
+    <div className="relative overflow-hidden rounded-card bg-surface border border-border shadow-elevated transition-all duration-300">
       {/* Banner / Cabeçalho com paleta #44100D */}
       <div className="relative h-52 sm:h-64 w-full bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(#C89D5C_1px,transparent_1px)] [background-size:16px_16px] opacity-15" />
@@ -51,7 +51,7 @@ export function DrinkCard({ drink }: DrinkCardProps) {
       </div>
 
       {/* Conteúdo do Card */}
-      <div className="p-6 sm:p-8 space-y-3">
+      <div className="p-6 sm:p-8 space-y-3 bg-surface">
         <div className="space-y-1">
           <span className="text-xs font-bold uppercase tracking-wider text-gold-700">
             Monte este drink

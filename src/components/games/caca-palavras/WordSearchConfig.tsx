@@ -44,8 +44,8 @@ export function WordSearchConfig({ onStart }: WordSearchConfigProps) {
     <div className="max-w-lg mx-auto space-y-8 animate-in fade-in duration-300">
       {/* Header */}
       <div className="text-center space-y-3">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-900 to-brand-800 shadow-lg mb-2">
-          <Search className="h-8 w-8 text-gold-300" />
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-control bg-primary shadow-card mb-2">
+          <Search className="h-8 w-8 text-secondary" />
         </div>
         <h1 className="text-3xl font-serif font-bold text-brand-950">Caça-Palavras</h1>
         <p className="text-sm text-gray-500 leading-relaxed max-w-sm mx-auto">
@@ -55,7 +55,7 @@ export function WordSearchConfig({ onStart }: WordSearchConfigProps) {
       </div>
 
       {/* Instructions */}
-      <div className="rounded-2xl bg-brand-50 border border-brand-100 p-4 space-y-2">
+      <div className="rounded-card bg-muted border border-border p-4 space-y-2">
         <h2 className="text-xs font-bold uppercase tracking-widest text-brand-700 mb-3">Como jogar</h2>
         <ul className="text-sm text-brand-900 space-y-2">
           {[
@@ -84,15 +84,15 @@ export function WordSearchConfig({ onStart }: WordSearchConfigProps) {
               key={d.id}
               onClick={() => setDifficulty(d.id)}
               className={[
-                'flex flex-col items-center gap-2 rounded-2xl border-2 p-3 text-center transition-all duration-200',
+                'flex flex-col items-center gap-2 rounded-control border-2 p-3 text-center transition-all duration-200',
                 difficulty === d.id
                   ? 'border-brand-800 bg-brand-50 shadow-md'
-                  : 'border-gray-200 bg-white hover:border-brand-300',
+                  : 'border-border bg-surface hover:border-primary/50',
               ].join(' ')}
             >
               <div
                 className={[
-                  'w-10 h-10 rounded-xl flex items-center justify-center',
+                  'w-10 h-10 rounded-control flex items-center justify-center',
                   difficulty === d.id
                     ? 'bg-brand-800 text-gold-300'
                     : 'bg-gray-100 text-gray-500',
@@ -117,7 +117,7 @@ export function WordSearchConfig({ onStart }: WordSearchConfigProps) {
       {/* Start button */}
       <button
         onClick={handleStart}
-        className="w-full flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-brand-900 to-brand-800 hover:from-brand-800 hover:to-brand-700 px-6 py-4 text-white font-bold text-base shadow-lg shadow-brand-900/20 transition-all hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
+        className="w-full flex items-center justify-center gap-3 rounded-control bg-primary hover:bg-primary/90 px-6 py-4 text-primary-foreground font-bold text-base shadow-card transition-all hover:shadow-elevated hover:-translate-y-0.5 active:scale-95"
       >
         <Play className="h-5 w-5 fill-white" />
         Sortear Drink e Jogar

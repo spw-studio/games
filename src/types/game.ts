@@ -1,3 +1,5 @@
+import { GameThemeId } from '../theme/types';
+
 export type GameDifficulty = 'facil' | 'medio' | 'dificil';
 
 export interface GameDefinition {
@@ -9,6 +11,7 @@ export interface GameDefinition {
   dificuldadePadrao?: GameDifficulty;
   icone: string;
   categoria?: string;
+  theme?: GameThemeId;
 }
 
 export type MemoryCardType = 'image' | 'description';

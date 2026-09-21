@@ -10,6 +10,7 @@ export const REGISTERED_GAMES: GameDefinition[] = [
     dificuldadePadrao: 'medio',
     icone: 'Brain',
     categoria: 'Cardápio & Memória',
+    theme: 'memoria',
   },
   {
     id: 'montar-drink',
@@ -20,6 +21,7 @@ export const REGISTERED_GAMES: GameDefinition[] = [
     dificuldadePadrao: 'medio',
     icone: 'Wine',
     categoria: 'Drinks & Coquetelaria',
+    theme: 'montar-drink',
   },
   {
     id: 'caca-palavras',
@@ -30,6 +32,7 @@ export const REGISTERED_GAMES: GameDefinition[] = [
     dificuldadePadrao: 'medio',
     icone: 'Search',
     categoria: 'Drinks & Vocabulário',
+    theme: 'caca-palavras',
   },
   {
     id: 'quiz-produtos',

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChefHat, Sparkles, UserCheck } from 'lucide-react';
 
 interface PlayerModalProps {
@@ -18,6 +18,21 @@ export function PlayerModal({
 }: PlayerModalProps) {
   const [nome, setNome] = useState(initialName);
   const [error, setError] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    inputRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && !isFirstVisit) {
+        onSave(initialName);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [initialName, isFirstVisit, isOpen, onSave]);
 
   if (!isOpen) return null;
 
@@ -37,14 +52,14 @@ export function PlayerModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl border border-brand-100">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200" role="presentation">
+      <div className="relative w-full max-w-md overflow-hidden rounded-2xl bg-surface shadow-2xl border border-border" role="dialog" aria-modal="true" aria-labelledby="player-modal-title">
         {/* Faixa superior com a cor gastronômica #44100D */}
         <div className="bg-gradient-to-r from-brand-900 via-brand-800 to-brand-900 px-6 py-8 text-center text-white relative">
           <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 backdrop-blur border border-gold-400/40 shadow-inner">
             <ChefHat className="h-9 w-9 text-gold-300" />
           </div>
-          <h2 className="text-2xl font-serif font-bold tracking-wide text-white">
+          <h2 id="player-modal-title" className="text-2xl font-serif font-bold tracking-wide text-white">
             {isFirstVisit ? 'Boas-vindas ao Treinamento' : 'Editar Perfil'}
           </h2>
           <p className="mt-1 text-sm text-gold-200 font-light">
@@ -68,6 +83,7 @@ export function PlayerModal({
                 id="player-name-input"
                 type="text"
                 value={nome}
+                ref={inputRef}
                 onChange={(e) => {
                   setNome(e.target.value);
                   if (error) setError('');

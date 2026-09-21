@@ -33,7 +33,7 @@ export function MemoryHUD({
   };
 
   return (
-    <div className="w-full rounded-2xl bg-white border border-cream-300 p-4 shadow-sm">
+    <div className="w-full rounded-card bg-surface border border-border p-4 shadow-card">
       {/* Barra superior de contexto */}
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-cream-200 pb-3">
         <div className="flex items-center gap-2">

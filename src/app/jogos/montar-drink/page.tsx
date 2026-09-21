@@ -4,6 +4,10 @@ import { useDrinkAssembly } from '@/hooks/useDrinkAssembly';
 import { DrinkAssemblyConfig } from '@/components/games/montar-drink/DrinkAssemblyConfig';
 import { DrinkAssemblyGame } from '@/components/games/montar-drink/DrinkAssemblyGame';
 import { DrinkAssemblyResult } from '@/components/games/montar-drink/DrinkAssemblyResult';
+import { ThemeProvider } from '@/theme/ThemeProvider';
+import { getGameById } from '@/lib/games/registry';
+
+const drinkTheme = getGameById('montar-drink')?.theme ?? 'default';
 
 export default function MontarDrinkPage() {
   const {
@@ -31,6 +35,7 @@ export default function MontarDrinkPage() {
   } = useDrinkAssembly();
 
   return (
+    <ThemeProvider themeId={drinkTheme}>
     <div className="py-2 animate-in fade-in duration-300">
       {gameState === 'config' && (
         <DrinkAssemblyConfig
@@ -68,5 +73,6 @@ export default function MontarDrinkPage() {
         />
       )}
     </div>
+    </ThemeProvider>
   );
 }

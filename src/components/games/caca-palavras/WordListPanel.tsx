@@ -61,7 +61,7 @@ export function WordListPanel({
   return (
     <div className="flex flex-col gap-4">
       {/* Drink Card */}
-      <div className="rounded-2xl border border-brand-100 bg-gradient-to-br from-brand-50 to-cream-50 overflow-hidden shadow-sm">
+      <div className="rounded-card border border-border bg-muted overflow-hidden shadow-card">
         {drinkImage && (
           <div className="relative h-32 overflow-hidden">
             <img
@@ -88,7 +88,7 @@ export function WordListPanel({
       </div>
 
       {/* Word list */}
-      <div className="rounded-2xl border border-gray-100 bg-white shadow-sm p-4">
+      <div className="rounded-card border border-border bg-surface shadow-card p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-xs font-bold uppercase tracking-widest text-gray-500">Ingredientes</h3>
           <span className="text-xs font-bold text-brand-700 bg-brand-50 rounded-full px-2 py-0.5 border border-brand-100">

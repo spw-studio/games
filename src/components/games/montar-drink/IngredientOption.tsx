@@ -36,7 +36,7 @@ export function IngredientOption({
 
   // Configuração visual de acordo com o estado
   let buttonClasses =
-    'relative flex items-center justify-between gap-3 px-4 py-3 rounded-2xl font-medium text-sm sm:text-base transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold-400 select-none shadow-sm ';
+    'relative flex items-center justify-between gap-3 px-4 py-3 rounded-control font-medium text-sm sm:text-base transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-secondary select-none shadow-card ';
   let icon = null;
   let labelPrefix = '';
 
@@ -71,7 +71,7 @@ export function IngredientOption({
     case 'default':
     default:
       buttonClasses +=
-        'bg-white border-2 border-cream-300 hover:border-brand-800/60 hover:bg-cream-50 text-gray-800 active:scale-95';
+        'bg-surface border-2 border-border hover:border-primary/60 hover:bg-surface-hover text-foreground active:scale-95';
       icon = <Plus className="h-5 w-5 text-gray-400 group-hover:text-brand-800" aria-hidden="true" />;
       break;
   }

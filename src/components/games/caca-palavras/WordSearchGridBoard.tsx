@@ -96,6 +96,8 @@ export function WordSearchGridBoard({
   return (
     <div
       ref={containerRef}
+      role="grid"
+      aria-label="Grade do caça-palavras"
       className={`inline-block select-none rounded-2xl border-2 p-2 sm:p-3 shadow-xl transition-all duration-200 ${
         wrongFlash
           ? 'border-rose-400 bg-rose-50 shadow-rose-200'
@@ -122,10 +124,12 @@ export function WordSearchGridBoard({
             const isCellWordFound = cell.wordIndexes.some((wi) => foundWordIndexes.has(wi));
 
             return (
-              <div
+              <button
                 key={key}
+                type="button"
                 data-row={r}
                 data-col={c}
+                aria-label={`Letra ${cell.letter}, linha ${r + 1}, coluna ${c + 1}`}
                 onMouseDown={() => onCellMouseDown(r, c)}
                 onMouseEnter={() => onCellMouseEnter(r, c)}
                 onMouseUp={() => onCellMouseUp(r, c)}
@@ -133,7 +137,7 @@ export function WordSearchGridBoard({
                   cellSizeClass,
                   'flex items-center justify-center rounded font-mono font-bold cursor-pointer transition-all duration-100 select-none',
                   isFoundHighlight
-                    ? `${foundColor} text-brand-900 scale-105 shadow-sm`
+                    ? 'text-white scale-105 shadow-md ring-2 ring-white/80 z-10'
                     : isPreview
                     ? 'bg-brand-800 text-white scale-110 z-10 shadow-md ring-1 ring-brand-700'
                     : isCellWordFound
@@ -144,9 +148,10 @@ export function WordSearchGridBoard({
                 ]
                   .filter(Boolean)
                   .join(' ')}
+                style={isFoundHighlight ? { backgroundColor: foundColor } : undefined}
               >
                 {cell.letter}
-              </div>
+              </button>
             );
           })
         )}

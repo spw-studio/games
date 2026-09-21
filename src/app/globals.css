@@ -5,14 +5,38 @@
 :root {
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   --color-primary: #44100D;
+  --theme-background: #FAF8F5;
+  --theme-foreground: #1A0A09;
+  --theme-surface: #FFFFFF;
+  --theme-surfaceHover: #FAF8F3;
+  --theme-primary: #44100D;
+  --theme-primaryForeground: #FFFFFF;
+  --theme-secondary: #C89D5C;
+  --theme-secondaryForeground: #4F3514;
+  --theme-border: #EAE1D3;
+  --theme-muted: #F4EFE6;
+  --theme-mutedForeground: #6B625A;
+  --theme-success: #059669;
+  --theme-warning: #D97706;
+  --theme-danger: #DC2626;
+  --theme-radiusCard: 1rem;
+  --theme-radiusControl: 0.75rem;
+  --theme-shadowCard: 0 4px 14px rgb(68 16 13 / 0.08);
+  --theme-shadowElevated: 0 20px 40px rgb(68 16 13 / 0.12);
 }
 
 body {
-  color: #1A0A09;
-  background-color: #FAF8F5;
+  color: var(--theme-foreground);
+  background-color: var(--theme-background);
   font-family: var(--font-sans);
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
+}
+
+.theme-root {
+  display: flex;
+  min-height: 100vh;
   flex-direction: column;
 }
 

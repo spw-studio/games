@@ -68,7 +68,7 @@ export function DrinkAssemblyGame({
         </div>
 
         {/* Coluna dos Ingredientes e Ações */}
-        <div className="lg:col-span-7 bg-white rounded-3xl border border-cream-300 p-6 sm:p-8 shadow-xl">
+        <div className="lg:col-span-7 bg-surface rounded-card border border-border p-6 sm:p-8 shadow-card">
           <IngredientGrid
             pool={pool}
             selectedIds={selectedIds}

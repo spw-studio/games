@@ -25,14 +25,14 @@ export function ProductImage({
   if (!src || hasError) {
     return (
       <div
-        className={`relative flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-950 text-gold-200 border border-gold-500/20 shadow-inner ${className}`}
+        className={`relative flex flex-col items-center justify-center overflow-hidden bg-primary text-secondary border border-secondary/20 shadow-inner ${className}`}
         aria-label={`Ilustração para ${alt}`}
       >
         {/* Padrão de fundo sutil gastronômico */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#C89D5C_1px,transparent_1px)] [background-size:12px_12px]" />
         
         <div className="relative z-10 flex flex-col items-center p-3 text-center">
-          <div className="w-12 h-12 rounded-full bg-gold-500/10 border border-gold-400/30 flex items-center justify-center mb-2 shadow-sm">
+          <div className="w-12 h-12 rounded-full bg-secondary/10 border border-secondary/30 flex items-center justify-center mb-2 shadow-card">
             {isBebida ? (
               <Wine className="w-6 h-6 text-gold-300" />
             ) : (
@@ -52,7 +52,7 @@ export function ProductImage({
   }
 
   return (
-    <div className={`relative overflow-hidden bg-cream-200 ${className}`}>
+    <div className={`relative overflow-hidden bg-muted ${className}`}>
       <Image
         src={src}
         alt={alt}

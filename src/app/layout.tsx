@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { AppShell } from '@/components/layout/AppShell';
+import { ThemeProvider } from '@/theme/ThemeProvider';
 
 export const metadata: Metadata = {
   title: 'Gastronomia Academy - Plataforma de Jogos e Aprendizagem',
@@ -22,8 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className="antialiased selection:bg-brand-800 selection:text-gold-200">
-        <AppShell>{children}</AppShell>
+      <body className="antialiased selection:bg-primary selection:text-secondary">
+        <ThemeProvider>
+          <AppShell>{children}</AppShell>
+        </ThemeProvider>
       </body>
     </html>
   );

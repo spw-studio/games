@@ -7,20 +7,27 @@ import { WordSearchGridBoard } from '@/components/games/caca-palavras/WordSearch
 import { WordListPanel } from '@/components/games/caca-palavras/WordListPanel';
 import { WordSearchResult } from '@/components/games/caca-palavras/WordSearchResult';
 import { normalizeForGrid } from '@/lib/games/word-search-engine';
+import { ThemeProvider } from '@/theme/ThemeProvider';
+import { getGameById } from '@/lib/games/registry';
+
+const wordSearchTheme = getGameById('caca-palavras')?.theme ?? 'default';
 
 export default function CacaPalavrasPage() {
   const game = useWordSearchGame();
 
   if (game.phase === 'config') {
     return (
+      <ThemeProvider themeId={wordSearchTheme}>
       <div className="min-h-[60vh] flex items-center justify-center py-8">
         <WordSearchConfig onStart={game.startGame} />
       </div>
+      </ThemeProvider>
     );
   }
 
   if (game.phase === 'result') {
     return (
+      <ThemeProvider themeId={wordSearchTheme}>
       <div className="py-8">
         <WordSearchResult
           drinkName={game.currentDrinkName}
@@ -35,6 +42,7 @@ export default function CacaPalavrasPage() {
           onRestart={game.onRestart}
         />
       </div>
+      </ThemeProvider>
     );
   }
 
@@ -62,6 +70,7 @@ export default function CacaPalavrasPage() {
   });
 
   return (
+    <ThemeProvider themeId={wordSearchTheme}>
     <div className="space-y-4 animate-in fade-in duration-300">
       {/* HUD */}
       <WordSearchHUD
@@ -107,5 +116,6 @@ export default function CacaPalavrasPage() {
         </div>
       </div>
     </div>
+    </ThemeProvider>
   );
 }

@@ -37,7 +37,7 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
   };
 
   return (
-    <div className="mx-auto max-w-2xl overflow-hidden rounded-3xl bg-white border border-cream-300 shadow-xl">
+    <div className="mx-auto max-w-2xl overflow-hidden rounded-card bg-surface border border-border shadow-elevated">
       {/* Banner Superior com a Cor Nobre #44100D */}
       <div className="bg-gradient-to-r from-brand-900 via-brand-800 to-brand-950 px-6 py-8 sm:px-8 text-white text-center relative">
         <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 border border-gold-400/30 shadow-inner">
@@ -64,7 +64,7 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
             id="category-select"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full rounded-xl border border-gray-300 bg-cream-50 px-4 py-3 text-sm font-medium text-gray-900 focus:border-brand-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-700/20"
+            className="w-full rounded-control border border-border bg-muted px-4 py-3 text-sm font-medium text-foreground focus:border-primary focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary/20"
           >
             <option value="todas">
               🍽️ Todas as Categorias ({getMemoryEligibleProducts('todas').length} pratos disponíveis)
@@ -106,7 +106,7 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
                   onClick={() => setPairCount(count)}
                   className={`flex flex-col items-center justify-center rounded-xl p-3 text-center transition-all ${
                     isSelected
-                      ? 'bg-brand-800 text-white shadow-md ring-2 ring-gold-400 font-bold'
+                        ? 'bg-primary text-primary-foreground shadow-card ring-2 ring-secondary font-bold'
                       : isPossible
                       ? 'bg-cream-100/80 text-gray-700 hover:bg-cream-200 border border-cream-300 font-medium'
                       : 'bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed opacity-60'
@@ -143,7 +143,7 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
                   className={`flex flex-col items-center rounded-xl p-3.5 border transition-all text-center ${
                     isSelected
                       ? 'bg-brand-50 border-brand-700 text-brand-900 shadow-sm ring-1 ring-brand-700'
-                      : 'bg-white border-cream-300 text-gray-700 hover:bg-cream-50'
+                      : 'bg-surface border-border text-foreground hover:bg-surface-hover'
                   }`}
                 >
                   <span className="text-sm font-bold">{level.name}</span>
@@ -176,9 +176,9 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
           <button
             type="submit"
             disabled={!hasEnoughProducts}
-            className={`w-full flex items-center justify-center gap-2 rounded-2xl px-6 py-4 text-base font-bold text-white shadow-lg transition-all ${
+            className={`w-full flex items-center justify-center gap-2 rounded-control px-6 py-4 text-base font-bold text-primary-foreground shadow-card transition-all ${
               hasEnoughProducts
-                ? 'bg-gradient-to-r from-brand-900 via-brand-800 to-brand-900 hover:shadow-xl hover:from-brand-850 hover:to-brand-800 active:scale-[0.99] cursor-pointer'
+                ? 'bg-primary hover:bg-primary/90 active:scale-[0.99] cursor-pointer'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed shadow-none'
             }`}
           >

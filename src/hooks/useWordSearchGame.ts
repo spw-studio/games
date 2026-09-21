@@ -22,16 +22,16 @@ interface FoundCells {
 }
 
 const HIGHLIGHT_COLORS = [
-  'bg-emerald-300/80',
-  'bg-sky-300/80',
-  'bg-amber-300/80',
-  'bg-rose-300/80',
-  'bg-violet-300/80',
-  'bg-teal-300/80',
-  'bg-orange-300/80',
-  'bg-pink-300/80',
-  'bg-lime-300/80',
-  'bg-cyan-300/80',
+  '#059669',
+  '#0284C7',
+  '#D97706',
+  '#E11D48',
+  '#7C3AED',
+  '#0F766E',
+  '#EA580C',
+  '#DB2777',
+  '#65A30D',
+  '#0891B2',
 ];
 
 const GRID_SIZE: Record<GameDifficulty, number> = {

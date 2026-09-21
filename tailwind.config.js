@@ -8,6 +8,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        background: 'var(--theme-background)',
+        foreground: 'var(--theme-foreground)',
+        surface: 'var(--theme-surface)',
+        'surface-hover': 'var(--theme-surfaceHover)',
+        primary: 'var(--theme-primary)',
+        'primary-foreground': 'var(--theme-primaryForeground)',
+        secondary: 'var(--theme-secondary)',
+        'secondary-foreground': 'var(--theme-secondaryForeground)',
+        border: 'var(--theme-border)',
+        muted: 'var(--theme-muted)',
+        'muted-foreground': 'var(--theme-mutedForeground)',
+        success: 'var(--theme-success)',
+        warning: 'var(--theme-warning)',
+        danger: 'var(--theme-danger)',
         brand: {
           50: '#FAF5F5',
           100: '#F3E8E8',
@@ -41,6 +55,14 @@ module.exports = {
           400: '#DDD0BE',
           500: '#CBBBA6',
         }
+      },
+      borderRadius: {
+        card: 'var(--theme-radiusCard)',
+        control: 'var(--theme-radiusControl)',
+      },
+      boxShadow: {
+        card: 'var(--theme-shadowCard)',
+        elevated: 'var(--theme-shadowElevated)',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'Inter', 'system-ui', 'sans-serif'],
