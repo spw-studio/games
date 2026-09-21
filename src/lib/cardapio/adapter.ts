@@ -16,7 +16,7 @@ function normalizeCategory(category?: RawCategory): Category | null {
 }
 
 function normalizeProduct(item?: RawProduct): Product | null {
-  if (!item || !item.id_prato) {
+  if (!item || !item.id) {
     return null;
   }
 
@@ -28,7 +28,7 @@ function normalizeProduct(item?: RawProduct): Product | null {
   }));
 
   return {
-    id: item.id_prato,
+    id: item.id,
     name: item.nome || 'Produto sem nome',
     categoryId: item.categoria || 'outros',
     description: item.descricao || '',

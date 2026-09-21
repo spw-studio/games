@@ -8,7 +8,7 @@ if (drinkItems.length < 5) {
 }
 
 for (const drink of drinkItems) {
-  if (!drink.id_prato || !drink.nome || !drink.descricao) {
+  if (!drink.id || !drink.nome || !drink.descricao) {
     throw new Error(`Drink inválido: ${JSON.stringify(drink)}`);
   }
   if (!Array.isArray(drink.ingredientes) || drink.ingredientes.length < 2) {

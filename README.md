@@ -126,7 +126,7 @@ Exemplo de inserção no array `cardapio.itens`:
 
 ```json
 {
-  "id_prato": "camarao-taiba",
+  "id": "camarao-taiba",
   "nome": "Camarão Taíba",
   "categoria": "camaroes",
   "descricao": "Camarões flambados com cognac e molho cremoso de queijo emmental com risoto de maçã verde e amêndoas laminadas.",

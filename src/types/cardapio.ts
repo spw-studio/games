@@ -42,7 +42,7 @@ export interface Product {
 }
 
 export interface RawProduct {
-  id_prato: string;
+  id: string;
   nome: string;
   categoria: string;
   descricao: string;

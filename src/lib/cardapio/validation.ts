@@ -20,7 +20,7 @@ function toLegacyCategory(category: Category) {
 
 function toLegacyProduct(item: Product) {
   return {
-    id_prato: item.id,
+    id: item.id,
     nome: item.name,
     categoria: item.categoryId,
     descricao: item.description,
@@ -59,20 +59,20 @@ export function validateCatalogData(data?: CatalogInput): CatalogValidationResul
   );
 
   for (const item of itens) {
-    if (!item || !item.id_prato) {
+    if (!item || !item.id) {
       continue;
     }
 
     if (!categoryMap.has(item.categoria)) {
-      missingCategoryItems.push(item.id_prato);
+      missingCategoryItems.push(item.id);
       warnings.push(
-        `Produto "${item.nome || item.id_prato}" (${item.id_prato}) possui categoria inexistente: "${item.categoria || 'indefinida'}".`
+        `Produto "${item.nome || item.id}" (${item.id}) possui categoria inexistente: "${item.categoria || 'indefinida'}".`
       );
     }
 
     if (!item.descricao || item.descricao.trim() === '') {
-      missingDescriptionItems.push(item.id_prato);
-      warnings.push(`Produto "${item.nome || item.id_prato}" (${item.id_prato}) não possui descrição cadastrada.`);
+      missingDescriptionItems.push(item.id);
+      warnings.push(`Produto "${item.nome || item.id}" (${item.id}) não possui descrição cadastrada.`);
     }
   }
 

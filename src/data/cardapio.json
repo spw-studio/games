@@ -72,7 +72,7 @@
     ],
     "itens": [
       {
-        "id_prato": "bacalhau-bras",
+        "id": "bacalhau-bras",
         "nome": "Bacalhau à Brás",
         "categoria": "lancamentos",
         "descricao": "Clássico português feito com lombo de bacalhau desfiado refogado no azeite de oliva com ovos cremosos e batata palha crocante, finalizado com salsinha e azeitonas Azapa.",
@@ -104,7 +104,7 @@
         ]
       },
       {
-        "id_prato": "camarao-al-mare-rosso",
+        "id": "camarao-al-mare-rosso",
         "nome": "Camarão al Mare Rosso",
         "categoria": "lancamentos",
         "descricao": "06 unidades de camarões GG salteados com alho, cebola e manjericão, envolvidos em molho de tomate italiano fresco com parmesão, servidos com fettuccine.",
@@ -122,7 +122,7 @@
         "preco": 154.00
       },
       {
-        "id_prato": "bombinha-camarao",
+        "id": "bombinha-camarao",
         "nome": "Bombinha de Camarão",
         "categoria": "lancamentos",
         "descricao": "Bolinhas crocantes recheadas com camarão, cream cheese e Catupiry, empanadas e acompanhadas de molho cremoso de maionese e mostarda levemente picante.",
@@ -140,7 +140,7 @@
         "preco": 59.00
       },
       {
-        "id_prato": "arpao-pescador",
+        "id": "arpao-pescador",
         "nome": "Arpão do Pescador",
         "categoria": "lancamentos",
         "descricao": "Camarões GG defumados e grelhados no charbroiler, servidos com delicioso molho provençal e alho frito laminado.",
@@ -157,7 +157,7 @@
         "preco": 102.00
       },
       {
-        "id_prato": "camarao-pistola-alho",
+        "id": "camarao-pistola-alho",
         "nome": "Camarão Pistola ao Alho",
         "categoria": "lancamentos",
         "descricao": "Majestosos camarões Pistola (tamanho GG) refogados em azeite fervilhante, lâminas de alho dourado e um leve toque de pimenta. Inspirado no clássico Gambas al Ajillo. Acompanha pão rústico para aproveitar o molho.",
@@ -173,7 +173,7 @@
         "preco": 116.00
       },
       {
-        "id_prato": "surf-and-turf",
+        "id": "surf-and-turf",
         "nome": "Coco Bambu Surf and Turf",
         "categoria": "lancamentos",
         "descricao": "Tornedor de filé mignon grelhado, acompanhado de camarões GG grelhados e finalizado com um cremoso molho de frutos do mar perfumado com salsinha fresca. Servido com arroz à parte.",
@@ -203,7 +203,7 @@
         ]
       },
       {
-        "id_prato": "camarao-ao-forno",
+        "id": "camarao-ao-forno",
         "nome": "Camarão ao Forno",
         "categoria": "camaroes",
         "descricao": "Camarões inteiros (com cabeça) levados ligeiramente ao forno, regados com suave molho provençal. Acompanha risoto de limão siciliano.",
@@ -226,7 +226,7 @@
         ]
       },
       {
-        "id_prato": "camarao-em-crosta",
+        "id": "camarao-em-crosta",
         "nome": "Camarão em Crosta",
         "categoria": "camaroes",
         "descricao": "Camarões em crosta de pão de alho. Acompanha salada de alface americana, tomate, azeitona verde, palmito, pimentão e cebola. Acompanha risoto de limão siciliano.",
@@ -250,7 +250,7 @@
         ]
       },
       {
-        "id_prato": "camarao-ipanema",
+        "id": "camarao-ipanema",
         "nome": "Camarão Ipanema",
         "categoria": "camaroes",
         "descricao": "Camarões salteados no azeite com alho, cebola, pimentão, coentro e tomate. Servidos sobre arroz regado com um toque de leite de coco e batata palha.",
@@ -277,7 +277,7 @@
         ]
       },
       {
-        "id_prato": "camarao-mucuripe",
+        "id": "camarao-mucuripe",
         "nome": "Camarão Mucuripe",
         "categoria": "camaroes",
         "descricao": "Camarões com espaguete italiano coberto com delicioso molho de tomate fresco acrescido de tomate seco, nata, azeitona preta e rúcula.",
@@ -305,7 +305,7 @@
         ]
       },
       {
-        "id_prato": "camarao-provençal",
+        "id": "camarao-provencal",
         "nome": "Camarão Provençal",
         "categoria": "camaroes",
         "descricao": "Camarões puxados no azeite extra virgem, alho e cebola, flambados com vinho branco, aromatizados com ervas de Provence, com molho de tomate fresco. Servido sobre fettuccine italiano com molho à base de creme de leite e um toque de limão siciliano.",
@@ -328,7 +328,7 @@
         ]
       },
       {
-        "id_prato": "carbonara-coco-bambu",
+        "id": "carbonara-coco-bambu",
         "nome": "Carbonara Coco Bambu",
         "categoria": "camaroes",
         "descricao": "Carbonara de camarão com fettuccine e molho feito com gema de ovo, queijo parmesão, creme de leite fresco, pimenta do reino, bacon e finalizado com farofa crocante de panko.",
@@ -358,7 +358,7 @@
         ]
       },
       {
-        "id_prato": "camarao-grelhado",
+        "id": "camarao-grelhado",
         "nome": "Camarão Grelhado",
         "categoria": "camaroes",
         "descricao": "Um prato rico em proteína com 8 unidades de camarões grandes grelhados com tomate, brócolis, abóbora, abobrinha, palmito, cenoura, batata e cebola.",
@@ -376,7 +376,7 @@
         "preco": 104.00
       },
       {
-        "id_prato": "camarao-coco-bambu",
+        "id": "camarao-coco-bambu",
         "nome": "Camarão Coco Bambu",
         "categoria": "camaroes",
         "descricao": "Camarões recheados com Catupiry® e empanados, servidos sobre arroz cremoso com camarão, ervilhas e presunto, cobertos com molho branco e gratinados com muçarela e parmesão. Acompanha batata palha artesanal.",
@@ -414,7 +414,7 @@
         ]
       },
       {
-        "id_prato": "camarao-coco-brasil",
+        "id": "camarao-coco-brasil",
         "nome": "Camarão Coco Brasil",
         "categoria": "camaroes",
         "descricao": "Camarões empanados recheados com Catupiry®, servidos sobre arroz cremoso de moqueca com camarão e coentro, cobertos com batata palha. Acompanha farofa de panko com bacon e pimenta-da-jamaica.",
@@ -453,7 +453,7 @@
         ]
       },
       {
-        "id_prato": "camarao-noronha",
+        "id": "camarao-noronha",
         "nome": "Camarão Grelhado Fernando de Noronha",
         "categoria": "camaroes",
         "descricao": "Camarões salteados no azeite e alho, acompanhados de legumes, palmito, batata recheada, tomates cereja e muçarela de búfala, cobertos com escalivada leve e óleo de ervas. Servido com arroz de brócolis.",
@@ -478,7 +478,7 @@
         ]
       },
       {
-        "id_prato": "camarao-internacional",
+        "id": "camarao-internacional",
         "nome": "Camarão Internacional",
         "categoria": "camaroes",
         "descricao": "Camarões servidos sobre arroz cremoso com ervilhas e presunto, envolvidos em molho branco e gratinados com muçarela e parmesão. Acompanha batata palha artesanal.",
@@ -510,7 +510,7 @@
         ]
       },
       {
-        "id_prato": "camarao-jurere",
+        "id": "camarao-jurere",
         "nome": "Camarão Jurerê",
         "categoria": "camaroes",
         "descricao": "Camarões salteados no azeite com alho e cebola, flambados no vinho branco e aromatizados com ervas de Provence. Servidos com molho de tomate fresco sobre fettuccine italiano ao creme de leite e limão siciliano.",
@@ -540,7 +540,7 @@
         ]
       },
       {
-        "id_prato": "camarao-monaco",
+        "id": "camarao-monaco",
         "nome": "Camarão Mônaco",
         "categoria": "camaroes",
         "descricao": "Camarões empanados servidos com risoto de aspargos e parmesão, finalizados com lâminas de amêndoas torradas.",
@@ -567,7 +567,7 @@
         ]
       },
       {
-        "id_prato": "camarao-siciliano",
+        "id": "camarao-siciliano",
         "nome": "Camarão Siciliano",
         "categoria": "camaroes",
         "descricao": "06 camarões recheados com Catupiry® e empanados, servidos sobre risoto de limão siciliano, decorados com salsinha e acompanhados de batata palha.",
@@ -588,7 +588,7 @@
         "preco": 166.00
       },
       {
-        "id_prato": "praia-boa-viagem",
+        "id": "praia-boa-viagem",
         "nome": "Praia de Boa Viagem",
         "categoria": "camaroes",
         "descricao": "Camarões refogados com alho e cebola, flambados no vinho branco. Servidos sobre espaguete ao molho bechamel e espinafre, gratinados com muçarela e parmesão.",
@@ -613,7 +613,7 @@
         ]
       },
       {
-        "id_prato": "camarao-florentina",
+        "id": "camarao-florentina",
         "nome": "Camarão Florentina",
         "categoria": "camaroes",
         "descricao": "Camarões refogados com alho e cebola, flambados no vinho branco. Servidos sobre espaguete ao molho bechamel e espinafre, gratinados com muçarela e parmesão.",
@@ -644,7 +644,7 @@
         ]
       },
       {
-        "id_prato": "praia-buzios",
+        "id": "praia-buzios",
         "nome": "Praia de Búzios",
         "categoria": "camaroes",
         "descricao": "Arroz de leite com queijo coalho coberto com camarões refogados com coentro, cebola, alho, tomate fresco e nata. Gratinado com queijo coalho e coberto com batata palha.",
@@ -670,7 +670,7 @@
         ]
       },
       {
-        "id_prato": "camarao-iracema",
+        "id": "camarao-iracema",
         "nome": "Camarão Iracema",
         "categoria": "camaroes",
         "descricao": "Arroz de queijo coalho coberto com camarões refogados com coentro, cebola, alho, tomate fresco e nata. Gratinado com queijo coalho e servido com mandioca frita.",
@@ -702,7 +702,7 @@
         ]
       },
       {
-        "id_prato": "praia-olinda",
+        "id": "praia-olinda",
         "nome": "Praia de Olinda",
         "categoria": "camaroes",
         "descricao": "Camarões refogados com alho e cebola, servidos sobre arroz cremoso com manjericão, envolvido em molho branco e gratinado com muçarela. Acompanha batata palha.",
@@ -728,7 +728,7 @@
         ]
       },
       {
-        "id_prato": "camarao-mediterraneo",
+        "id": "camarao-mediterraneo",
         "nome": "Camarão Mediterrâneo",
         "categoria": "camaroes",
         "descricao": "Camarões refogados no azeite com alho e cebola, servidos sobre arroz cremoso com manjericão, cobertos com molho branco e gratinados com muçarela e parmesão. Acompanha batata palha.",
@@ -760,7 +760,7 @@
         ]
       },
       {
-        "id_prato": "camarao-scampi",
+        "id": "camarao-scampi",
         "nome": "Camarão Scampi",
         "categoria": "camaroes",
         "descricao": "Espaguete com camarões, manteiga, alho, bacon crocante, parmesão, farinha panko e limão siciliano.",
@@ -789,7 +789,7 @@
         ]
       },
       {
-        "id_prato": "caipirinha-tradicional",
+        "id": "caipirinha-tradicional",
         "nome": "Caipirinha Tradicional",
         "categoria": "drinks",
         "descricao": "Clássico brasileiro elaborado com cachaça artesanal, limão fresco macerado, açúcar e cubos de gelo.",
@@ -807,7 +807,7 @@
         ]
       },
       {
-        "id_prato": "mojito-cubano",
+        "id": "mojito-cubano",
         "nome": "Mojito Cubano",
         "categoria": "drinks",
         "descricao": "Refrescante coquetel de origem caribenha com rum branco, folhas de hortelã fresca, suco de limão, açúcar, água com gás e gelo.",
@@ -827,7 +827,7 @@
         ]
       },
       {
-        "id_prato": "gin-tonica-classico",
+        "id": "gin-tonica-classico",
         "nome": "Gin Tônica Clássico",
         "categoria": "drinks",
         "descricao": "Harmoniosa combinação botânica de gin premium, água tônica cristalina, rodelas de limão siciliano, bagas de zimbro e muito gelo.",
@@ -846,7 +846,7 @@
         ]
       },
       {
-        "id_prato": "aperol-spritz",
+        "id": "aperol-spritz",
         "nome": "Aperol Spritz",
         "categoria": "drinks",
         "descricao": "Ícone do aperitivo italiano composto por Aperol, espumante Prosecco, um splash de água com gás, meia-lua de laranja e gelo.",
@@ -865,7 +865,7 @@
         ]
       },
       {
-        "id_prato": "moscow-mule",
+        "id": "moscow-mule",
         "nome": "Moscow Mule",
         "categoria": "drinks",
         "descricao": "Servido na tradicional caneca de cobre: vodka destilada, suco de limão taiti, xarope aromático de gengibre e suave espuma artesanal de gengibre com gelo.",
@@ -884,7 +884,7 @@
         ]
       },
       {
-        "id_prato": "pina-colada",
+        "id": "pina-colada",
         "nome": "Piña Colada",
         "categoria": "drinks",
         "descricao": "Bebida cremosa tropical que equilibra rum branco suave, leite de coco aveludado, suco de abacaxi selecionado, leite condensado e gelo batido.",
@@ -906,7 +906,7 @@
         ]
       },
       {
-        "id_prato": "margarita-classica",
+        "id": "margarita-classica",
         "nome": "Margarita Tradicional",
         "categoria": "drinks",
         "descricao": "Clássico mexicano combinando tequila prata pura, licor fino de laranja Cointreau, suco de limão fresco e borda decorada com crosta de sal marinho.",
@@ -925,7 +925,7 @@
         ]
       },
       {
-        "id_prato": "negroni",
+        "id": "negroni",
         "nome": "Negroni Clássico",
         "categoria": "drinks",
         "descricao": "Coquetel secular italiano que reúne partes iguais de gin seco, bitter Campari e vermute tinto doce, finalizado com twist aromático de casca de laranja.",
@@ -944,7 +944,7 @@
         ]
       },
       {
-        "id_prato": "dry-martini",
+        "id": "dry-martini",
         "nome": "Dry Martini",
         "categoria": "drinks",
         "descricao": "A sofisticação máxima em taça martini: gin London Dry gelado, toque sutil de vermute dry e azeitona verde premium espetada no palito.",
@@ -962,7 +962,7 @@
         ]
       },
       {
-        "id_prato": "caipiroska-morango",
+        "id": "caipiroska-morango",
         "nome": "Caipiroska de Morango",
         "categoria": "drinks",
         "descricao": "Variação vibrante e frutada preparada com vodka selecionada, morangos frescos macerados na taça, açúcar e pedras de gelo.",
@@ -980,7 +980,7 @@
         ]
       },
       {
-        "id_prato": "cuba-libre",
+        "id": "cuba-libre",
         "nome": "Cuba Libre",
         "categoria": "drinks",
         "descricao": "Combinação clássica de rum carta ouro envelhecido, refrigerante de cola gelado, gotas de suco de limão taiti fresco e pedras de gelo.",
@@ -998,7 +998,7 @@
         ]
       },
       {
-        "id_prato": "coquetel-frutas-sem-alcool",
+        "id": "coquetel-frutas-sem-alcool",
         "nome": "Coquetel de Frutas Tropical",
         "categoria": "drinks",
         "descricao": "Opção refrescante sem álcool preparada com suco de laranja natural, suco de abacaxi fresco, xarope de groselha, leite condensado e gelo batido.",

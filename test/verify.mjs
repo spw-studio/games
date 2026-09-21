@@ -14,10 +14,10 @@ console.log('=== TESTE 2: VERIFICAÇÃO DE CATEGORIA COMO ID ===');
 for (const item of itens) {
   const matchingCat = categorias.find((c) => c.id === item.categoria);
   if (!matchingCat) {
-    throw new Error(`Produto ${item.id_prato} possui categoria inexistente: ${item.categoria}`);
+    throw new Error(`Produto ${item.id} possui categoria inexistente: ${item.categoria}`);
   }
   if (!item.descricao || item.descricao.length === 0) {
-    throw new Error(`Produto ${item.id_prato} sem descrição`);
+    throw new Error(`Produto ${item.id} sem descrição`);
   }
 }
 console.log('OK: Todas as referências de categoria são IDs válidos!');
@@ -26,23 +26,23 @@ console.log('=== TESTE 3: PRESERVAÇÃO DE CAMPOS EXIGIDOS ===');
 for (const item of itens) {
   if (item.possui_variacoes) {
     if (!item.variacoes || item.variacoes.length === 0) {
-      throw new Error(`Item ${item.id_prato} marcado com variações mas array vazio`);
+      throw new Error(`Item ${item.id} marcado com variações mas array vazio`);
     }
     for (const v of item.variacoes) {
       if (!v.codigo || !v.porcao || typeof v.preco !== 'number') {
-        throw new Error(`Variação inválida em ${item.id_prato}`);
+        throw new Error(`Variação inválida em ${item.id}`);
       }
     }
   } else {
     if (!item.codigo || typeof item.preco !== 'number') {
-      throw new Error(`Item fixo ${item.id_prato} sem código ou preço`);
+      throw new Error(`Item fixo ${item.id} sem código ou preço`);
     }
   }
   if (!Array.isArray(item.tags_alimentares)) {
-    throw new Error(`tags_alimentares não é array em ${item.id_prato}`);
+    throw new Error(`tags_alimentares não é array em ${item.id}`);
   }
   if (!Array.isArray(item.acompanhamentos)) {
-    throw new Error(`acompanhamentos não é array em ${item.id_prato}`);
+    throw new Error(`acompanhamentos não é array em ${item.id}`);
   }
 }
 console.log('OK: Todos os campos (código, preço, variações, tags, porções, peso, acompanhamentos) foram preservados!');
@@ -98,7 +98,7 @@ console.log('OK: Acurácia calculada perfeitamente como 71%!');
 console.log('=== TESTE 5: DINAMISMO - ADICIONAR CATEGORIA E PRODUTO SEM ALTERAR CÓDIGO ===');
 const fakeNewCategory = { id: 'sobremesas-especiais', nome: 'Sobremesas Especiais' };
 const fakeNewProduct = {
-  id_prato: 'cocada-ao-forno',
+  id: 'cocada-ao-forno',
   nome: 'Cocada ao Forno com Sorvete',
   categoria: 'sobremesas-especiais',
   descricao: 'Deliciosa cocada cremosa assada ao forno servida quente com sorvete de creme artesanal.',
