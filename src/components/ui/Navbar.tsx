@@ -3,7 +3,19 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { ChefHat, Gamepad2, Home, Trophy, User, Settings } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import {
+  ChefHat,
+  ChevronDown,
+  Gamepad2,
+  Home,
+  LogIn,
+  LogOut,
+  Settings,
+  Trophy,
+  User,
+  UserRound,
+} from 'lucide-react';
 import { PlayerProfile } from '@/types/player';
 
 interface NavbarProps {
@@ -15,12 +27,46 @@ interface NavbarProps {
 export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: NavbarProps) {
   const pathname = usePathname();
   const { data: session, status } = useSession();
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
     { href: '/', label: 'Início', icon: Home },
     { href: '/jogos', label: 'Jogos', icon: Gamepad2 },
     { href: '/perfil', label: 'Desempenho', icon: Trophy },
   ];
+
+  const isAuthenticated = status === 'authenticated';
+  const profileName = session?.user?.name || player?.nome || 'Visitante';
+  const profileEmail = session?.user?.email || player?.email;
+  const profileInitials = profileName
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join('') || 'V';
+
+  useEffect(() => {
+    if (!isProfileMenuOpen) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!profileMenuRef.current?.contains(event.target as Node)) {
+        setIsProfileMenuOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsProfileMenuOpen(false);
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isProfileMenuOpen]);
+
+  const closeProfileMenu = () => setIsProfileMenuOpen(false);
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-primary/20 bg-primary text-primary-foreground shadow-md">
@@ -74,42 +120,100 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
           })}
         </nav>
 
-        {/* Perfil do Jogador */}
-        <div className="flex items-center gap-3">
-          {status === 'authenticated' ? (
-            <button
-              onClick={() => signOut()}
-              className="flex items-center gap-2 rounded-full bg-primary-foreground/10 px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary-foreground/15 border border-primary-foreground/10 transition-all active:scale-95"
-              title={`Sair de ${session.user?.email || 'sua conta Google'}`}
-            >
-              <span className="hidden lg:inline max-w-32 truncate">{session.user?.email}</span>
-              <span className="text-secondary">Sair</span>
-            </button>
-          ) : status !== 'loading' ? (
-            <button
-              onClick={() => signIn('google')}
-              className="flex items-center gap-2 rounded-full bg-primary-foreground px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-semibold text-primary hover:bg-surface transition-all active:scale-95"
-              title="Entrar com Google"
-            >
-              <span>Entrar com Google</span>
-            </button>
-          ) : null}
-          <button
-            onClick={onOpenPlayerModal}
-            className="flex items-center gap-2.5 rounded-full bg-primary-foreground/10 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-medium text-primary-foreground hover:bg-primary-foreground/15 border border-primary-foreground/10 transition-all active:scale-95"
-            title="Clique para editar seu nome"
-          >
-            <User className="h-4 w-4" />
-          </button>
+        {/* Menu do perfil e preferências */}
+        <div className="relative" ref={profileMenuRef}>
           <button
             type="button"
-            onClick={onOpenAudioSettings}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/15 border border-primary-foreground/10 transition-all active:scale-95"
-            title="Configurações de som"
-            aria-label="Abrir configurações de som"
+            onClick={() => setIsProfileMenuOpen((isOpen) => !isOpen)}
+            className="flex items-center gap-2 rounded-full border border-primary-foreground/15 bg-primary-foreground/10 px-2 py-1.5 text-left transition-all hover:bg-primary-foreground/15 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary"
+            aria-expanded={isProfileMenuOpen}
+            aria-haspopup="menu"
+            aria-label={`Abrir menu do perfil de ${profileName}`}
           >
-            <Settings className="h-4 w-4" />
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-xs font-bold text-primary">
+              {profileInitials}
+            </span>
+            <span className="hidden max-w-32 sm:block">
+              <span className="block truncate text-xs font-semibold text-primary-foreground">{profileName}</span>
+              <span className="block text-[10px] text-secondary/80">
+                {status === 'loading' ? 'Carregando...' : isAuthenticated ? 'Conta Google' : 'Visitante'}
+              </span>
+            </span>
+            <ChevronDown className={`hidden h-4 w-4 text-secondary transition-transform sm:block ${isProfileMenuOpen ? 'rotate-180' : ''}`} />
           </button>
+
+          {isProfileMenuOpen && (
+            <div className="absolute right-0 top-full z-50 mt-2 w-64 rounded-card border border-border bg-surface p-2 text-foreground shadow-elevated" role="menu">
+              <div className="border-b border-border px-3 py-2">
+                <p className="truncate text-sm font-bold">{profileName}</p>
+                <p className="truncate text-xs text-muted-foreground">{profileEmail || 'Perfil salvo neste navegador'}</p>
+              </div>
+
+              <Link
+                href="/perfil"
+                onClick={closeProfileMenu}
+                className="mt-2 flex items-center gap-3 rounded-control px-3 py-2.5 text-sm hover:bg-muted"
+                role="menuitem"
+              >
+                <UserRound className="h-4 w-4 text-primary" />
+                <span>Meu desempenho</span>
+              </Link>
+              <button
+                type="button"
+                onClick={() => {
+                  closeProfileMenu();
+                  onOpenPlayerModal?.();
+                }}
+                className="flex w-full items-center gap-3 rounded-control px-3 py-2.5 text-left text-sm hover:bg-muted"
+                role="menuitem"
+              >
+                <User className="h-4 w-4 text-primary" />
+                <span>Editar perfil</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  closeProfileMenu();
+                  onOpenAudioSettings?.();
+                }}
+                className="flex w-full items-center gap-3 rounded-control px-3 py-2.5 text-left text-sm hover:bg-muted"
+                role="menuitem"
+              >
+                <Settings className="h-4 w-4 text-primary" />
+                <span>Preferências de som</span>
+              </button>
+
+              <div className="mt-2 border-t border-border pt-2">
+                {isAuthenticated ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      closeProfileMenu();
+                      void signOut();
+                    }}
+                    className="flex w-full items-center gap-3 rounded-control px-3 py-2.5 text-left text-sm text-danger hover:bg-danger/10"
+                    role="menuitem"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Sair da conta Google</span>
+                  </button>
+                ) : status !== 'loading' ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      closeProfileMenu();
+                      void signIn('google');
+                    }}
+                    className="flex w-full items-center gap-3 rounded-control px-3 py-2.5 text-left text-sm text-primary hover:bg-muted"
+                    role="menuitem"
+                  >
+                    <LogIn className="h-4 w-4" />
+                    <span>Entrar com Google</span>
+                  </button>
+                ) : null}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

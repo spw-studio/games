@@ -118,6 +118,8 @@ O usuário pode:
 
 As preferências são persistidas no `localStorage` do navegador.
 
+Perfis locais usam `authType: 'local'` e um identificador aleatório. Perfis autenticados pelo Google usam `authType: 'google'` e um identificador estável da conta. O histórico continua local e não é sincronizado entre dispositivos.
+
 ## 9. Como Adicionar um Novo Produto
 
 Qualquer novo produto deve ser adicionado **apenas** no arquivo `src/data/cardapio.json`. **Nenhum código React precisa ser alterado.**
