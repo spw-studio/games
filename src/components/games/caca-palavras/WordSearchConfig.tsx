@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Play, Search, Zap, BookOpen, Flame } from 'lucide-react';
 import { GameDifficulty } from '@/types/game';
 import { WordSearchConfigState } from '@/types/word-search';
+import { DRINK_CATEGORY_ID } from '@/lib/cardapio/pure';
 
 interface WordSearchConfigProps {
   onStart: (config: WordSearchConfigState) => void;
@@ -37,7 +38,7 @@ export function WordSearchConfig({ onStart }: WordSearchConfigProps) {
   const [difficulty, setDifficulty] = useState<GameDifficulty>('medio');
 
   const handleStart = () => {
-    onStart({ difficulty, category: 'drinks' });
+    onStart({ difficulty, category: DRINK_CATEGORY_ID });
   };
 
   return (

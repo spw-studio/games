@@ -13,10 +13,13 @@ import { useGameTimer } from './useGameTimer';
 import { useAudio } from '@/components/audio/AudioProvider';
 import { useGameStorage } from './useGameStorage';
 import { usePlayer } from './usePlayer';
+import { Product } from '@/types/cardapio';
+import { fetchCatalogProducts } from '@/lib/cardapio/client';
 import {
+  DRINK_CATEGORY_ID,
+  buildDrinkGroups,
   getAllDistinctIngredients,
-  getDrinkGroups,
-} from '@/lib/cardapio/groupAdapter';
+} from '@/lib/cardapio/pure';
 import {
   evaluateDrinkSelection,
   generateDrinkRound,
@@ -39,11 +42,35 @@ export function useDrinkAssembly() {
   const [config, setConfig] = useState<DrinkAssemblyConfigState>({
     drinkCount: 5,
     difficulty: 'medio',
-    category: 'drinks',
+    category: DRINK_CATEGORY_ID,
   });
 
+  // Catálogo carregado via API (escopo de tenant aplicado no servidor)
+  const [catalogProducts, setCatalogProducts] = useState<Product[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetchCatalogProducts()
+      .then((products) => {
+        if (!cancelled) setCatalogProducts(products);
+      })
+      .catch(() => {
+        // Em caso de erro, o estado permanece "pronto" com lista vazia —
+        // a tela de configuração exibe o aviso de "nenhum drink disponível".
+        if (!cancelled) setCatalogProducts([]);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   // Catálogo completo de drinks e ingredientes
-  const allEligibleDrinks = useMemo(() => getDrinkGroups(), []);
+  const allEligibleDrinks = useMemo(
+    () => (catalogProducts ? buildDrinkGroups(catalogProducts) : []),
+    [catalogProducts]
+  );
   const allIngredients = useMemo(
     () => getAllDistinctIngredients(allEligibleDrinks),
     [allEligibleDrinks]
@@ -81,7 +108,9 @@ export function useDrinkAssembly() {
     (newConfig: DrinkAssemblyConfigState) => {
       setConfig(newConfig);
 
-      const available = getDrinkGroups(newConfig.category);
+      const available = catalogProducts
+        ? buildDrinkGroups(catalogProducts, newConfig.category)
+        : [];
       if (!available || available.length === 0) {
         return false;
       }
@@ -126,7 +155,7 @@ export function useDrinkAssembly() {
       play('click');
       return true;
     },
-    [allIngredients, timer, play]
+    [allIngredients, timer, play, catalogProducts]
   );
 
   // Alternar seleção de ingrediente
@@ -364,6 +393,7 @@ export function useDrinkAssembly() {
   return {
     gameState,
     config,
+    isCatalogReady: catalogProducts !== null,
     allEligibleDrinks,
     matchDrinks,
     currentIndex,

@@ -1,8 +1,10 @@
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
+import { isPublicPath } from '@/core/routes';
 
 export async function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname === '/jogos') {
+  // Política de rotas públicas compartilhada com o AppShell (client)
+  if (isPublicPath(request.nextUrl.pathname)) {
     return NextResponse.next();
   }
 
@@ -23,5 +25,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/perfil/:path*', '/jogos/:path*'],
+  matcher: ['/', '/perfil/:path*', '/jogos/:path*', '/admin/:path*'],
 };

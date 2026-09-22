@@ -1,21 +1,11 @@
 import { GameDifficulty } from '@/types/game';
 import { DrinkRoundEvaluation, Group, GroupMember } from '@/types/grouping';
-
-/**
- * Embaralha um array utilizando o algoritmo de Fisher-Yates (Knuth Shuffle).
- * Garante distribuição uniforme e aleatória sem viés.
- */
-export function shuffleArray<T>(array: T[]): T[] {
-  const result = [...array];
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
-}
+import { shuffleArray } from '@/lib/utils/shuffle';
 
 /**
  * Seleciona drinks para a partida sem repetição na mesma sessão.
+ * (Embaralhamento compartilhado via `lib/utils/shuffle` — única
+ * implementação Fisher-Yates da plataforma.)
  */
 export function selectMatchDrinks(allDrinks: Group[], count: number | 'todos'): Group[] {
   const shuffled = shuffleArray(allDrinks);

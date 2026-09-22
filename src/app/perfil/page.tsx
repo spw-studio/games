@@ -452,7 +452,7 @@ export default function PerfilPage() {
                         {new Date(item.playedAt).toLocaleString('pt-BR')}
                       </td>
                       <td className="px-4 py-3 font-semibold text-foreground whitespace-nowrap">
-                        {games.find((g) => g.id === item.gameId)?.nome || (item.gameId === 'memoria' ? 'Jogo da Memória' : item.gameId === 'montar-drink' ? 'Montar Drink' : item.gameId)}
+                        {games.find((g) => g.id === item.gameId)?.nome || item.gameId}
                       </td>
                       <td className="px-4 py-3 uppercase text-[10px] font-bold text-muted-foreground">
                         {item.difficulty}

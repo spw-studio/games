@@ -1,5 +1,6 @@
 import rawCardapio from '@/data/cardapio.json';
 import { CardapioRaw, Category, NormalizedCardapio, Product, RawProduct, RawCategory, ProductVariation } from '@/types/cardapio';
+import { getBootstrapOrganizationId } from '@/core/tenancy/types';
 import { validateMenuCatalog } from './schema';
 
 function normalizeCategory(category?: RawCategory): Category | null {
@@ -9,6 +10,7 @@ function normalizeCategory(category?: RawCategory): Category | null {
 
   return {
     id: category.id,
+    organizationId: getBootstrapOrganizationId(),
     name: category.nome || category.id,
     description: category.descricao,
     icon: category.icone,
@@ -29,6 +31,7 @@ function normalizeProduct(item?: RawProduct): Product | null {
 
   return {
     id: item.id,
+    organizationId: getBootstrapOrganizationId(),
     name: item.nome || 'Produto sem nome',
     categoryId: item.categoria || 'outros',
     description: item.descricao || '',

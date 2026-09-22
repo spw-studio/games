@@ -21,7 +21,7 @@ import {
 import { usePlayer } from '@/hooks/usePlayer';
 import { useGameStorage } from '@/hooks/useGameStorage';
 import { formatTimeMMSS } from '@/lib/statistics/calculations';
-import { MemoryMetrics } from '@/types/game';
+import { getGameById } from '@/lib/games/registry';
 
 export default function ResultadoPage() {
   const router = useRouter();
@@ -63,22 +63,39 @@ export default function ResultadoPage() {
           Inicie uma nova partida para visualizar suas pontuações e desempenho.
         </p>
         <Link
-          href="/jogos/memoria"
+          href="/jogos"
           className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-bold text-white shadow-md hover:bg-primary transition-all"
         >
-          <span>Ir para o Jogo da Memória</span>
+          <span>Ir para o Catálogo de Jogos</span>
         </Link>
       </div>
     );
   }
 
-  const metrics = (lastResult?.metrics as MemoryMetrics) || {
-    matches: 0,
-    errors: 0,
-    moves: 0,
-    bestStreak: 0,
-    totalPairs: 0,
-  };
+  /**
+   * Métricas genéricas — a tela funciona para qualquer jogo da plataforma.
+   * Cada jogo expõe suas métricas próprias; aqui só lemos o que existir.
+   */
+  const rawMetrics = (lastResult?.metrics ?? {}) as Record<string, unknown>;
+  const matches =
+    typeof rawMetrics.matches === 'number'
+      ? rawMetrics.matches
+      : typeof rawMetrics.correctDrinks === 'number'
+        ? rawMetrics.correctDrinks
+        : null;
+  const errors =
+    typeof rawMetrics.errors === 'number'
+      ? rawMetrics.errors
+      : typeof rawMetrics.incorrectDrinks === 'number'
+        ? rawMetrics.incorrectDrinks
+        : null;
+  const bestStreak =
+    typeof rawMetrics.bestStreak === 'number' ? rawMetrics.bestStreak : null;
+  const moves = typeof rawMetrics.moves === 'number' ? rawMetrics.moves : null;
+
+  const playedGame = lastResult ? getGameById(lastResult.gameId) : undefined;
+  const gameName = playedGame?.nome ?? lastResult?.gameId ?? 'rodada';
+  const replayHref = playedGame?.rota ?? '/jogos';
 
   return (
     <div className="mx-auto max-w-2xl py-4 animate-in fade-in zoom-in-95 duration-300">
@@ -103,7 +120,7 @@ export default function ResultadoPage() {
             PARABÉNS, {player ? player.nome.toUpperCase() : 'COLABORADOR'}!
           </h1>
           <p className="relative z-10 mt-1 text-sm text-gold-200/90 font-light">
-            Você completou com êxito a rodada de aprendizagem do cardápio.
+            Você concluiu uma partida de {gameName}.
           </p>
 
           {/* Destaque da Pontuação Final */}
@@ -142,7 +159,7 @@ export default function ResultadoPage() {
                 Acertos
               </span>
               <span className="text-xl font-extrabold text-emerald-700">
-                {metrics.matches}
+                {matches ?? '—'}
               </span>
             </div>
 
@@ -155,7 +172,7 @@ export default function ResultadoPage() {
                 Erros
               </span>
               <span className="text-xl font-extrabold text-red-600">
-                {metrics.errors}
+                {errors ?? '—'}
               </span>
             </div>
 
@@ -180,13 +197,13 @@ export default function ResultadoPage() {
                 <Flame className="w-4 h-4" />
               </div>
               <div>
-                <span className="block font-bold">Melhor Sequência (Streak): {metrics.bestStreak}x</span>
+                <span className="block font-bold">Melhor Sequência (Streak): {bestStreak ?? '—'}x</span>
                 <span className="text-[11px] text-muted-foreground">Acertos consecutivos nesta rodada</span>
               </div>
             </div>
 
             <div className="text-right">
-              <span className="block font-bold">Movimentos: {metrics.moves}</span>
+              <span className="block font-bold">Movimentos: {moves ?? '—'}</span>
               <span className="text-[11px] text-muted-foreground">Dificuldade: {lastResult?.difficulty.toUpperCase()}</span>
             </div>
           </div>
@@ -194,7 +211,7 @@ export default function ResultadoPage() {
           {/* Botões de Ação Exigidos no Requisito 31 */}
           <div className="space-y-3 pt-2">
             <Link
-              href="/jogos/memoria"
+              href={replayHref}
               className="w-full flex items-center justify-center gap-2 rounded-2xl bg-primary hover:bg-primary px-6 py-4 text-base font-bold text-white shadow-lg transition-all active:scale-[0.99]"
             >
               <RotateCcw className="w-5 h-5 text-gold-300" />

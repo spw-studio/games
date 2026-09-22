@@ -32,6 +32,7 @@ function CacaPalavrasContent() {
         <div className="min-h-[60vh] flex items-center justify-center py-8">
           <WordSearchConfig onStart={handleStartGame} />
         </div>
+        {!game.isCatalogReady && <LoadingScreen label="Carregando catálogo..." />}
         {isStarting && <LoadingScreen label="Preparando o caça-palavras..." />}
       </>
     );

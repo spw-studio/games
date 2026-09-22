@@ -15,6 +15,7 @@ export default function MontarDrinkPage() {
   const [isStarting, setIsStarting] = useState(false);
   const {
     gameState,
+    isCatalogReady,
     allEligibleDrinks,
     matchDrinks,
     currentIndex,
@@ -84,6 +85,7 @@ export default function MontarDrinkPage() {
         />
       )}
     </div>
+    {!isCatalogReady && <LoadingScreen label="Carregando catálogo..." />}
     {isStarting && <LoadingScreen label="Preparando o Montar Drink..." />}
     </ThemeProvider>
   );

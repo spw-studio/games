@@ -209,7 +209,7 @@ A plataforma foi construída para permitir a inclusão de novos jogos seguindo o
    }
    ```
    Use um tema específico somente quando o jogo precisar de uma identidade própria. Nesse caso, adicione apenas os overrides necessários em `src/theme/themes.ts`.
-5. **Consuma os produtos:** Use `getAllProducts()` ou `getProductsByCategory()` de `lib/cardapio/queries.ts`.
+5. **Consuma os produtos:** Em componentes cliente, use `fetchCatalogProducts()`/`fetchCatalogCategories()` de `lib/cardapio/client.ts` (a API aplica autenticação, papel e isolamento de tenant) e opere com as funções puras de `lib/cardapio/pure.ts`. No servidor (Route Handlers/serviços), use `lib/cardapio/service.ts` ou `queries.ts`.
 6. **Persista os resultados:** Chame `recordResult(result)` do hook `useGameStorage()`. A Home e a página de Perfil exibirão automaticamente o jogo ativo e suas estatísticas.
 
 ---
@@ -265,7 +265,8 @@ src/
 │   │   └── resultado/
 │   │       └── page.tsx          # Tela de resultado e novo recorde
 │   ├── api/
-│   │   └── auth/[...nextauth]/    # Endpoint do NextAuth
+│   │   ├── auth/[...nextauth]/    # Endpoint do NextAuth
+│   │   └── catalog/               # Produtos e categorias (tenant-scoped)
 │   └── perfil/
 │       └── page.tsx              # Perfil, gráficos Recharts e histórico
 ├── components/
@@ -285,6 +286,9 @@ src/
 │       └── ProductImage.tsx      # Fallback elegante de imagens
 ├── config/
 │   └── game-config.ts            # Parâmetros e limites globais
+├── core/
+│   ├── routes.ts                 # Política de rotas públicas (server + client)
+│   └── tenancy/                  # Organization, TenantContext, papéis e permissões
 ├── data/
 │   ├── cardapio.json             # Catálogo normalizado (Fonte de Verdade)
 │   └── games.ts                  # Definições centrais de jogos
@@ -299,8 +303,11 @@ src/
 │   └── usePlayer.ts              # Perfil do jogador e gatilho de modal
 ├── lib/
 │   ├── cardapio/
-│   │   ├── adapter.ts            # Normalizador de dados brutos
-│   │   └── queries.ts            # Consultas (getAllProducts, etc.)
+│   │   ├── adapter.ts            # Normalizador Raw→Product (server-only)
+│   │   ├── queries.ts            # Consultas ao JSON (server-only)
+│   │   ├── service.ts            # Serviço com autorização + escopo de tenant
+│   │   ├── client.ts             # Cliente HTTP do catálogo (client-only)
+│   │   └── pure.ts               # Funções puras compartilhadas (client-safe)
 │   ├── games/
 │   │   ├── drinkAssembly.ts      # Regras do Montar Drink
 │   │   ├── registry.ts           # Registro dinâmico de jogos
@@ -320,6 +327,7 @@ src/
 └── types/
     ├── cardapio.ts               # Tipos Category, Product, CardapioRaw
     ├── game.ts                   # Tipos GameResult, MemoryCard, etc.
+    ├── next-auth.d.ts            # Sessão NextAuth com organizationId + role
     ├── player.ts                 # Tipos PlayerProfile
     └── statistics.ts             # Tipos de estatísticas e séries Recharts
 public/
@@ -327,3 +335,44 @@ public/
   ├── bg/                       # Padrões e fundos da plataforma
   └── cardapio/                 # Fotos dos pratos e drinks
 ```
+
+---
+
+## Apêndice A. Multi-tenancy & API interna (Fase 2)
+
+A plataforma foi preparada para operar como SaaS multi-empresa **sem alterar o `package.json`** (nenhuma dependência foi instalada, removida ou alterada).
+
+### Conceitos e papéis
+
+| Conceito | Arquivo | Papel na arquitetura |
+|---|---|---|
+| `Organization` / `organizationId` | `src/core/tenancy/types.ts` | Convenção de nomenclatura de toda entidade de empresa |
+| `TenantContext` | `src/core/tenancy/context.ts` | Resolvido **no servidor** a partir da sessão — nunca aceito do cliente |
+| `Role` | `OWNER`, `EDITOR`, `VIEWER` | Matriz papel × módulo em `src/core/tenancy/permissions.ts` |
+| Módulos | `CARDAPIO`, `JOGOS`, `ADMIN` | Permissões `read`/`write` por papel |
+
+### Regras de isolamento
+
+1. O `organizationId` entra no JWT pelo callback `jwt` de `src/lib/auth.ts` (bootstrap: `TENANT_DEFAULT_ORG_ID`; futuramente, lookup em `organization_member` quando houver banco).
+2. Toda rota de API resolve o tenant com `getTenantContext()` — `401` sem sessão, `403` sem papel.
+3. `Product` e `Category` carregam `organizationId`; o serviço (`lib/cardapio/service.ts`) filtra por ele antes de responder.
+4. Componentes cliente **nunca** importam `cardapio.json` — consomem `lib/cardapio/client.ts` (HTTP) e `lib/cardapio/pure.ts` (funções puras). O JSON é importado apenas por `lib/cardapio/adapter.ts` (server-only).
+
+### Endpoints
+
+| Método | Rota | Requisito |
+|---|---|---|
+| GET | `/api/catalog/products?categoryId=` | sessão + leitura em `CARDAPIO` |
+| GET | `/api/catalog/categories` | sessão + leitura em `CARDAPIO` |
+
+### Variáveis de ambiente (`.env.example`)
+
+- `TENANT_DEFAULT_ORG_ID` — organização de bootstrap (padrão `org-default`).
+- `AUTH_EMAIL_ALLOWLIST` — lista branca opcional de e-mails, separados por vírgula (vazio = comportamento histórico).
+
+### Próximos passos (fase de banco, ainda não implementados)
+
+- Persistir `organization_member` (substitui o bootstrap de papel no JWT).
+- `GET/POST /api/results` — histórico de partidas por empresa (hoje: `localStorage`).
+- `GET /api/games` — módulos contratados por organização (entitlements).
+- Troca JSON → PostgreSQL alterando apenas `lib/cardapio/queries.ts`; as camadas `service` e UI permanecem inalteradas.

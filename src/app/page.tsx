@@ -13,11 +13,7 @@ import {
   Target,
   Trophy,
   ArrowRight,
-  HelpCircle,
-  BadgeDollarSign,
-  Utensils,
   History,
-  Wine,
 } from 'lucide-react';
 import {
   AreaChart,
@@ -29,7 +25,8 @@ import {
 } from 'recharts';
 import { usePlayer } from '@/hooks/usePlayer';
 import { useGameStorage } from '@/hooks/useGameStorage';
-import { getActiveGames, getAllGames } from '@/lib/games/registry';
+import { getActiveGames, getAllGames, getGameById } from '@/lib/games/registry';
+import { GameIcon } from '@/components/games/GameIcon';
 import { CHART_COLORS } from '@/theme/themes';
 import {
   calculateOverallStats,
@@ -56,21 +53,6 @@ export default function HomePage() {
     return history.slice(0, 5);
   }, [history]);
 
-  // Mapeamento de ícones dinâmicos
-  const renderGameIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Brain':
-        return <Brain className="h-7 w-7 text-gold-300" />;
-      case 'HelpCircle':
-        return <HelpCircle className="h-7 w-7 text-gold-300" />;
-      case 'BadgeDollarSign':
-        return <BadgeDollarSign className="h-7 w-7 text-gold-300" />;
-      case 'Wine':
-        return <Wine className="h-7 w-7 text-gold-300" />;
-      default:
-        return <Utensils className="h-7 w-7 text-gold-300" />;
-    }
-  };
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
@@ -221,7 +203,7 @@ export default function HomePage() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-900 to-brand-800 shadow-md">
-                    {renderGameIcon(game.icone)}
+                    <GameIcon name={game.icone} className="h-7 w-7 text-gold-300" />
                   </div>
                   <span className="rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-bold text-emerald-800 border border-emerald-300">
                     Disponível
@@ -263,7 +245,7 @@ export default function HomePage() {
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
-                      {renderGameIcon(game.icone)}
+                      <GameIcon name={game.icone} className="h-7 w-7 text-gold-300" />
                     </div>
                     <span className="rounded-full bg-muted px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                       Em Breve
@@ -394,7 +376,7 @@ export default function HomePage() {
                   >
                     <div>
                       <span className="block text-xs font-bold text-foreground">
-                        {match.gameId === 'memoria' ? 'Jogo da Memória' : match.gameId}
+                        {getGameById(match.gameId)?.nome ?? match.gameId}
                       </span>
                       <span className="text-[10px] text-muted-foreground">
                         {new Date(match.playedAt).toLocaleDateString('pt-BR')} • {formatTimeMMSS(match.durationSeconds)}

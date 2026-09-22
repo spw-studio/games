@@ -1,5 +1,7 @@
 export interface Category {
   id: string;
+  /** Organização (tenant) dona da categoria. */
+  organizationId: string;
   name: string;
   description?: string;
   icon?: string;
@@ -28,6 +30,8 @@ export interface RawProductVariation {
 
 export interface Product {
   id: string;
+  /** Organização (tenant) dona do produto — escopo de isolamento. */
+  organizationId: string;
   name: string;
   categoryId: string;
   description: string;

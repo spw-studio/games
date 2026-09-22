@@ -1,10 +1,11 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { GameDifficulty, GameResult, MemoryMetrics } from '@/types/game';
-import { Product } from '@/types/cardapio';
-import { getCategories, getMemoryEligibleProducts } from '@/lib/cardapio/queries';
+import { Category, Product } from '@/types/cardapio';
+import { fetchCatalogCategories, fetchCatalogProducts } from '@/lib/cardapio/client';
+import { filterMemoryEligibleProducts } from '@/lib/cardapio/pure';
 import { usePlayer } from '@/hooks/usePlayer';
 import { useGameStorage } from '@/hooks/useGameStorage';
 import { MemoryConfig } from '@/components/games/memory/MemoryConfig';
@@ -12,6 +13,7 @@ import { MemoryBoard } from '@/components/games/memory/MemoryBoard';
 import { ThemeProvider } from '@/theme/ThemeProvider';
 import { getGameById } from '@/lib/games/registry';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
+import { NoticeModal } from '@/components/ui/NoticeModal';
 
 const memoryTheme = getGameById('memoria')?.theme ?? 'default';
 
@@ -19,6 +21,11 @@ export default function MemoryGamePage() {
   const router = useRouter();
   const { player } = usePlayer();
   const { recordResult } = useGameStorage();
+
+  // Catálogo carregado via API (escopo de tenant aplicado no servidor)
+  const [categories, setCategories] = useState<Category[] | null>(null);
+  const [products, setProducts] = useState<Product[] | null>(null);
+  const [catalogError, setCatalogError] = useState(false);
 
   // Estados da partida
   const [gameState, setGameState] = useState<'config' | 'playing'>('config');
@@ -33,13 +40,29 @@ export default function MemoryGamePage() {
     difficulty: 'medio',
   });
 
-  // Categorias do cardápio normalizado
-  const categories = useMemo(() => getCategories(), []);
+  useEffect(() => {
+    let cancelled = false;
+
+    Promise.all([fetchCatalogCategories(), fetchCatalogProducts()])
+      .then(([fetchedCategories, fetchedProducts]) => {
+        if (cancelled) return;
+        setCategories(fetchedCategories);
+        setProducts(fetchedProducts);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setCatalogError(true);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Mapeamento de id de categoria para nome legível
   const categoryMap = useMemo(() => {
     const map: Record<string, string> = { todas: 'Todas as Categorias' };
-    categories.forEach((cat) => {
+    (categories ?? []).forEach((cat) => {
       map[cat.id] = cat.name;
     });
     return map;
@@ -47,8 +70,9 @@ export default function MemoryGamePage() {
 
   // Produtos elegíveis para o jogo (com descrição válida)
   const eligibleProducts = useMemo(() => {
-    return getMemoryEligibleProducts(gameConfig.category);
-  }, [gameConfig.category]);
+    if (!products) return [];
+    return filterMemoryEligibleProducts(products, gameConfig.category);
+  }, [products, gameConfig.category]);
 
   const handleStartGame = (config: {
     category: string;
@@ -74,28 +98,50 @@ export default function MemoryGamePage() {
     setGameState('config');
   };
 
+  const isCatalogLoading = !catalogError && (!categories || !products);
+
   return (
     <ThemeProvider themeId={memoryTheme}>
       <div className="py-2 animate-in fade-in duration-300">
-      {gameState === 'config' ? (
-        <MemoryConfig
-          categories={categories}
-          onStartGame={handleStartGame}
-        />
-      ) : (
-        <MemoryBoard
-          products={eligibleProducts}
-          categoryMap={categoryMap}
-          category={gameConfig.category}
-          pairCount={gameConfig.pairCount}
-          difficulty={gameConfig.difficulty}
-          playerId={player?.id || 'local-player'}
-          onFinishGame={handleFinishGame}
-          onRestart={handleRestart}
-        />
-      )}
+        {isCatalogLoading && <LoadingScreen label="Carregando catálogo..." />}
+
+        {!isCatalogLoading && catalogError && (
+          <NoticeModal
+            isOpen
+            title="Não foi possível carregar o catálogo"
+            message="Ocorreu um erro ao buscar os produtos. Verifique sua conexão e tente novamente."
+            variant="danger"
+            onClose={() => window.location.reload()}
+            primaryAction={{
+              label: 'Tentar novamente',
+              onClick: () => window.location.reload(),
+            }}
+          />
+        )}
+
+        {!isCatalogLoading && !catalogError && gameState === 'config' && (
+          <MemoryConfig
+            categories={categories ?? []}
+            products={products ?? []}
+            onStartGame={handleStartGame}
+          />
+        )}
+
+        {!isCatalogLoading && !catalogError && gameState === 'playing' && (
+          <MemoryBoard
+            products={eligibleProducts}
+            categoryMap={categoryMap}
+            category={gameConfig.category}
+            pairCount={gameConfig.pairCount}
+            difficulty={gameConfig.difficulty}
+            playerId={player?.id || 'local-player'}
+            onFinishGame={handleFinishGame}
+            onRestart={handleRestart}
+          />
+        )}
+
+        {isStarting && <LoadingScreen label="Preparando o jogo da memória..." />}
       </div>
-      {isStarting && <LoadingScreen label="Preparando o jogo da memória..." />}
     </ThemeProvider>
   );
 }

@@ -2,28 +2,12 @@
 
 import { useMemo } from 'react';
 import Link from 'next/link';
-import { Brain, HelpCircle, BadgeDollarSign, Utensils, Play, Sparkles, Wine, Search } from 'lucide-react';
+import { Play, Sparkles } from 'lucide-react';
 import { getAllGames } from '@/lib/games/registry';
+import { GameIcon } from '@/components/games/GameIcon';
 
 export default function JogosPage() {
   const games = useMemo(() => getAllGames(), []);
-
-  const renderGameIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Brain':
-        return <Brain className="h-8 w-8 text-gold-300" />;
-      case 'HelpCircle':
-        return <HelpCircle className="h-8 w-8 text-gold-300" />;
-      case 'BadgeDollarSign':
-        return <BadgeDollarSign className="h-8 w-8 text-gold-300" />;
-      case 'Wine':
-        return <Wine className="h-8 w-8 text-gold-300" />;
-      case 'Search':
-        return <Search className="h-8 w-8 text-gold-300" />;
-      default:
-        return <Utensils className="h-8 w-8 text-gold-300" />;
-    }
-  };
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
@@ -61,7 +45,7 @@ export default function JogosPage() {
                       : 'bg-muted text-muted-foreground'
                   }`}
                 >
-                  {renderGameIcon(game.icone)}
+                  <GameIcon name={game.icone} className="h-8 w-8 text-gold-300" />
                 </div>
 
                 <span

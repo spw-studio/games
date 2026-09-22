@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { Category, Product, ProductVariation } from '@/types/cardapio';
+import { DEFAULT_ORGANIZATION_ID } from '@/core/tenancy/types';
 
 const rawCategorySchema = z.object({
   id: z.string().min(1),
@@ -108,6 +109,7 @@ export function normalizeLegacyCategory(category: Partial<Category>): Category {
 
   return {
     id,
+    organizationId: category.organizationId ?? DEFAULT_ORGANIZATION_ID,
     name: normalizedName,
     description: category.description,
     icon: category.icon,
@@ -126,6 +128,7 @@ export function normalizeLegacyProduct(product: Partial<Product>): Product {
 
   return {
     id,
+    organizationId: product.organizationId ?? DEFAULT_ORGANIZATION_ID,
     name,
     categoryId,
     description,

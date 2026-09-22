@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Wine, Play, Sparkles, AlertCircle, ShieldAlert } from 'lucide-react';
 import { GameDifficulty } from '@/types/game';
 import { DrinkAssemblyConfigState, Group } from '@/types/grouping';
+import { DRINK_CATEGORY_ID } from '@/lib/cardapio/pure';
 
 interface DrinkAssemblyConfigProps {
   availableDrinks: Group[];
@@ -50,7 +51,7 @@ export function DrinkAssemblyConfig({
 }: DrinkAssemblyConfigProps) {
   const [selectedQuantity, setSelectedQuantity] = useState<number | 'todos'>(5);
   const [selectedDifficulty, setSelectedDifficulty] = useState<GameDifficulty>('medio');
-  const [selectedCategory, setSelectedCategory] = useState<string>('drinks');
+  const [selectedCategory, setSelectedCategory] = useState<string>(DRINK_CATEGORY_ID);
 
   const hasEnoughDrinks = availableDrinks && availableDrinks.length >= 1;
 

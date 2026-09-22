@@ -1,7 +1,10 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { getProductsByCategory } from '@/lib/cardapio/queries';
+import { Product } from '@/types/cardapio';
+import { fetchCatalogProducts } from '@/lib/cardapio/client';
+import { DRINK_CATEGORY_ID, filterProductsByCategory } from '@/lib/cardapio/pure';
+import { GAME_CONFIG } from '@/config/game-config';
 import { buildWordSearchGrid, checkSelectionForWord, getCellsOnLine, normalizeForGrid } from '@/lib/games/word-search-engine';
 import {
   buildWordSearchMetrics,
@@ -26,22 +29,11 @@ interface FoundCells {
 // Cores de destaque vindas do tema, garantindo sincronia com WordListPanel.
 const HIGHLIGHT_COLORS = [...WORD_SEARCH_COLORS];
 
-const GRID_SIZE: Record<GameDifficulty, number> = {
-  facil: 12,
-  medio: 15,
-  dificil: 18,
-};
-
-const DISTRACTOR_COUNT: Record<GameDifficulty, number> = {
-  facil: 0,
-  medio: 2,
-  dificil: 4,
-};
-
-const ALL_POSSIBLE_DISTRACTORS = [
-  'ABSINTO', 'COINTREAU', 'ANGOSTURA', 'MENTA', 'CURAÇAO',
-  'CHAMPANHE', 'VINHO', 'CERVEJA', 'UÍSQUE', 'BRANDY',
-];
+// Parâmetros de grade e distratores vivem no módulo de configuração
+// compartilhado (GAME_CONFIG.WORD_SEARCH).
+const GRID_SIZE = GAME_CONFIG.WORD_SEARCH.GRID_SIZE;
+const DISTRACTOR_COUNT = GAME_CONFIG.WORD_SEARCH.DISTRACTOR_COUNT;
+const ALL_POSSIBLE_DISTRACTORS = GAME_CONFIG.WORD_SEARCH.DISTRACTORS;
 
 export function useWordSearchGame() {
   const { player } = usePlayer();
@@ -51,8 +43,27 @@ export function useWordSearchGame() {
   const [phase, setPhase] = useState<GamePhase>('config');
   const [config, setConfig] = useState<WordSearchConfigState>({
     difficulty: 'medio',
-    category: 'drinks',
+    category: DRINK_CATEGORY_ID,
   });
+
+  // Catálogo carregado via API (escopo de tenant aplicado no servidor)
+  const [catalogProducts, setCatalogProducts] = useState<Product[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetchCatalogProducts()
+      .then((products) => {
+        if (!cancelled) setCatalogProducts(products);
+      })
+      .catch(() => {
+        if (!cancelled) setCatalogProducts([]);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const [currentDrinkName, setCurrentDrinkName] = useState<string>('');
   const [currentDrinkDesc, setCurrentDrinkDesc] = useState<string>('');
@@ -256,9 +267,10 @@ export function useWordSearchGame() {
       stopTimer();
       setConfig(cfg);
 
-      const drinks = getProductsByCategory('drinks').filter(
-        (p) => (p.ingredients ?? []).length >= 3
-      );
+      const drinks = filterProductsByCategory(
+        catalogProducts ?? [],
+        DRINK_CATEGORY_ID
+      ).filter((p) => (p.ingredients ?? []).length >= 3);
       if (drinks.length === 0) return;
 
       const drink = drinks[Math.floor(Math.random() * drinks.length)];
@@ -300,7 +312,7 @@ export function useWordSearchGame() {
         }, 1000);
       }, 100);
     },
-    [stopTimer, play]
+    [stopTimer, play, catalogProducts]
   );
 
   // ---- Hint ----
@@ -385,6 +397,7 @@ export function useWordSearchGame() {
   return {
     phase,
     config,
+    isCatalogReady: catalogProducts !== null,
     currentDrinkName,
     currentDrinkDesc,
     currentDrinkImage,

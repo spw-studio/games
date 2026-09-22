@@ -1,14 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { Category } from '@/types/cardapio';
+import { Category, Product } from '@/types/cardapio';
 import { GameDifficulty } from '@/types/game';
 import { GAME_CONFIG } from '@/config/game-config';
-import { getMemoryEligibleProducts } from '@/lib/cardapio/queries';
+import { filterMemoryEligibleProducts } from '@/lib/cardapio/pure';
 import { AlertCircle, Brain, Play, Sparkles, SlidersHorizontal } from 'lucide-react';
 
 interface MemoryConfigProps {
   categories: Category[];
+  /** Produtos do catálogo (carregados pela página via API). */
+  products: Product[];
   onStartGame: (config: {
     category: string;
     pairCount: number;
@@ -16,13 +18,14 @@ interface MemoryConfigProps {
   }) => void;
 }
 
-export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
+export function MemoryConfig({ categories, products, onStartGame }: MemoryConfigProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('todas');
   const [pairCount, setPairCount] = useState<number>(GAME_CONFIG.DEFAULT_PRODUCT_COUNT);
   const [difficulty, setDifficulty] = useState<GameDifficulty>(GAME_CONFIG.DEFAULT_DIFFICULTY);
 
   // Verificação dinâmica da quantidade de produtos elegíveis no catálogo
-  const eligibleProducts = getMemoryEligibleProducts(selectedCategory);
+  const eligibleProducts = filterMemoryEligibleProducts(products, selectedCategory);
+  const totalEligibleCount = filterMemoryEligibleProducts(products, 'todas').length;
   const availableCount = eligibleProducts.length;
   const hasEnoughProducts = availableCount >= pairCount;
 
@@ -67,10 +70,10 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
             className="w-full rounded-control border border-border bg-muted px-4 py-3 text-sm font-medium text-foreground focus:border-primary focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary/20"
           >
             <option value="todas">
-              🍽️ Todas as Categorias ({getMemoryEligibleProducts('todas').length} pratos disponíveis)
+              🍽️ Todas as Categorias ({totalEligibleCount} pratos disponíveis)
             </option>
             {categories.map((cat) => {
-              const count = getMemoryEligibleProducts(cat.id).length;
+              const count = filterMemoryEligibleProducts(products, cat.id).length;
               return (
                 <option key={cat.id} value={cat.id}>
                   {cat.name} ({count} pratos)

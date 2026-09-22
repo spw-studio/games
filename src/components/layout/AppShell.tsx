@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
 import { usePlayer } from '@/hooks/usePlayer';
+import { isPublicPath } from '@/core/routes';
 import { Navbar } from '@/components/ui/Navbar';
 import { PlayerModal } from '@/components/ui/PlayerModal';
 import { NoticeModal } from '@/components/ui/NoticeModal';
@@ -19,7 +20,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { status } = useSession();
-  const isPublicPage = pathname === '/jogos';
+  const isPublicPage = isPublicPath(pathname);
   const isAuthenticated = status === 'authenticated';
 
   useEffect(() => {
