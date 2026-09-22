@@ -1,60 +1,88 @@
 /** @type {import('tailwindcss').Config} */
+
+// Helper: converte um token de tema em cor com suporte a opacidade.
+// Os tokens são expostos como canais RGB ("R G B") pelo ThemeProvider.
+const themeColor = (token) => `rgb(var(--theme-${token}) / <alpha-value>)`;
+
+// Helper: monta uma rampa inteira (ex: brand.500 -> --theme-brand-500)
+const ramp = (name, shades) =>
+  shades.reduce((acc, shade) => {
+    acc[shade] = themeColor(`${name}-${shade}`);
+    return acc;
+  }, {});
+
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        background: 'var(--theme-background)',
-        foreground: 'var(--theme-foreground)',
-        surface: 'var(--theme-surface)',
-        'surface-hover': 'var(--theme-surfaceHover)',
-        primary: 'var(--theme-primary)',
-        'primary-foreground': 'var(--theme-primaryForeground)',
-        secondary: 'var(--theme-secondary)',
-        'secondary-foreground': 'var(--theme-secondaryForeground)',
-        border: 'var(--theme-border)',
-        muted: 'var(--theme-muted)',
-        'muted-foreground': 'var(--theme-mutedForeground)',
-        success: 'var(--theme-success)',
-        warning: 'var(--theme-warning)',
-        danger: 'var(--theme-danger)',
-        brand: {
-          50: '#FAF5F5',
-          100: '#F3E8E8',
-          200: '#E5CDCD',
-          300: '#D1ABAB',
-          400: '#B37574',
-          500: '#8E3935',
-          600: '#6D1C19',
-          700: '#571412',
-          800: '#44100D', // Cor predominante solicitada
-          900: '#330B09',
-          950: '#1F0605',
-        },
-        gold: {
-          50: '#FDFBF7',
-          100: '#FAF3E8',
-          200: '#F3E3C8',
-          300: '#E8CEA0',
-          400: '#DBB674',
-          500: '#C89D5C',
-          600: '#AD813E',
-          700: '#876228',
-          800: '#67481C',
-          900: '#4F3514',
-        },
-        cream: {
-          50: '#FDFCF9',
-          100: '#FAF8F3',
-          200: '#F4EFE6',
-          300: '#EAE1D3',
-          400: '#DDD0BE',
-          500: '#CBBBA6',
-        }
+        // ---- Tokens semânticos ----
+        background: themeColor('background'),
+        foreground: themeColor('foreground'),
+        surface: themeColor('surface'),
+        'surface-hover': themeColor('surfaceHover'),
+        'surface-elevated': themeColor('surfaceElevated'),
+        muted: themeColor('muted'),
+        'muted-foreground': themeColor('mutedForeground'),
+        'subtle-foreground': themeColor('subtleForeground'),
+        border: themeColor('border'),
+        'border-strong': themeColor('borderStrong'),
+
+        primary: themeColor('primary'),
+        'primary-foreground': themeColor('primaryForeground'),
+        'primary-soft': themeColor('primarySoft'),
+        'primary-soft-foreground': themeColor('primarySoftForeground'),
+
+        secondary: themeColor('secondary'),
+        'secondary-foreground': themeColor('secondaryForeground'),
+        'secondary-soft': themeColor('secondarySoft'),
+        'secondary-soft-foreground': themeColor('secondarySoftForeground'),
+
+        success: themeColor('success'),
+        'success-foreground': themeColor('successForeground'),
+        'success-soft': themeColor('successSoft'),
+        'success-soft-foreground': themeColor('successSoftForeground'),
+
+        warning: themeColor('warning'),
+        'warning-foreground': themeColor('warningForeground'),
+        'warning-soft': themeColor('warningSoft'),
+        'warning-soft-foreground': themeColor('warningSoftForeground'),
+
+        danger: themeColor('danger'),
+        'danger-foreground': themeColor('dangerForeground'),
+        'danger-soft': themeColor('dangerSoft'),
+        'danger-soft-foreground': themeColor('dangerSoftForeground'),
+
+        info: themeColor('info'),
+        'info-foreground': themeColor('infoForeground'),
+        'info-soft': themeColor('infoSoft'),
+        'info-soft-foreground': themeColor('infoSoftForeground'),
+
+        // Superfícies "hero"
+        'hero-from': themeColor('heroFrom'),
+        'hero-via': themeColor('heroVia'),
+        'hero-to': themeColor('heroTo'),
+        'hero-foreground': themeColor('heroForeground'),
+        overlay: themeColor('overlay'),
+
+        // Branco/preto controlados pelo tema
+        white: themeColor('white'),
+        black: themeColor('black'),
+
+        // ---- Rampas completas ----
+        brand: ramp('brand', [50, 100, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950]),
+        gold: ramp('gold', [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]),
+        cream: ramp('cream', [50, 100, 200, 300, 400, 500]),
+        gray: ramp('gray', [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]),
+        emerald: ramp('emerald', [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]),
+        amber: ramp('amber', [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]),
+        rose: ramp('rose', [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]),
+        red: ramp('red', [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]),
+        sky: ramp('sky', [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]),
       },
       borderRadius: {
         card: 'var(--theme-radiusCard)',
