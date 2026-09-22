@@ -13,6 +13,7 @@ import { usePlayer } from './usePlayer';
 import { GameDifficulty, GameResult } from '@/types/game';
 import { WordSearchConfigState, WordSearchGrid } from '@/types/word-search';
 import { useAudio } from '@/components/audio/AudioProvider';
+import { WORD_SEARCH_COLORS } from '@/theme/themes';
 
 type GamePhase = 'config' | 'playing' | 'result';
 
@@ -22,18 +23,8 @@ interface FoundCells {
   color: string;
 }
 
-const HIGHLIGHT_COLORS = [
-  '#059669',
-  '#0284C7',
-  '#D97706',
-  '#E11D48',
-  '#7C3AED',
-  '#0F766E',
-  '#EA580C',
-  '#DB2777',
-  '#65A30D',
-  '#0891B2',
-];
+// Cores de destaque vindas do tema, garantindo sincronia com WordListPanel.
+const HIGHLIGHT_COLORS = [...WORD_SEARCH_COLORS];
 
 const GRID_SIZE: Record<GameDifficulty, number> = {
   facil: 12,

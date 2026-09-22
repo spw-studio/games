@@ -1,8 +1,10 @@
 'use client';
 
+import type { CSSProperties } from 'react';
 import { Check, GlassWater } from 'lucide-react';
 import { WordSearchGrid } from '@/types/word-search';
 import { normalizeForGrid } from '@/lib/games/word-search-engine';
+import { WORD_SEARCH_COLORS } from '@/theme/themes';
 
 interface WordListPanelProps {
   drinkName: string;
@@ -13,19 +15,18 @@ interface WordListPanelProps {
   foundWordIndexes: Set<number>;
 }
 
-// Colors matching HIGHLIGHT_COLORS in the hook (same order)
-const WORD_COLORS = [
-  'bg-emerald-100 text-emerald-800 border-emerald-300 line-through decoration-emerald-500',
-  'bg-sky-100 text-sky-800 border-sky-300 line-through decoration-sky-500',
-  'bg-amber-100 text-amber-800 border-amber-300 line-through decoration-amber-500',
-  'bg-rose-100 text-rose-800 border-rose-300 line-through decoration-rose-500',
-  'bg-violet-100 text-violet-800 border-violet-300 line-through decoration-violet-500',
-  'bg-teal-100 text-teal-800 border-teal-300 line-through decoration-teal-500',
-  'bg-orange-100 text-orange-800 border-orange-300 line-through decoration-orange-500',
-  'bg-pink-100 text-pink-800 border-pink-300 line-through decoration-pink-500',
-  'bg-lime-100 text-lime-800 border-lime-300 line-through decoration-lime-500',
-  'bg-cyan-100 text-cyan-800 border-cyan-300 line-through decoration-cyan-500',
-];
+// Estilo do chip derivado da MESMA paleta do grid (WORD_SEARCH_COLORS),
+// garantindo correspondência 1:1 de cores entre o tabuleiro e a lista.
+const chipStyle = (index: number): CSSProperties => {
+  const color = WORD_SEARCH_COLORS[index % WORD_SEARCH_COLORS.length];
+  return {
+    backgroundColor: `${color}26`,
+    borderColor: `${color}80`,
+    color: 'rgb(var(--theme-foreground))',
+    textDecoration: 'line-through',
+    textDecorationColor: color,
+  };
+};
 
 export function WordListPanel({
   drinkName,
@@ -44,14 +45,6 @@ export function WordListPanel({
       }
     });
   });
-
-  // Track which "found word index" corresponds to which color
-  const foundIndexColorMap = new Map<number, string>();
-  let colorCounter = 0;
-  for (const idx of foundWordIndexes) {
-    foundIndexColorMap.set(idx, WORD_COLORS[colorCounter % WORD_COLORS.length]);
-    colorCounter++;
-  }
 
   const foundCount = targetWords.filter((w) => {
     const idx = wordIndexMap.get(w);
@@ -77,12 +70,12 @@ export function WordListPanel({
         )}
         <div className="p-4">
           <div className="flex items-center gap-2 mb-1">
-            <GlassWater className="h-4 w-4 text-brand-700 shrink-0" />
+            <GlassWater className="h-4 w-4 text-secondary shrink-0" />
             <span className="text-xs font-bold uppercase tracking-widest text-brand-600">Tema</span>
           </div>
-          <h2 className="text-lg font-serif font-bold text-brand-950 leading-tight">{drinkName}</h2>
+          <h2 className="text-lg font-serif font-bold text-foreground leading-tight">{drinkName}</h2>
           {drinkDesc && (
-            <p className="mt-1.5 text-xs text-gray-500 leading-relaxed line-clamp-3">{drinkDesc}</p>
+            <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed line-clamp-3">{drinkDesc}</p>
           )}
         </div>
       </div>
@@ -90,8 +83,8 @@ export function WordListPanel({
       {/* Word list */}
       <div className="rounded-card border border-border bg-surface shadow-card p-4">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-xs font-bold uppercase tracking-widest text-gray-500">Ingredientes</h3>
-          <span className="text-xs font-bold text-brand-700 bg-brand-50 rounded-full px-2 py-0.5 border border-brand-100">
+          <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Ingredientes</h3>
+          <span className="text-xs font-bold text-secondary bg-primary-soft rounded-full px-2 py-0.5 border border-brand-100">
             {foundCount}/{targetWords.length}
           </span>
         </div>
@@ -102,25 +95,26 @@ export function WordListPanel({
             const isFound = wordIndex !== undefined && foundWordIndexes.has(wordIndex);
             const isPlaced = wordIndex !== undefined;
 
-            // Get the found color for this word
-            let foundColorClass = '';
+            // Cor do chip derivada do índice encontrado (mesma ordem do grid)
+            let foundChipStyle: CSSProperties | undefined;
             if (isFound && wordIndex !== undefined) {
               const mapEntry = Array.from(foundWordIndexes).indexOf(wordIndex);
               if (mapEntry >= 0) {
-                foundColorClass = WORD_COLORS[mapEntry % WORD_COLORS.length];
+                foundChipStyle = chipStyle(mapEntry);
               }
             }
 
             return (
               <li
                 key={index}
+                style={foundChipStyle}
                 className={[
                   'flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition-all duration-300',
                   isFound
-                    ? `${foundColorClass} opacity-80`
+                    ? 'opacity-80'
                     : isPlaced
-                    ? 'border-gray-200 bg-gray-50 text-gray-700'
-                    : 'border-dashed border-gray-200 bg-gray-50/50 text-gray-400 text-xs',
+                    ? 'border-border bg-muted text-foreground'
+                    : 'border-dashed border-border bg-muted/50 text-subtle-foreground text-xs',
                 ]
                   .filter(Boolean)
                   .join(' ')}
@@ -130,7 +124,7 @@ export function WordListPanel({
                   <Check className="h-3.5 w-3.5 shrink-0 opacity-70" />
                 )}
                 {!isPlaced && (
-                  <span className="text-[10px] text-gray-400 italic">(não cabe)</span>
+                  <span className="text-[10px] text-subtle-foreground italic">(não cabe)</span>
                 )}
               </li>
             );

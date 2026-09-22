@@ -68,7 +68,7 @@ export function WordSearchResult({
     <div className="max-w-lg mx-auto space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Header */}
       <div className="rounded-3xl bg-gradient-to-br from-brand-950 to-brand-900 text-white p-8 text-center shadow-2xl">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/10 flex items-center justify-center">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-overlay/10 flex items-center justify-center">
           <Trophy className="h-8 w-8 text-gold-300" />
         </div>
         <div className="text-gold-300 text-sm font-medium uppercase tracking-widest mb-1">Partida encerrada</div>
@@ -76,7 +76,7 @@ export function WordSearchResult({
         <p className="text-white/60 text-sm mt-1">{drinkName}</p>
 
         {/* Score */}
-        <div className="mt-6 bg-white/10 rounded-2xl p-4">
+        <div className="mt-6 bg-overlay/10 rounded-2xl p-4">
           <div className="text-white/60 text-xs uppercase tracking-wider">Pontuação Final</div>
           <div className="text-4xl font-bold text-gold-300 mt-1">{score.toLocaleString()}</div>
         </div>
@@ -87,20 +87,20 @@ export function WordSearchResult({
         {[
           { icon: <Target className="h-4 w-4" />, label: 'Precisão', value: `${accuracy}%`, color: 'text-emerald-600' },
           { icon: <Clock className="h-4 w-4" />, label: 'Tempo', value: formatTime(elapsedSeconds), color: 'text-sky-600' },
-          { icon: <X className="h-4 w-4" />, label: 'Erros', value: wrongAttempts, color: wrongAttempts > 0 ? 'text-rose-600' : 'text-gray-400' },
-          { icon: <Lightbulb className="h-4 w-4" />, label: 'Dicas', value: hintsUsed, color: hintsUsed > 0 ? 'text-amber-600' : 'text-gray-400' },
+          { icon: <X className="h-4 w-4" />, label: 'Erros', value: wrongAttempts, color: wrongAttempts > 0 ? 'text-rose-600' : 'text-subtle-foreground' },
+          { icon: <Lightbulb className="h-4 w-4" />, label: 'Dicas', value: hintsUsed, color: hintsUsed > 0 ? 'text-amber-600' : 'text-subtle-foreground' },
         ].map((stat, i) => (
-          <div key={i} className="rounded-2xl border border-gray-100 bg-white p-3 text-center shadow-sm">
+          <div key={i} className="rounded-2xl border border-border bg-surface p-3 text-center shadow-sm">
             <div className={`flex justify-center mb-1 ${stat.color}`}>{stat.icon}</div>
             <div className={`text-xl font-bold ${stat.color}`}>{stat.value}</div>
-            <div className="text-[10px] text-gray-400 font-medium uppercase tracking-wide">{stat.label}</div>
+            <div className="text-[10px] text-subtle-foreground font-medium uppercase tracking-wide">{stat.label}</div>
           </div>
         ))}
       </div>
 
       {/* Word results */}
-      <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
-        <h2 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3">
+      <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">
           Ingredientes — {foundCount}/{placedWords.length} encontrados
         </h2>
         <div className="grid grid-cols-2 gap-2">
@@ -118,7 +118,7 @@ export function WordSearchResult({
                     ? 'border-emerald-200 bg-emerald-50 text-emerald-800'
                     : isPlaced
                     ? 'border-rose-200 bg-rose-50 text-rose-700'
-                    : 'border-dashed border-gray-200 bg-gray-50 text-gray-400 text-xs',
+                    : 'border-dashed border-border bg-gray-50 text-subtle-foreground text-xs',
                 ].join(' ')}
               >
                 {isFound ? (
@@ -137,14 +137,14 @@ export function WordSearchResult({
       <div className="grid grid-cols-2 gap-3">
         <button
           onClick={() => onPlayAgain(true)}
-          className="flex items-center justify-center gap-2 rounded-2xl bg-brand-800 hover:bg-brand-900 px-4 py-3.5 text-white font-bold text-sm shadow-md transition-all hover:-translate-y-0.5 active:scale-95"
+          className="flex items-center justify-center gap-2 rounded-2xl bg-primary hover:bg-primary px-4 py-3.5 text-white font-bold text-sm shadow-md transition-all hover:-translate-y-0.5 active:scale-95"
         >
           <RotateCcw className="h-4 w-4" />
           Novo Drink
         </button>
         <button
           onClick={onRestart}
-          className="flex items-center justify-center gap-2 rounded-2xl border-2 border-brand-200 bg-white hover:bg-brand-50 px-4 py-3.5 text-brand-900 font-bold text-sm transition-all hover:-translate-y-0.5 active:scale-95"
+          className="flex items-center justify-center gap-2 rounded-2xl border-2 border-border bg-surface hover:bg-primary-soft px-4 py-3.5 text-foreground font-bold text-sm transition-all hover:-translate-y-0.5 active:scale-95"
         >
           Mudar Config.
         </button>
@@ -152,7 +152,7 @@ export function WordSearchResult({
 
       <Link
         href="/jogos"
-        className="flex items-center justify-center gap-2 text-sm text-gray-500 hover:text-brand-800 transition-colors"
+        className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
       >
         <Home className="h-4 w-4" />
         Voltar aos Jogos

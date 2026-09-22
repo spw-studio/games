@@ -64,7 +64,7 @@ export function IngredientOption({
 
     case 'selected':
       buttonClasses +=
-        'bg-brand-900 border-2 border-brand-950 text-gold-300 font-semibold shadow-md transform -translate-y-0.5';
+        'bg-primary border-2 border-brand-950 text-gold-300 font-semibold shadow-md transform -translate-y-0.5';
       icon = <Check className="h-5 w-5 text-gold-300 stroke-[3]" aria-hidden="true" />;
       break;
 
@@ -72,7 +72,7 @@ export function IngredientOption({
     default:
       buttonClasses +=
         'bg-surface border-2 border-border hover:border-primary/60 hover:bg-surface-hover text-foreground active:scale-95';
-      icon = <Plus className="h-5 w-5 text-gray-400 group-hover:text-brand-800" aria-hidden="true" />;
+      icon = <Plus className="h-5 w-5 text-subtle-foreground group-hover:text-foreground" aria-hidden="true" />;
       break;
   }
 

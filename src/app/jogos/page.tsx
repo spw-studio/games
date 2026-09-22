@@ -36,7 +36,7 @@ export default function JogosPage() {
           <h1 className="text-3xl sm:text-4xl font-serif font-bold tracking-tight">
             Jogos de Aprendizagem Gastronômica
           </h1>
-          <p className="mt-2 text-sm text-cream-200/80 font-light leading-relaxed">
+          <p className="mt-2 text-sm text-foreground/80 font-light leading-relaxed">
             Todos os jogos compartilham o mesmo catálogo oficial de produtos, permitindo testar diferentes habilidades como memorização visual, conhecimentos de alérgenos e noções de porções.
           </p>
         </div>
@@ -48,8 +48,8 @@ export default function JogosPage() {
             key={game.id}
             className={`flex flex-col justify-between rounded-3xl p-6 transition-all ${
               game.ativo
-                ? 'bg-white border-2 border-brand-800/30 shadow-md hover:border-brand-800 hover:shadow-xl'
-                : 'bg-cream-100/60 border border-dashed border-gray-300 opacity-80'
+                ? 'bg-surface border-2 border-primary/30 shadow-md hover:border-primary hover:shadow-xl'
+                : 'bg-muted/60 border border-dashed border-border-strong opacity-80'
             }`}
           >
             <div>
@@ -58,7 +58,7 @@ export default function JogosPage() {
                   className={`flex h-16 w-16 items-center justify-center rounded-2xl ${
                     game.ativo
                       ? 'bg-gradient-to-br from-brand-900 to-brand-800 shadow-md'
-                      : 'bg-gray-200 text-gray-500'
+                      : 'bg-muted text-muted-foreground'
                   }`}
                 >
                   {renderGameIcon(game.icone)}
@@ -68,37 +68,37 @@ export default function JogosPage() {
                   className={`rounded-full px-3 py-1 text-[11px] font-bold ${
                     game.ativo
                       ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-                      : 'bg-gray-200 text-gray-600'
+                      : 'bg-muted text-muted-foreground'
                   }`}
                 >
                   {game.ativo ? 'Disponível' : 'Em Breve'}
                 </span>
               </div>
 
-              <span className="text-xs font-semibold uppercase tracking-wider text-gold-700">
+              <span className="text-xs font-semibold uppercase tracking-wider text-secondary">
                 {game.categoria}
               </span>
 
-              <h2 className="mt-1 text-xl font-serif font-bold text-brand-950">
+              <h2 className="mt-1 text-xl font-serif font-bold text-foreground">
                 {game.nome}
               </h2>
 
-              <p className="mt-2 text-xs sm:text-sm text-gray-600 leading-relaxed">
+              <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 {game.descricao}
               </p>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-cream-200">
+            <div className="mt-6 pt-4 border-t border-border">
               {game.ativo ? (
                 <Link
                   href={game.rota}
-                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand-800 hover:bg-brand-900 px-4 py-3 text-sm font-bold text-white shadow-md transition-all active:scale-95"
+                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-primary hover:bg-primary px-4 py-3 text-sm font-bold text-white shadow-md transition-all active:scale-95"
                 >
                   <Play className="h-4 w-4 fill-white" />
                   <span>Configurar e Jogar</span>
                 </Link>
               ) : (
-                <div className="w-full text-center py-2.5 text-xs font-medium text-gray-400 bg-gray-100 rounded-xl">
+                <div className="w-full text-center py-2.5 text-xs font-medium text-subtle-foreground bg-muted rounded-xl">
                   Próxima versão da plataforma
                 </div>
               )}

@@ -70,7 +70,7 @@ export function DrinkAssemblyConfig({
         <div className="absolute inset-0 bg-[radial-gradient(#C89D5C_1px,transparent_1px)] [background-size:20px_20px] opacity-10" />
 
         <div className="relative z-10 flex flex-col items-center text-center">
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 border-2 border-gold-400/40 text-gold-300 shadow-xl backdrop-blur-md">
+          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-overlay/10 border-2 border-gold-400/40 text-gold-300 shadow-xl backdrop-blur-md">
             <Wine className="h-8 w-8" />
           </div>
 
@@ -83,7 +83,7 @@ export function DrinkAssemblyConfig({
             Montar o Drink
           </h1>
 
-          <p className="mt-2 text-sm sm:text-base text-cream-200/90 font-light max-w-lg leading-relaxed">
+          <p className="mt-2 text-sm sm:text-base text-foreground/90 font-light max-w-lg leading-relaxed">
             Treine sua agilidade e conhecimento técnico selecionando os ingredientes
             exatos de cada coquetel clássico sem errar a receita.
           </p>
@@ -119,10 +119,10 @@ export function DrinkAssemblyConfig({
           {/* 1. Quantidade de Drinks */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <label className="text-sm font-bold uppercase tracking-wider text-brand-950">
+              <label className="text-sm font-bold uppercase tracking-wider text-foreground">
                 1. Quantidade de Drinks na Partida
               </label>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-muted-foreground">
                 {availableDrinks.length} drinks disponíveis
               </span>
             </div>
@@ -154,7 +154,7 @@ export function DrinkAssemblyConfig({
 
           {/* 2. Categoria */}
           <div className="space-y-3">
-            <label className="block text-sm font-bold uppercase tracking-wider text-brand-950">
+            <label className="block text-sm font-bold uppercase tracking-wider text-foreground">
               2. Categoria de Coquetelaria
             </label>
 
@@ -173,7 +173,7 @@ export function DrinkAssemblyConfig({
                 </span>
                 <span
                   className={`text-xs mt-0.5 block ${
-                    selectedCategory === 'drinks' ? 'text-cream-200/80' : 'text-gray-500'
+                    selectedCategory === 'drinks' ? 'text-foreground/80' : 'text-muted-foreground'
                   }`}
                 >
                   Drinks com receitas completas
@@ -194,7 +194,7 @@ export function DrinkAssemblyConfig({
                 </span>
                 <span
                   className={`text-xs mt-0.5 block ${
-                    selectedCategory === 'todas' ? 'text-cream-200/80' : 'text-gray-500'
+                    selectedCategory === 'todas' ? 'text-foreground/80' : 'text-muted-foreground'
                   }`}
                 >
                   Drinks e coquetéis variados
@@ -205,7 +205,7 @@ export function DrinkAssemblyConfig({
 
           {/* 3. Nível de Dificuldade */}
           <div className="space-y-3">
-            <label className="block text-sm font-bold uppercase tracking-wider text-brand-950">
+            <label className="block text-sm font-bold uppercase tracking-wider text-foreground">
               3. Nível de Dificuldade
             </label>
 
@@ -232,7 +232,7 @@ export function DrinkAssemblyConfig({
                           className={`text-xs font-mono font-bold px-2 py-0.5 rounded-full ${
                             isSelected
                               ? 'bg-gold-500/20 text-gold-300 border border-gold-400/40'
-                              : 'bg-cream-200 text-gray-700'
+                              : 'bg-muted text-foreground'
                           }`}
                         >
                           {diff.multiplier}
@@ -240,7 +240,7 @@ export function DrinkAssemblyConfig({
                       </div>
                       <p
                         className={`text-xs mt-2 leading-relaxed ${
-                          isSelected ? 'text-cream-200/90' : 'text-gray-500'
+                          isSelected ? 'text-foreground/90' : 'text-muted-foreground'
                         }`}
                       >
                         {diff.desc}

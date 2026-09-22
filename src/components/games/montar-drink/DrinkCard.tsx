@@ -34,7 +34,7 @@ export function DrinkCard({ drink }: DrinkCardProps) {
         ) : (
           /* Fallback visual gastronômico nobre quando não há imagem física */
           <div className="relative z-10 flex flex-col items-center justify-center text-center p-6">
-            <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-white/10 border-2 border-gold-400/40 text-gold-300 shadow-2xl backdrop-blur-sm mb-3 animate-in zoom-in-90 duration-300">
+            <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-overlay/10 border-2 border-gold-400/40 text-gold-300 shadow-2xl backdrop-blur-sm mb-3 animate-in zoom-in-90 duration-300">
               <Wine className="h-10 w-10" />
             </div>
             <span className="text-xs font-semibold uppercase tracking-widest text-gold-300/90">
@@ -53,29 +53,29 @@ export function DrinkCard({ drink }: DrinkCardProps) {
       {/* Conteúdo do Card */}
       <div className="p-6 sm:p-8 space-y-3 bg-surface">
         <div className="space-y-1">
-          <span className="text-xs font-bold uppercase tracking-wider text-gold-700">
+          <span className="text-xs font-bold uppercase tracking-wider text-secondary">
             Monte este drink
           </span>
-          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-brand-950 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-foreground tracking-tight">
             {drink.name}
           </h2>
         </div>
 
         {drink.description && (
-          <p className="text-sm sm:text-base text-gray-600 font-light leading-relaxed">
+          <p className="text-sm sm:text-base text-muted-foreground font-light leading-relaxed">
             {drink.description}
           </p>
         )}
 
-        <div className="pt-2 border-t border-cream-200/80 flex items-center justify-between text-xs text-gray-500">
+        <div className="pt-2 border-t border-border/80 flex items-center justify-between text-xs text-muted-foreground">
           <span>
             Ingredientes necessários:{' '}
-            <strong className="text-brand-900 font-bold font-mono">
+            <strong className="text-foreground font-bold font-mono">
               {drink.members.length}
             </strong>
           </span>
           <span className="text-cream-400">•</span>
-          <span className="text-gray-400">Selecione todos para acertar</span>
+          <span className="text-subtle-foreground">Selecione todos para acertar</span>
         </div>
       </div>
     </div>

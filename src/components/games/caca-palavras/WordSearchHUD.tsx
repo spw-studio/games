@@ -35,7 +35,7 @@ export function WordSearchHUD({
       <div className="flex items-center justify-between gap-3 flex-wrap">
         {/* Left: Progress */}
         <div className="flex items-center gap-3 min-w-0">
-          <div className="flex items-center gap-1.5 bg-white/10 rounded-xl px-3 py-2">
+          <div className="flex items-center gap-1.5 bg-overlay/10 rounded-xl px-3 py-2">
             <Search className="h-4 w-4 text-secondary shrink-0" />
             <span className="font-bold text-lg text-primary-foreground leading-none">
               {foundCount}

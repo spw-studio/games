@@ -40,7 +40,7 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
     <div className="mx-auto max-w-2xl overflow-hidden rounded-card bg-surface border border-border shadow-elevated">
       {/* Banner Superior com a Cor Nobre #44100D */}
       <div className="bg-gradient-to-r from-brand-900 via-brand-800 to-brand-950 px-6 py-8 sm:px-8 text-white text-center relative">
-        <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 border border-gold-400/30 shadow-inner">
+        <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl bg-overlay/10 border border-gold-400/30 shadow-inner">
           <Brain className="h-8 w-8 text-gold-300" />
         </div>
         <h1 className="text-2xl sm:text-3xl font-serif font-bold tracking-wide">
@@ -56,7 +56,7 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
         <div>
           <label
             htmlFor="category-select"
-            className="block text-xs font-bold uppercase tracking-wider text-brand-900 mb-2"
+            className="block text-xs font-bold uppercase tracking-wider text-foreground mb-2"
           >
             1. Categoria de Produtos
           </label>
@@ -78,7 +78,7 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
               );
             })}
           </select>
-          <p className="mt-1.5 text-xs text-gray-500">
+          <p className="mt-1.5 text-xs text-muted-foreground">
             Categorias carregadas diretamente da base oficial do restaurante.
           </p>
         </div>
@@ -86,10 +86,10 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
         {/* 2. QUANTIDADE DE PARES */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-xs font-bold uppercase tracking-wider text-brand-900">
+            <label className="block text-xs font-bold uppercase tracking-wider text-foreground">
               2. Quantidade de Pares (Pratos)
             </label>
-            <span className="text-xs text-gray-500 font-medium">
+            <span className="text-xs text-muted-foreground font-medium">
               {pairCount * 2} cartas no tabuleiro
             </span>
           </div>
@@ -108,8 +108,8 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
                     isSelected
                         ? 'bg-primary text-primary-foreground shadow-card ring-2 ring-secondary font-bold'
                       : isPossible
-                      ? 'bg-cream-100/80 text-gray-700 hover:bg-cream-200 border border-cream-300 font-medium'
-                      : 'bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed opacity-60'
+                      ? 'bg-muted/80 text-foreground hover:bg-muted border border-border font-medium'
+                      : 'bg-muted text-subtle-foreground border border-border cursor-not-allowed opacity-60'
                   }`}
                   title={!isPossible ? 'Quantidade indisponível nesta categoria' : undefined}
                 >
@@ -123,7 +123,7 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
 
         {/* 3. DIFICULDADE */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-brand-900 mb-2">
+          <label className="block text-xs font-bold uppercase tracking-wider text-foreground mb-2">
             3. Dificuldade & Multiplicador de Pontuação
           </label>
           <div className="grid grid-cols-3 gap-3">
@@ -142,15 +142,15 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
                   onClick={() => setDifficulty(level.id)}
                   className={`flex flex-col items-center rounded-xl p-3.5 border transition-all text-center ${
                     isSelected
-                      ? 'bg-brand-50 border-brand-700 text-brand-900 shadow-sm ring-1 ring-brand-700'
+                      ? 'bg-primary-soft border-primary text-foreground shadow-sm ring-1 ring-primary'
                       : 'bg-surface border-border text-foreground hover:bg-surface-hover'
                   }`}
                 >
                   <span className="text-sm font-bold">{level.name}</span>
-                  <span className="rounded-full bg-gold-500/20 px-2 py-0.5 mt-1 text-[10px] font-bold text-gold-800 border border-gold-400/40">
+                  <span className="rounded-full bg-gold-500/20 px-2 py-0.5 mt-1 text-[10px] font-bold text-secondary border border-gold-400/40">
                     {level.mult}
                   </span>
-                  <span className="text-[10px] text-gray-500 mt-1">{level.desc}</span>
+                  <span className="text-[10px] text-muted-foreground mt-1">{level.desc}</span>
                 </button>
               );
             })}
@@ -179,7 +179,7 @@ export function MemoryConfig({ categories, onStartGame }: MemoryConfigProps) {
             className={`w-full flex items-center justify-center gap-2 rounded-control px-6 py-4 text-base font-bold text-primary-foreground shadow-card transition-all ${
               hasEnoughProducts
                 ? 'bg-primary hover:bg-primary/90 active:scale-[0.99] cursor-pointer'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed shadow-none'
+                : 'bg-muted text-muted-foreground cursor-not-allowed shadow-none'
             }`}
           >
             <Play className="w-5 h-5 text-gold-300 fill-gold-300" />

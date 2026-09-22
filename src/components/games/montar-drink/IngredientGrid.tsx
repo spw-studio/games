@@ -119,10 +119,10 @@ export function IngredientGrid({
       {/* Grid de Ingredientes Selecionáveis */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-gray-500">
+          <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Ingredientes Disponíveis
           </span>
-          <span className="text-xs text-gray-400 font-mono">
+          <span className="text-xs text-subtle-foreground font-mono">
             {selectedIds.length} selecionado(s)
           </span>
         </div>
@@ -154,8 +154,8 @@ export function IngredientGrid({
             disabled={!hasSelection}
             className={`w-full flex items-center justify-center gap-2 rounded-2xl py-4 px-6 text-base font-bold shadow-lg transition-all duration-200 active:scale-[0.98] ${
               hasSelection
-                ? 'bg-brand-900 hover:bg-brand-950 text-gold-300 border border-gold-400/40 cursor-pointer shadow-brand-900/20'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                ? 'bg-primary hover:bg-brand-950 text-gold-300 border border-gold-400/40 cursor-pointer shadow-brand-900/20'
+                : 'bg-muted text-subtle-foreground cursor-not-allowed'
             }`}
           >
             <Check className="h-5 w-5 stroke-[2.5]" />
@@ -165,7 +165,7 @@ export function IngredientGrid({
           <button
             type="button"
             onClick={onNext}
-            className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-600 via-amber-500 to-gold-400 hover:brightness-105 text-brand-950 font-bold py-4 px-6 text-base shadow-xl transition-all duration-200 active:scale-[0.98] cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-600 via-amber-500 to-gold-400 hover:brightness-105 text-foreground font-bold py-4 px-6 text-base shadow-xl transition-all duration-200 active:scale-[0.98] cursor-pointer"
           >
             <span>{isLastDrink ? 'FINALIZAR PARTIDA' : 'PRÓXIMO DRINK'}</span>
             <ArrowRight className="h-5 w-5 stroke-[2.5]" />

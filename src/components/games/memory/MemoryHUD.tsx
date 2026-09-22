@@ -36,13 +36,13 @@ export function MemoryHUD({
   return (
     <div className="w-full rounded-card bg-surface border border-border p-4 shadow-card">
       {/* Barra superior de contexto */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-cream-200 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-3">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-brand-900">
+          <span className="text-xs font-bold uppercase tracking-wider text-foreground">
             Jogo da Memória Gastronômico
           </span>
           {categoryName && (
-            <span className="rounded-full bg-cream-200 px-2.5 py-0.5 text-[11px] font-semibold text-brand-900">
+            <span className="rounded-full bg-muted px-2.5 py-0.5 text-[11px] font-semibold text-foreground">
               {categoryName}
             </span>
           )}
@@ -57,7 +57,7 @@ export function MemoryHUD({
           <GameSoundToggle />
           <button
             onClick={onRestart}
-            className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold text-gray-600 hover:bg-cream-100 hover:text-brand-900 transition-colors"
+            className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
             title="Reiniciar esta partida"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -70,7 +70,7 @@ export function MemoryHUD({
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 pt-3">
         {/* 1. PONTUAÇÃO */}
         <div className="flex items-center gap-3 rounded-xl bg-gradient-to-br from-brand-900 to-brand-800 p-3 text-white shadow-sm">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-gold-300">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-overlay/10 text-gold-300">
             <Trophy className="w-5 h-5" />
           </div>
           <div>
@@ -84,57 +84,57 @@ export function MemoryHUD({
         </div>
 
         {/* 2. PARES ENCONTRADOS */}
-        <div className="flex items-center gap-3 rounded-xl bg-cream-100/70 border border-cream-200 p-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-800 text-gold-200">
+        <div className="flex items-center gap-3 rounded-xl bg-muted/70 border border-border p-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-gold-200">
             <Target className="w-5 h-5" />
           </div>
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-gray-500">
+            <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
               Pares
             </span>
-            <span className="text-base sm:text-lg font-bold text-brand-900">
-              {matches} <span className="text-xs font-normal text-gray-400">/ {totalPairs}</span>
+            <span className="text-base sm:text-lg font-bold text-foreground">
+              {matches} <span className="text-xs font-normal text-subtle-foreground">/ {totalPairs}</span>
             </span>
           </div>
         </div>
 
         {/* 3. TEMPO */}
-        <div className="flex items-center gap-3 rounded-xl bg-cream-100/70 border border-cream-200 p-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-800 text-gold-200">
+        <div className="flex items-center gap-3 rounded-xl bg-muted/70 border border-border p-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-gold-200">
             <Clock className="w-5 h-5" />
           </div>
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-gray-500">
+            <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
               Tempo
             </span>
-            <span className="font-mono text-base sm:text-lg font-bold text-brand-900">
+            <span className="font-mono text-base sm:text-lg font-bold text-foreground">
               {timeFormatted}
             </span>
           </div>
         </div>
 
         {/* 4. ERROS */}
-        <div className="flex items-center gap-3 rounded-xl bg-cream-100/70 border border-cream-200 p-3">
+        <div className="flex items-center gap-3 rounded-xl bg-muted/70 border border-border p-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-red-600 border border-red-200">
             <XCircle className="w-5 h-5" />
           </div>
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-gray-500">
+            <span className="block text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
               Erros
             </span>
-            <span className="text-base sm:text-lg font-bold text-gray-800">
+            <span className="text-base sm:text-lg font-bold text-foreground">
               {errors}
             </span>
           </div>
         </div>
 
         {/* 5. STREAK */}
-        <div className="col-span-2 sm:col-span-1 flex items-center gap-3 rounded-xl bg-gold-50/80 border border-gold-300/50 p-3">
+        <div className="col-span-2 sm:col-span-1 flex items-center gap-3 rounded-xl bg-secondary-soft/80 border border-gold-300/50 p-3">
           <div className={`flex h-9 w-9 items-center justify-center rounded-lg transition-transform ${streak > 1 ? 'scale-110' : ''} bg-amber-500 text-white shadow-sm`}>
             <Flame className="w-5 h-5" />
           </div>
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-gold-800">
+            <span className="block text-[10px] font-bold uppercase tracking-wider text-secondary">
               Streak
             </span>
             <span className="text-base sm:text-lg font-extrabold text-amber-700">

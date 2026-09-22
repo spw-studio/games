@@ -47,8 +47,8 @@ export function WordSearchConfig({ onStart }: WordSearchConfigProps) {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-control bg-primary shadow-card mb-2">
           <Search className="h-8 w-8 text-secondary" />
         </div>
-        <h1 className="text-3xl font-serif font-bold text-brand-950">Caça-Palavras</h1>
-        <p className="text-sm text-gray-500 leading-relaxed max-w-sm mx-auto">
+        <h1 className="text-3xl font-serif font-bold text-foreground">Caça-Palavras</h1>
+        <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto">
           Um drink é sorteado e seus ingredientes ficam escondidos na grade.
           Encontre todos arrastando o dedo (ou o cursor) sobre as letras!
         </p>
@@ -56,8 +56,8 @@ export function WordSearchConfig({ onStart }: WordSearchConfigProps) {
 
       {/* Instructions */}
       <div className="rounded-card bg-muted border border-border p-4 space-y-2">
-        <h2 className="text-xs font-bold uppercase tracking-widest text-brand-700 mb-3">Como jogar</h2>
-        <ul className="text-sm text-brand-900 space-y-2">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Como jogar</h2>
+        <ul className="text-sm text-foreground space-y-2">
           {[
             'Um drink é sorteado como tema da rodada.',
             'Cada ingrediente está escondido na grade de letras.',
@@ -66,7 +66,7 @@ export function WordSearchConfig({ onStart }: WordSearchConfigProps) {
             'Use a dica se travar (custa pontos).',
           ].map((tip, i) => (
             <li key={i} className="flex gap-2 items-start">
-              <span className="mt-0.5 flex-shrink-0 w-4 h-4 rounded-full bg-brand-800 text-white text-[10px] font-bold flex items-center justify-center">
+              <span className="mt-0.5 flex-shrink-0 w-4 h-4 rounded-full bg-primary text-white text-[10px] font-bold flex items-center justify-center">
                 {i + 1}
               </span>
               <span>{tip}</span>
@@ -77,7 +77,7 @@ export function WordSearchConfig({ onStart }: WordSearchConfigProps) {
 
       {/* Difficulty */}
       <div className="space-y-3">
-        <h2 className="text-xs font-bold uppercase tracking-widest text-gray-500">Dificuldade</h2>
+        <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Dificuldade</h2>
         <div className="grid grid-cols-3 gap-3">
           {DIFFICULTIES.map((d) => (
             <button
@@ -86,7 +86,7 @@ export function WordSearchConfig({ onStart }: WordSearchConfigProps) {
               className={[
                 'flex flex-col items-center gap-2 rounded-control border-2 p-3 text-center transition-all duration-200',
                 difficulty === d.id
-                  ? 'border-brand-800 bg-brand-50 shadow-md'
+                  ? 'border-primary bg-primary-soft shadow-md'
                   : 'border-border bg-surface hover:border-primary/50',
               ].join(' ')}
             >
@@ -94,22 +94,22 @@ export function WordSearchConfig({ onStart }: WordSearchConfigProps) {
                 className={[
                   'w-10 h-10 rounded-control flex items-center justify-center',
                   difficulty === d.id
-                    ? 'bg-brand-800 text-gold-300'
-                    : 'bg-gray-100 text-gray-500',
+                    ? 'bg-primary text-gold-300'
+                    : 'bg-muted text-muted-foreground',
                 ].join(' ')}
               >
                 {d.icon}
               </div>
               <div>
-                <div className={`text-sm font-bold ${difficulty === d.id ? 'text-brand-900' : 'text-gray-700'}`}>
+                <div className={`text-sm font-bold ${difficulty === d.id ? 'text-foreground' : 'text-foreground'}`}>
                   {d.label}
                 </div>
-                <div className="text-[10px] text-gray-400 mt-0.5">{d.gridInfo}</div>
+                <div className="text-[10px] text-subtle-foreground mt-0.5">{d.gridInfo}</div>
               </div>
             </button>
           ))}
         </div>
-        <p className="text-xs text-gray-400 text-center">
+        <p className="text-xs text-subtle-foreground text-center">
           {DIFFICULTIES.find((d) => d.id === difficulty)?.desc}
         </p>
       </div>

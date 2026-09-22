@@ -38,6 +38,7 @@ import {
   formatTimeMMSS,
 } from '@/lib/statistics/calculations';
 import { PlayerModal } from '@/components/ui/PlayerModal';
+import { CHART_COLORS } from '@/theme/themes';
 
 export default function PerfilPage() {
   const { player, setPlayerName } = usePlayer();
@@ -93,7 +94,7 @@ export default function PerfilPage() {
       ========================================================= */}
       <div className="rounded-3xl bg-gradient-to-r from-brand-950 via-brand-900 to-brand-850 p-6 sm:p-10 text-white shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div className="flex items-center gap-4 sm:gap-6">
-          <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-3xl bg-white/10 border-2 border-gold-400/40 text-gold-300 shadow-inner">
+          <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-3xl bg-overlay/10 border-2 border-gold-400/40 text-gold-300 shadow-inner">
             <User className="h-8 w-8 sm:h-10 sm:w-10" />
           </div>
           <div>
@@ -103,7 +104,7 @@ export default function PerfilPage() {
               </h1>
               <button
                 onClick={() => setIsEditModalOpen(true)}
-                className="rounded-lg bg-white/10 p-1.5 text-gold-300 hover:bg-white/20 transition-colors"
+                className="rounded-lg bg-overlay/10 p-1.5 text-gold-300 hover:bg-overlay/20 transition-colors"
                 title="Editar Nome"
               >
                 <Edit2 className="h-4 w-4" />
@@ -130,16 +131,16 @@ export default function PerfilPage() {
           FILTRO DE JOGOS & RESUMO GERAL
       ========================================================= */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-xs font-bold uppercase tracking-widest text-brand-900">
+        <h2 className="text-xs font-bold uppercase tracking-widest text-foreground">
           Métricas Gerais de Desempenho
         </h2>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-500 font-medium">Filtrar por Jogo:</span>
+          <span className="text-xs text-muted-foreground font-medium">Filtrar por Jogo:</span>
           <select
             value={selectedGameFilter}
             onChange={(e) => setSelectedGameFilter(e.target.value)}
-            className="rounded-xl border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-900 shadow-sm focus:border-brand-700 focus:outline-none"
+            className="rounded-xl border border-border-strong bg-surface px-3 py-1.5 text-xs font-medium text-foreground shadow-sm focus:border-primary focus:outline-none"
           >
             <option value="todos">Todos os Jogos</option>
             {games.map((g) => (
@@ -153,65 +154,65 @@ export default function PerfilPage() {
 
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         {/* 1. Partidas */}
-        <div className="rounded-2xl bg-white border border-cream-300 p-5 shadow-sm">
+        <div className="rounded-2xl bg-surface border border-border p-5 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-subtle-foreground">
               Partidas
             </span>
-            <Gamepad2 className="h-4 w-4 text-brand-800" />
+            <Gamepad2 className="h-4 w-4 text-foreground" />
           </div>
-          <p className="mt-2 text-2xl font-serif font-bold text-brand-950">
+          <p className="mt-2 text-2xl font-serif font-bold text-foreground">
             {stats.totalGames}
           </p>
-          <span className="text-[10px] text-gray-400">rodadas concluídas</span>
+          <span className="text-[10px] text-subtle-foreground">rodadas concluídas</span>
         </div>
 
         {/* 2. Melhor Pontuação */}
-        <div className="rounded-2xl bg-white border border-cream-300 p-5 shadow-sm">
+        <div className="rounded-2xl bg-surface border border-border p-5 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-subtle-foreground">
               Melhor Pontuação
             </span>
-            <Trophy className="h-4 w-4 text-gold-600" />
+            <Trophy className="h-4 w-4 text-secondary" />
           </div>
-          <p className="mt-2 text-2xl font-serif font-bold text-brand-950">
+          <p className="mt-2 text-2xl font-serif font-bold text-foreground">
             {stats.bestScore.toLocaleString('pt-BR')}
           </p>
-          <span className="text-[10px] text-gold-700 font-medium">recorde absoluto</span>
+          <span className="text-[10px] text-secondary font-medium">recorde absoluto</span>
         </div>
 
         {/* 3. Precisão Média */}
-        <div className="rounded-2xl bg-white border border-cream-300 p-5 shadow-sm">
+        <div className="rounded-2xl bg-surface border border-border p-5 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-subtle-foreground">
               Precisão Média
             </span>
             <Target className="h-4 w-4 text-emerald-600" />
           </div>
-          <p className="mt-2 text-2xl font-serif font-bold text-brand-950">
+          <p className="mt-2 text-2xl font-serif font-bold text-foreground">
             {stats.avgAccuracy}%
           </p>
           <span className="text-[10px] text-emerald-700 font-medium">taxa de sucesso</span>
         </div>
 
         {/* 4. Melhor Tempo */}
-        <div className="rounded-2xl bg-white border border-cream-300 p-5 shadow-sm">
+        <div className="rounded-2xl bg-surface border border-border p-5 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-subtle-foreground">
               Melhor Tempo
             </span>
-            <Clock className="h-4 w-4 text-brand-800" />
+            <Clock className="h-4 w-4 text-foreground" />
           </div>
-          <p className="mt-2 text-2xl font-mono font-bold text-brand-950">
+          <p className="mt-2 text-2xl font-mono font-bold text-foreground">
             {stats.bestTime > 0 ? formatTimeMMSS(stats.bestTime) : '--:--'}
           </p>
-          <span className="text-[10px] text-gray-400">partida mais rápida</span>
+          <span className="text-[10px] text-subtle-foreground">partida mais rápida</span>
         </div>
 
         {/* 5. Melhor Streak */}
-        <div className="col-span-2 lg:col-span-1 rounded-2xl bg-white border border-cream-300 p-5 shadow-sm">
+        <div className="col-span-2 lg:col-span-1 rounded-2xl bg-surface border border-border p-5 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-subtle-foreground">
               Melhor Streak
             </span>
             <Flame className="h-4 w-4 text-amber-500" />
@@ -226,26 +227,26 @@ export default function PerfilPage() {
       {/* =========================================================
           OS 3 GRÁFICOS RECHARTS REQUISITADOS
       ========================================================= */}
-      <div className="rounded-3xl bg-white border border-cream-300 p-6 sm:p-8 shadow-sm space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cream-200 pb-4">
+      <div className="rounded-3xl bg-surface border border-border p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-4">
           <div>
-            <h2 className="text-xl font-serif font-bold text-brand-950 flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-gold-600" />
+            <h2 className="text-xl font-serif font-bold text-foreground flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-secondary" />
               <span>Gráficos de Desempenho e Evolução</span>
             </h2>
-            <p className="text-xs text-gray-500 mt-0.5">
+            <p className="text-xs text-muted-foreground mt-0.5">
               Acompanhe seu aprimoramento a cada rodada de treinamento
             </p>
           </div>
 
           {/* Abas dos 3 Gráficos */}
-          <div className="inline-flex rounded-xl bg-cream-100 p-1">
+          <div className="inline-flex rounded-xl bg-muted p-1">
             <button
               onClick={() => setActiveTab('score')}
               className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all ${
                 activeTab === 'score'
-                  ? 'bg-brand-800 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-brand-900'
+                  ? 'bg-primary text-white shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               1. Pontuação
@@ -254,8 +255,8 @@ export default function PerfilPage() {
               onClick={() => setActiveTab('accuracy')}
               className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all ${
                 activeTab === 'accuracy'
-                  ? 'bg-brand-800 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-brand-900'
+                  ? 'bg-primary text-white shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               2. Precisão (%)
@@ -264,8 +265,8 @@ export default function PerfilPage() {
               onClick={() => setActiveTab('time')}
               className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all ${
                 activeTab === 'time'
-                  ? 'bg-brand-800 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-brand-900'
+                  ? 'bg-primary text-white shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               3. Tempo (s)
@@ -281,17 +282,17 @@ export default function PerfilPage() {
                 <AreaChart data={scoreData}>
                   <defs>
                     <linearGradient id="scoreColor" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#44100D" stopOpacity={0.4} />
-                      <stop offset="95%" stopColor="#44100D" stopOpacity={0.0} />
+                      <stop offset="5%" stopColor={CHART_COLORS.primary} stopOpacity={0.4} />
+                      <stop offset="95%" stopColor={CHART_COLORS.primary} stopOpacity={0.0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#F3EFEA" />
+                  <CartesianGrid strokeDasharray="3 3" stroke={CHART_COLORS.grid} />
                   <XAxis
                     dataKey="matchIndex"
                     tickFormatter={(val) => `P${val}`}
-                    tick={{ fontSize: 12, fill: '#6B7280' }}
+                    tick={{ fontSize: 12, fill: CHART_COLORS.axis }}
                   />
-                  <YAxis tick={{ fontSize: 12, fill: '#6B7280' }} />
+                  <YAxis tick={{ fontSize: 12, fill: CHART_COLORS.axis }} />
                   <Tooltip
                     formatter={(val: any) => [
                       `${Number(val || 0).toLocaleString('pt-BR')} pts`,
@@ -299,16 +300,17 @@ export default function PerfilPage() {
                     ]}
                     labelFormatter={(label) => `Partida ${label}`}
                     contentStyle={{
-                      backgroundColor: '#1A0A09',
+                      backgroundColor: CHART_COLORS.tooltipBackground,
                       borderRadius: '12px',
-                      color: '#fff',
+                      color: CHART_COLORS.tooltipText,
                       fontSize: '12px',
+                      border: `1px solid ${CHART_COLORS.tooltipBorder}`,
                     }}
                   />
                   <Area
                     type="monotone"
                     dataKey="score"
-                    stroke="#44100D"
+                    stroke={CHART_COLORS.primary}
                     strokeWidth={2.5}
                     fillOpacity={1}
                     fill="url(#scoreColor)"
@@ -321,33 +323,34 @@ export default function PerfilPage() {
             {activeTab === 'accuracy' && (
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={accuracyData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#F3EFEA" />
+                  <CartesianGrid strokeDasharray="3 3" stroke={CHART_COLORS.grid} />
                   <XAxis
                     dataKey="matchIndex"
                     tickFormatter={(val) => `P${val}`}
-                    tick={{ fontSize: 12, fill: '#6B7280' }}
+                    tick={{ fontSize: 12, fill: CHART_COLORS.axis }}
                   />
                   <YAxis
                     domain={[0, 100]}
                     tickFormatter={(val) => `${val}%`}
-                    tick={{ fontSize: 12, fill: '#6B7280' }}
+                    tick={{ fontSize: 12, fill: CHART_COLORS.axis }}
                   />
                   <Tooltip
                     formatter={(val: any) => [`${val}%`, 'Precisão']}
                     labelFormatter={(label) => `Partida ${label}`}
                     contentStyle={{
-                      backgroundColor: '#1A0A09',
+                      backgroundColor: CHART_COLORS.tooltipBackground,
                       borderRadius: '12px',
-                      color: '#fff',
+                      color: CHART_COLORS.tooltipText,
                       fontSize: '12px',
+                      border: `1px solid ${CHART_COLORS.tooltipBorder}`,
                     }}
                   />
                   <Line
                     type="monotone"
                     dataKey="accuracy"
-                    stroke="#059669"
+                    stroke={CHART_COLORS.success}
                     strokeWidth={3}
-                    dot={{ fill: '#059669', r: 4 }}
+                    dot={{ fill: CHART_COLORS.success, r: 4 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -357,15 +360,15 @@ export default function PerfilPage() {
             {activeTab === 'time' && (
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={timeData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#F3EFEA" />
+                  <CartesianGrid strokeDasharray="3 3" stroke={CHART_COLORS.grid} />
                   <XAxis
                     dataKey="matchIndex"
                     tickFormatter={(val) => `P${val}`}
-                    tick={{ fontSize: 12, fill: '#6B7280' }}
+                    tick={{ fontSize: 12, fill: CHART_COLORS.axis }}
                   />
                   <YAxis
                     tickFormatter={(val) => `${val}s`}
-                    tick={{ fontSize: 12, fill: '#6B7280' }}
+                    tick={{ fontSize: 12, fill: CHART_COLORS.axis }}
                   />
                   <Tooltip
                     formatter={(val: any) => [
@@ -374,18 +377,19 @@ export default function PerfilPage() {
                     ]}
                     labelFormatter={(label) => `Partida ${label}`}
                     contentStyle={{
-                      backgroundColor: '#1A0A09',
+                      backgroundColor: CHART_COLORS.tooltipBackground,
                       borderRadius: '12px',
-                      color: '#fff',
+                      color: CHART_COLORS.tooltipText,
                       fontSize: '12px',
+                      border: `1px solid ${CHART_COLORS.tooltipBorder}`,
                     }}
                   />
                   <Line
                     type="monotone"
                     dataKey="durationSeconds"
-                    stroke="#C89D5C"
+                    stroke={CHART_COLORS.accent}
                     strokeWidth={3}
-                    dot={{ fill: '#C89D5C', r: 4 }}
+                    dot={{ fill: CHART_COLORS.accent, r: 4 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -393,17 +397,17 @@ export default function PerfilPage() {
           </div>
         ) : (
           /* MENSAGEM DE ESTADO VAZIO EXIGIDA NO REQUISITO 15 */
-          <div className="flex flex-col items-center justify-center py-16 text-center bg-cream-50 rounded-2xl border border-cream-200">
+          <div className="flex flex-col items-center justify-center py-16 text-center bg-muted rounded-2xl border border-border">
             <Trophy className="h-12 w-12 text-gold-400 mb-3" />
-            <p className="text-base font-serif font-bold text-brand-950">
+            <p className="text-base font-serif font-bold text-foreground">
               Jogue algumas partidas para começar a acompanhar sua evolução.
             </p>
-            <p className="mt-1 text-xs text-gray-500 max-w-md">
+            <p className="mt-1 text-xs text-muted-foreground max-w-md">
               A cada partida completada, seus gráficos de pontuação, precisão e velocidade serão atualizados automaticamente.
             </p>
             <Link
               href="/jogos"
-              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-brand-800 hover:bg-brand-900 px-5 py-2.5 text-xs font-bold text-white shadow transition-all"
+              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-primary hover:bg-primary px-5 py-2.5 text-xs font-bold text-white shadow transition-all"
             >
               Escolher um Jogo
             </Link>
@@ -414,13 +418,13 @@ export default function PerfilPage() {
       {/* =========================================================
           HISTÓRICO COMPLETO DE PARTIDAS
       ========================================================= */}
-      <div className="rounded-3xl bg-white border border-cream-300 p-6 sm:p-8 shadow-sm">
-        <div className="flex items-center justify-between mb-4 border-b border-cream-200 pb-3">
-          <h2 className="text-lg font-serif font-bold text-brand-950 flex items-center gap-2">
-            <History className="h-4 w-4 text-gold-600" />
+      <div className="rounded-3xl bg-surface border border-border p-6 sm:p-8 shadow-sm">
+        <div className="flex items-center justify-between mb-4 border-b border-border pb-3">
+          <h2 className="text-lg font-serif font-bold text-foreground flex items-center gap-2">
+            <History className="h-4 w-4 text-secondary" />
             <span>Histórico de Partidas Concluídas</span>
           </h2>
-          <span className="text-xs text-gray-500">
+          <span className="text-xs text-muted-foreground">
             Últimas {history.length} partidas (máximo 100)
           </span>
         </div>
@@ -428,7 +432,7 @@ export default function PerfilPage() {
         {hasData ? (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-cream-300 bg-cream-50 text-gray-600 uppercase font-semibold">
+              <thead className="border-b border-border bg-muted text-muted-foreground uppercase font-semibold">
                 <tr>
                   <th className="px-4 py-3">Data/Hora</th>
                   <th className="px-4 py-3">Jogo</th>
@@ -439,27 +443,27 @@ export default function PerfilPage() {
                   <th className="px-4 py-3">Streak</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-cream-200">
+              <tbody className="divide-y divide-border">
                 {history.map((item) => {
                   const m = item.metrics as { bestStreak?: number } | undefined;
                   return (
-                    <tr key={item.id} className="hover:bg-cream-50/70 transition-colors">
-                      <td className="px-4 py-3 text-gray-600 whitespace-nowrap">
+                    <tr key={item.id} className="hover:bg-muted/70 transition-colors">
+                      <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">
                         {new Date(item.playedAt).toLocaleString('pt-BR')}
                       </td>
-                      <td className="px-4 py-3 font-semibold text-brand-950 whitespace-nowrap">
+                      <td className="px-4 py-3 font-semibold text-foreground whitespace-nowrap">
                         {games.find((g) => g.id === item.gameId)?.nome || (item.gameId === 'memoria' ? 'Jogo da Memória' : item.gameId === 'montar-drink' ? 'Montar Drink' : item.gameId)}
                       </td>
-                      <td className="px-4 py-3 uppercase text-[10px] font-bold text-gray-500">
+                      <td className="px-4 py-3 uppercase text-[10px] font-bold text-muted-foreground">
                         {item.difficulty}
                       </td>
-                      <td className="px-4 py-3 font-serif font-bold text-brand-950 whitespace-nowrap">
+                      <td className="px-4 py-3 font-serif font-bold text-foreground whitespace-nowrap">
                         {item.score.toLocaleString('pt-BR')} pts
                       </td>
                       <td className="px-4 py-3 font-semibold text-emerald-700 whitespace-nowrap">
                         {item.accuracy}%
                       </td>
-                      <td className="px-4 py-3 font-mono text-gray-700 whitespace-nowrap">
+                      <td className="px-4 py-3 font-mono text-foreground whitespace-nowrap">
                         {formatTimeMMSS(item.durationSeconds)}
                       </td>
                       <td className="px-4 py-3 font-semibold text-amber-600 whitespace-nowrap">
@@ -472,7 +476,7 @@ export default function PerfilPage() {
             </table>
           </div>
         ) : (
-          <p className="text-center py-8 text-xs text-gray-500 italic">
+          <p className="text-center py-8 text-xs text-muted-foreground italic">
             Nenhuma partida registrada no histórico ainda.
           </p>
         )}

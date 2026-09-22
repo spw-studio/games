@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import confetti from 'canvas-confetti';
+import { CELEBRATION_COLORS } from '@/theme/themes';
 import { Product } from '@/types/cardapio';
 import { GameDifficulty, GameResult, MemoryCard as IMemoryCard, MemoryMetrics } from '@/types/game';
 import { GAME_CONFIG } from '@/config/game-config';
@@ -134,7 +135,7 @@ export function MemoryBoard({
           particleCount: 100,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ['#44100D', '#C89D5C', '#EEDDAF', '#10B981'],
+          colors: [...CELEBRATION_COLORS],
         });
       } catch {
         // Ignora caso falhe no navegador
