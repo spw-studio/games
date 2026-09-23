@@ -243,11 +243,14 @@ Você pode limpar os dados locais de duas formas:
 
 A aplicação não requer banco de dados externo. Os jogos funcionam sem login, mas o login Google exige as variáveis de ambiente descritas na seção de autenticação.
 
+A área administrativa publicada em produção fica em **https://games-ivory-five.vercel.app/admin/membros** — os requisitos de acesso e as variáveis necessárias estão na seção 17.
+
 1. Faça push do código para o GitHub/GitLab.
 2. Acesse [vercel.com](https://vercel.com) e clique em **"Add New Project"**.
 3. Importe o repositório.
 4. O framework **Next.js** será detectado automaticamente.
 5. Clique em **Deploy**. A compilação gerará as rotas estáticas prontas para distribuição global via CDN.
+6. Configure as **Environment Variables** do projeto na Vercel: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `NEXTAUTH_SECRET`, `NEXTAUTH_URL` (domínio publicado) e, para a área administrativa, `DATABASE_URL` e `SUPER_ADMIN_EMAILS` (ver seção 17).
 
 ---
 
@@ -269,9 +272,15 @@ src/
 │   │   │   └── page.tsx          # Página do Montar Drink
 │   │   └── resultado/
 │   │       └── page.tsx          # Tela de resultado e novo recorde
+│   ├── admin/
+│   │   └── membros/
+│   │       └── page.tsx          # Gestão de equipe da organização
 │   ├── api/
 │   │   ├── auth/[...nextauth]/    # Endpoint do NextAuth
-│   │   └── catalog/               # Produtos e categorias (tenant-scoped)
+│   │   ├── catalog/               # Produtos e categorias (tenant-scoped)
+│   │   ├── organizations/         # Lista/criação de organizações (SUPER_ADMIN)
+│   │   ├── session/org/           # Contexto de tenant da sessão (org, papel, flags)
+│   │   └── users/                 # Membros da organização (convite, papel, remoção)
 │   └── perfil/
 │       └── page.tsx              # Perfil, gráficos Recharts e histórico
 ├── components/
@@ -339,7 +348,88 @@ public/
 └── images/
   ├── bg/                       # Padrões e fundos da plataforma
   └── cardapio/                 # Fotos dos pratos e drinks
+migrations/
+└── 001_identity.sql            # Organizations, users e organization_members (Fase 3)
+scripts/
+├── db-migrate.mjs              # Migrador SQL idempotente (npm run db:migrate)
+├── db-seed.mjs                 # Cria a organização padrão e vincula OWNER (npm run db:seed)
+└── setup-images.mjs            # Utilitário de preparação de imagens
 ```
+
+---
+
+## 17. Como Acessar a Página de Admin
+
+A administração da plataforma fica em **`/admin/membros`** (gestão de equipe da organização). Não existe página na raiz `admin`, portanto `/admin` isolado responde **404**.
+
+| Ambiente | URL |
+|---|---|
+| Local | http://localhost:3000/admin/membros |
+| Produção (Vercel) | https://games-ivory-five.vercel.app/admin/membros |
+
+### Quem pode acessar
+
+A tela é restrita a **`OWNER`** e **`SUPER_ADMIN`**:
+
+| Camada | Regra | Arquivo |
+|---|---|---|
+| Middleware | Exige sessão — `/admin/*` não é rota pública | `src/middleware.ts`, `src/core/routes.ts` |
+| Página | `session.user.role === 'OWNER'` ou `session.user.isSuperAdmin === true`; caso contrário exibe "Acesso restrito" | `src/app/admin/membros/page.tsx` |
+| API | `requirePermission(ctx, 'ADMIN', 'read'/'write')` sobre a matriz papel × módulo | `src/app/api/users/route.ts`, `src/core/tenancy/permissions.ts` |
+
+Existem dois caminhos para chegar à tela:
+
+1. **Direto pela URL** — `/admin/membros`.
+2. **Pela interface** — clique no **avatar** na barra superior e depois em **"Equipe"**; o item só é exibido para OWNER/SUPER_ADMIN.
+
+### Pré-requisitos e modos de execução
+
+| Cenário | `DATABASE_URL` | Papel na sessão | Resultado |
+|---|---|---|---|
+| Fallback (padrão em dev) | não definido | todo login recebe `org-default` + `OWNER` | A página abre, mas `GET /api/users` responde **503 `database_disabled`** e a lista de membros não carrega |
+| Banco ativo + usuário convidado | definido | lido de `organization_members` | Fluxo completo: listar, convidar, alterar papel e remover |
+| Banco ativo + usuário sem membership | definido | `undefined` | **"Acesso restrito"** |
+| `SUPER_ADMIN_EMAILS` preenchido | qualquer | `SUPER_ADMIN` (plataforma) | Abre a tela; sem membership mostra "Sem organização associada" e as ações de membro retornam `no_organization` |
+
+### Habilitando a área de admin com banco de dados
+
+1. Adicione as variáveis em `.env.local` (e nas **Environment Variables** do projeto na Vercel):
+   ```bash
+   DATABASE_URL=postgres://usuario:senha@host:5432/banco
+   TENANT_DEFAULT_ORG_ID=org-default            # opcional (padrão: org-default)
+   TENANT_DEFAULT_ORG_NAME=Organização Padrão   # opcional
+   SUPER_ADMIN_EMAILS=seu-email@gmail.com       # opcional — papel de plataforma
+   ```
+2. Aplique as migrações e o seed:
+   ```bash
+   npm run db:migrate                        # aplica migrations/001_identity.sql
+   npm run db:seed -- seu-email@gmail.com    # cria a organização padrão e vincula o e-mail como OWNER
+   ```
+3. Reinicie o servidor (`npm run dev`) e faça login com o **mesmo e-mail** cadastrado no seed.
+4. Acesse `http://localhost:3000/admin/membros`.
+
+> SUPER_ADMIN opera qualquer organização: as APIs `GET/POST /api/organizations` e `GET /api/users?organizationId=...` existem para esse papel (hoje sem interface própria — uso via API).
+
+### APIs usadas pela tela
+
+| Método | Rota | Função |
+|---|---|---|
+| GET | `/api/session/org` | Contexto de tenant da sessão (organização, papel, `isSuperAdmin`) |
+| GET | `/api/users` | Lista os membros da organização (`organizationId` opcional para SUPER_ADMIN) |
+| POST | `/api/users` | Convida/adiciona membro por e-mail com papel OWNER, EDITOR ou VIEWER |
+| PATCH | `/api/users/[id]` | Altera o papel do membro |
+| DELETE | `/api/users/[id]` | Remove o membro da organização |
+| GET/POST | `/api/organizations` | Lista/cria organizações (apenas SUPER_ADMIN) |
+
+### Solução de problemas
+
+| Sintoma | Causa provável | Como resolver |
+|---|---|---|
+| Redireciona para `/jogos?authRequired=1` | Sem sessão ativa | Faça login com Google e navegue novamente para `/admin/membros` (o modal de login retorna para `/jogos`) |
+| "Acesso restrito" | Papel diferente de OWNER e sem `isSuperAdmin` | Rode `npm run db:seed -- seu-email@gmail.com` ou inclua o e-mail em `SUPER_ADMIN_EMAILS` |
+| "Banco de dados não configurado..." | `DATABASE_URL` vazio (modo fallback) | Defina `DATABASE_URL` e rode `npm run db:migrate` |
+| Erro `no_organization` (403) | SUPER_ADMIN sem membership na organização alvo | Informe `organizationId` no payload (permitido apenas a SUPER_ADMIN) ou vincule o usuário a uma organização |
+| 404 em `/admin` | Não existe página na raiz de `admin` | Use `/admin/membros` |
 
 ---
 
@@ -358,7 +448,7 @@ A plataforma foi preparada para operar como SaaS multi-empresa **sem alterar o `
 
 ### Regras de isolamento
 
-1. O `organizationId` entra no JWT pelo callback `jwt` de `src/lib/auth.ts` (bootstrap: `TENANT_DEFAULT_ORG_ID`; futuramente, lookup em `organization_member` quando houver banco).
+1. O `organizationId` entra no JWT pelo callback `jwt` de `src/lib/auth.ts` (bootstrap: `TENANT_DEFAULT_ORG_ID`; com `DATABASE_URL` ativo, o callback `session` resolve a membership real em `organization_members`).
 2. Toda rota de API resolve o tenant com `getTenantContext()` — `401` sem sessão, `403` sem papel.
 3. `Product` e `Category` carregam `organizationId`; o serviço (`lib/cardapio/service.ts`) filtra por ele antes de responder.
 4. Componentes cliente **nunca** importam `cardapio.json` — consomem `lib/cardapio/client.ts` (HTTP) e `lib/cardapio/pure.ts` (funções puras). O JSON é importado apenas por `lib/cardapio/adapter.ts` (server-only).
@@ -375,9 +465,22 @@ A plataforma foi preparada para operar como SaaS multi-empresa **sem alterar o `
 - `TENANT_DEFAULT_ORG_ID` — organização de bootstrap (padrão `org-default`).
 - `AUTH_EMAIL_ALLOWLIST` — lista branca opcional de e-mails, separados por vírgula (vazio = comportamento histórico).
 
-### Próximos passos (fase de banco, ainda não implementados)
+### Endpoints de identidade (Fase 3)
 
-- Persistir `organization_member` (substitui o bootstrap de papel no JWT).
+Além do catálogo, a camada de identidade expõe as rotas usadas pela administração — requisitos e detalhes na **seção 17**:
+
+| Método | Rota | Requisito |
+|---|---|---|
+| GET | `/api/session/org` | sessão |
+| GET | `/api/users?organizationId=` | sessão + `ADMIN:read` (`organizationId` apenas para SUPER_ADMIN) |
+| POST | `/api/users` | sessão + `ADMIN:write` |
+| PATCH/DELETE | `/api/users/[id]` | sessão + `ADMIN:write` |
+| GET/POST | `/api/organizations` | sessão (criação apenas para SUPER_ADMIN) |
+
+### Próximos passos (ainda não implementados)
+
+> A persistência de identidade em PostgreSQL (`organizations`, `users`, `organization_members`) já está implementada — ver seção 17.
+
 - `GET/POST /api/results` — histórico de partidas por empresa (hoje: `localStorage`).
 - `GET /api/games` — módulos contratados por organização (entitlements).
 - Troca JSON → PostgreSQL alterando apenas `lib/cardapio/queries.ts`; as camadas `service` e UI permanecem inalteradas.
