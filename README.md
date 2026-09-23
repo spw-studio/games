@@ -216,6 +216,7 @@ A plataforma foi construída para permitir a inclusão de novos jogos seguindo o
    Use um tema específico somente quando o jogo precisar de uma identidade própria. Nesse caso, adicione apenas os overrides necessários em `src/theme/themes.ts`.
 5. **Consuma os produtos:** Em componentes cliente, use `fetchCatalogProducts()`/`fetchCatalogCategories()` de `lib/cardapio/client.ts` (a API aplica autenticação, papel e isolamento de tenant) e opere com as funções puras de `lib/cardapio/pure.ts`. No servidor (Route Handlers/serviços), use `lib/cardapio/service.ts` ou `queries.ts`.
 6. **Persista os resultados:** Chame `recordResult(result)` do hook `useGameStorage()`. A Home e a página de Perfil exibirão automaticamente o jogo ativo e suas estatísticas.
+7. **Ative o modo imersivo durante a partida:** na página do jogo chame `useImmersiveGame(isPlaying)` (ex: `useImmersiveGame(gameState === 'playing')`) de `src/components/layout/GameModeProvider.tsx`. Enquanto a partida está em andamento o `AppShell` esconde a navbar e o rodapé e o jogo ocupa 100% da viewport, sem barra de rolagem da página — para isso use `flex min-h-0 flex-1 flex-col` nos contêineres do jogo e `min-h-0 flex-1 overflow-y-auto` na área do tabuleiro/lista (a rolagem fica interna, apenas quando o conteúdo não cabe).
 
 ---
 
@@ -293,7 +294,8 @@ src/
 │   │   │   ├── memory/           # Tabuleiro, cartas, configuração e HUD
 │   │   │   └── montar-drink/     # Configuração, jogo, ingredientes e resultado
 │   ├── layout/
-│   │   └── AppShell.tsx          # Shell cliente com Navbar e Footer
+│   │   ├── AppShell.tsx          # Shell cliente com Navbar e Footer
+│   │   └── GameModeProvider.tsx  # Modo partida: jogo em tela cheia sem navbar
 │   ├── cardapio/
 │   │   ├── CatalogFilters.tsx    # Busca, filtro por categoria e restrições alimentares
 │   │   └── ProductCard.tsx       # Cartão do produto (imagem, alérgenos, preços/porções)

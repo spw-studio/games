@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import './globals.css';
 import { AppShell } from '@/components/layout/AppShell';
+import { GameModeProvider } from '@/components/layout/GameModeProvider';
 import { ThemeProvider } from '@/theme/ThemeProvider';
 import { AuthProvider } from '@/components/auth/AuthProvider';
 import { AudioProvider } from '@/components/audio/AudioProvider';
@@ -30,9 +31,11 @@ export default function RootLayout({
         <AuthProvider>
           <AudioProvider>
             <ThemeProvider>
-              <Suspense fallback={null}>
-                <AppShell>{children}</AppShell>
-              </Suspense>
+              <GameModeProvider>
+                <Suspense fallback={null}>
+                  <AppShell>{children}</AppShell>
+                </Suspense>
+              </GameModeProvider>
             </ThemeProvider>
           </AudioProvider>
         </AuthProvider>

@@ -45,7 +45,7 @@ export function DrinkAssemblyGame({
   const isLastDrink = currentIndex + 1 >= totalDrinks;
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto animate-in fade-in duration-300">
+    <div className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col gap-4 animate-in fade-in duration-300">
       {/* HUD de Status Superior */}
       <DrinkAssemblyHUD
         currentIndex={currentIndex}
@@ -58,12 +58,13 @@ export function DrinkAssemblyGame({
         onQuit={onRestart}
       />
 
-      {/* Área Principal de Jogo Responsiva */}
+      {/* Área Principal de Jogo Responsiva (ocupa a altura restante da partida;
+          rolagem interna apenas quando o conteúdo não cabe na tela) */}
       {/* Desktop: Lado a Lado (Drink à Esquerda, Ingredientes à Direita) */}
       {/* Mobile: Coluna Única (Drink no Topo, Ingredientes Abaixo) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div className="grid min-h-0 flex-1 grid-cols-1 items-start gap-6 overflow-y-auto overscroll-contain lg:grid-cols-12">
         {/* Coluna do Drink */}
-        <div className="lg:col-span-5 lg:sticky lg:top-24">
+        <div className="lg:col-span-5">
           <DrinkCard drink={currentDrink} />
         </div>
 

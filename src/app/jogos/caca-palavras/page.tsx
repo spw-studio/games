@@ -10,6 +10,7 @@ import { normalizeForGrid } from '@/lib/games/word-search-engine';
 import { ThemeProvider } from '@/theme/ThemeProvider';
 import { getGameById } from '@/lib/games/registry';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
+import { useImmersiveGame } from '@/components/layout/GameModeProvider';
 import { useState } from 'react';
 
 const wordSearchTheme = getGameById('caca-palavras')?.theme ?? 'default';
@@ -17,6 +18,10 @@ const wordSearchTheme = getGameById('caca-palavras')?.theme ?? 'default';
 function CacaPalavrasContent() {
   const game = useWordSearchGame();
   const [isStarting, setIsStarting] = useState(false);
+
+  // Modo imersivo: durante a partida a navbar/rodapé somem e a grade ocupa
+  // 100% da tela, sem barra de rolagem da página.
+  useImmersiveGame(game.phase === 'playing');
 
   const handleStartGame = (config: Parameters<typeof game.startGame>[0]) => {
     setIsStarting(true);
@@ -81,7 +86,7 @@ function CacaPalavrasContent() {
   });
 
   return (
-    <div className="space-y-4 animate-in fade-in duration-300">
+    <div className="flex min-h-0 flex-1 flex-col gap-4 p-2 animate-in fade-in duration-300">
       {/* HUD */}
       <WordSearchHUD
         foundCount={foundTargetCount}
@@ -96,10 +101,11 @@ function CacaPalavrasContent() {
         canHint={canHint}
       />
 
-      {/* Main layout: Grid (left) + Word list (right) */}
-      <div className="flex flex-col lg:flex-row gap-5 items-start">
+      {/* Main layout: Grid (left) + Word list (right) — a grade ocupa a altura
+          restante da partida; rolagem só quando o conteúdo não cabe na tela */}
+      <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto overscroll-contain lg:flex-row lg:items-start lg:overflow-visible">
         {/* Grid — scrollable horizontally on small screens */}
-        <div className="flex-1 flex justify-center overflow-x-auto">
+        <div className="flex min-h-0 w-full justify-center overflow-x-auto lg:flex-1 lg:items-start lg:overflow-y-auto">
           <WordSearchGridBoard
             grid={game.grid}
             foundCells={game.foundCells}
@@ -114,7 +120,7 @@ function CacaPalavrasContent() {
         </div>
 
         {/* Word list sidebar */}
-        <div className="w-full lg:w-72 shrink-0">
+        <div className="w-full shrink-0 lg:max-h-full lg:w-72 lg:overflow-y-auto">
           <WordListPanel
             drinkName={game.currentDrinkName}
             drinkDesc={game.currentDrinkDesc}
@@ -131,7 +137,7 @@ function CacaPalavrasContent() {
 
 export default function CacaPalavrasPage() {
   return (
-    <ThemeProvider themeId={wordSearchTheme}>
+    <ThemeProvider themeId={wordSearchTheme} className="flex min-h-0 flex-1 flex-col">
       <CacaPalavrasContent />
     </ThemeProvider>
   );

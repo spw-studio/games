@@ -8,6 +8,7 @@ import { fetchCatalogCategories, fetchCatalogProducts } from '@/lib/cardapio/cli
 import { filterMemoryEligibleProducts } from '@/lib/cardapio/pure';
 import { usePlayer } from '@/hooks/usePlayer';
 import { useGameStorage } from '@/hooks/useGameStorage';
+import { useImmersiveGame } from '@/components/layout/GameModeProvider';
 import { MemoryConfig } from '@/components/games/memory/MemoryConfig';
 import { MemoryBoard } from '@/components/games/memory/MemoryBoard';
 import { ThemeProvider } from '@/theme/ThemeProvider';
@@ -39,6 +40,10 @@ export default function MemoryGamePage() {
     pairCount: 6,
     difficulty: 'medio',
   });
+
+  // Modo imersivo: durante a partida a navbar/rodapé somem e o tabuleiro ocupa
+  // 100% da tela, sem barra de rolagem da página.
+  useImmersiveGame(gameState === 'playing');
 
   useEffect(() => {
     let cancelled = false;
@@ -101,8 +106,12 @@ export default function MemoryGamePage() {
   const isCatalogLoading = !catalogError && (!categories || !products);
 
   return (
-    <ThemeProvider themeId={memoryTheme}>
-      <div className="py-2 animate-in fade-in duration-300">
+    <ThemeProvider themeId={memoryTheme} className="flex min-h-0 flex-1 flex-col">
+      <div
+        className={`animate-in fade-in duration-300 ${
+          gameState === 'playing' ? 'flex min-h-0 flex-1 flex-col p-2' : 'py-2'
+        }`}
+      >
         {isCatalogLoading && <LoadingScreen label="Carregando catálogo..." />}
 
         {!isCatalogLoading && catalogError && (

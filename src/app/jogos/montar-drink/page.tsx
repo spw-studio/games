@@ -7,6 +7,7 @@ import { DrinkAssemblyResult } from '@/components/games/montar-drink/DrinkAssemb
 import { ThemeProvider } from '@/theme/ThemeProvider';
 import { getGameById } from '@/lib/games/registry';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
+import { useImmersiveGame } from '@/components/layout/GameModeProvider';
 import { useState } from 'react';
 
 const drinkTheme = getGameById('montar-drink')?.theme ?? 'default';
@@ -38,6 +39,10 @@ export default function MontarDrinkPage() {
     restart,
   } = useDrinkAssembly();
 
+  // Modo imersivo: durante a partida a navbar/rodapé somem e o jogo ocupa
+  // 100% da tela, sem barra de rolagem da página.
+  useImmersiveGame(gameState === 'playing');
+
   const handleStartGame = (config: Parameters<typeof startGame>[0]) => {
     setIsStarting(true);
     window.setTimeout(() => {
@@ -47,8 +52,12 @@ export default function MontarDrinkPage() {
   };
 
   return (
-    <ThemeProvider themeId={drinkTheme}>
-    <div className="py-2 animate-in fade-in duration-300">
+    <ThemeProvider themeId={drinkTheme} className="flex min-h-0 flex-1 flex-col">
+    <div
+      className={`animate-in fade-in duration-300 ${
+        gameState === 'playing' ? 'flex min-h-0 flex-1 flex-col p-2' : 'py-2'
+      }`}
+    >
       {gameState === 'config' && (
         <DrinkAssemblyConfig
           availableDrinks={allEligibleDrinks}

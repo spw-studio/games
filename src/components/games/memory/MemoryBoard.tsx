@@ -77,7 +77,7 @@ export function MemoryBoard({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="flex min-h-0 flex-1 flex-col gap-4">
       {/* HUD em Tempo Real */}
       <MemoryHUD
         score={currentScoring.finalScore}
@@ -91,27 +91,30 @@ export function MemoryBoard({
         onRestart={onRestart}
       />
 
-      {/* Tabuleiro Responsivo de Cartas */}
-      <div
-        className={`grid gap-3 sm:gap-4 ${getGridColsClass()}`}
-        role="region"
-        aria-label="Tabuleiro do Jogo da Memória"
-      >
-        {cards.map((card) => {
-          const product = productLookup[card.productId];
-          if (!product) return null;
+      {/* Tabuleiro Responsivo de Cartas — ocupa a altura restante da partida
+          (rolagem interna apenas quando a grade não cabe na tela) */}
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-2">
+        <div
+          className={`grid content-start gap-3 sm:gap-4 ${getGridColsClass()}`}
+          role="region"
+          aria-label="Tabuleiro do Jogo da Memória"
+        >
+          {cards.map((card) => {
+            const product = productLookup[card.productId];
+            if (!product) return null;
 
-          return (
-            <MemoryCard
-              key={card.id}
-              card={card}
-              product={product}
-              categoryName={categoryMap[product.categoryId]}
-              onClick={handleCardClick}
-              disabled={isCheckingMatch || isFinished}
-            />
-          );
-        })}
+            return (
+              <MemoryCard
+                key={card.id}
+                card={card}
+                product={product}
+                categoryName={categoryMap[product.categoryId]}
+                onClick={handleCardClick}
+                disabled={isCheckingMatch || isFinished}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
