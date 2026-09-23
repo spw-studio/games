@@ -73,7 +73,7 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
   const closeProfileMenu = () => setIsProfileMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-primary/20 bg-primary text-primary-foreground shadow-md">
+    <header className="sticky top-0 z-40 w-full border-b border-border bg-background text-foreground shadow-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16 sm:h-20">
         {/* Marca & Logo */}
         <Link
@@ -86,7 +86,7 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <span className="font-serif text-lg sm:text-xl font-bold tracking-wider text-primary-foreground">
+              <span className="font-serif text-lg sm:text-xl font-bold tracking-wider text-foreground">
                 GASTRONOMIA
               </span>
                 <span className="rounded bg-secondary/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-secondary border border-secondary/30">
@@ -114,8 +114,8 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
                   key={link.href}
                   href={link.href}
                   className={`flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all ${isActive
-                    ? 'bg-primary-foreground/10 text-secondary shadow-sm border border-secondary/30'
-                    : 'text-primary-foreground/80 hover:bg-primary-foreground/5 hover:text-primary-foreground'
+                    ? 'bg-overlay/10 text-secondary shadow-sm border border-secondary/30'
+                    : 'text-foreground/80 hover:bg-overlay/5 hover:text-foreground'
                     }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -131,7 +131,7 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
             type="button"
             onClick={() => void signIn('google')}
             disabled={status === 'loading'}
-            className="rounded-full bg-primary-foreground px-4 py-2 text-xs font-bold uppercase tracking-wide text-primary transition-all hover:bg-surface disabled:cursor-wait disabled:opacity-70"
+            className="rounded-full bg-primary-foreground px-4 py-2 text-xs font-bold uppercase tracking-wide text-primary transition-all hover:bg-secondary hover:text-secondary-foreground disabled:cursor-wait disabled:opacity-70"
             aria-label="Fazer login com Google"
           >
             Login
@@ -141,7 +141,7 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
             <button
               type="button"
               onClick={() => setIsProfileMenuOpen((isOpen) => !isOpen)}
-              className="flex items-center gap-2 rounded-full border border-primary-foreground/15 bg-primary-foreground/10 px-2 py-1.5 text-left transition-all hover:bg-primary-foreground/15 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary"
+              className="flex items-center gap-2 rounded-full border border-border bg-surface px-2 py-1.5 text-left transition-all hover:bg-surface-hover focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-background"
               aria-expanded={isProfileMenuOpen}
               aria-haspopup="menu"
               aria-label={`Abrir menu do perfil de ${profileName}`}
@@ -150,7 +150,7 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
                 {profileInitials}
               </span>
               <span className="hidden max-w-32 sm:block">
-                <span className="block truncate text-xs font-semibold text-primary-foreground">{profileName}</span>
+                <span className="block truncate text-xs font-semibold text-foreground">{profileName}</span>
                 <span className="block text-[10px] text-secondary/80">Conta Google</span>
               </span>
               <ChevronDown className={`hidden h-4 w-4 text-secondary transition-transform sm:block ${isProfileMenuOpen ? 'rotate-180' : ''}`} />
@@ -235,7 +235,7 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
       </div>
 
       {/* Barra de navegação móvel inferior ou compacta */}
-      <div className="md:hidden flex items-center justify-around border-t border-primary-foreground/20 bg-primary px-2 py-2">
+      <div className="md:hidden flex items-center justify-around border-t border-border bg-background px-2 py-2">
         {visibleNavLinks.map((link) => {
           const Icon = link.icon;
           const isActive =
@@ -247,7 +247,7 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
             <Link
               key={link.href}
               href={link.href}
-                className={`flex flex-col items-center gap-1 rounded-lg px-3 py-1 text-[11px] font-medium transition-colors ${isActive ? 'text-secondary font-semibold' : 'text-primary-foreground/70 hover:text-primary-foreground'
+                className={`flex flex-col items-center gap-1 rounded-lg px-3 py-1 text-[11px] font-medium transition-colors ${isActive ? 'text-secondary font-semibold' : 'text-foreground/70 hover:text-foreground'
                 }`}
             >
               <Icon className="h-4 w-4" />
