@@ -1,8 +1,10 @@
 # Plataforma Gastronômica de Jogos e Aprendizagem 🍽️🧠
 
-Plataforma web completa de treinamento e capacitação para equipes de restaurantes, baseada em um catálogo de produtos normalizado (`cardapio.json`).
+Plataforma SaaS multi-empresa de treinamento e capacitação para equipes de restaurantes, baseada em um catálogo de produtos normalizado (`cardapio.json`).
 
-Projetada com uma arquitetura modular multi-jogos e independente de banco de dados externo. Atualmente inclui o **Jogo da Memória Gastronômico**, o **Montar Drink** e o **Caça-Palavras**.
+Projetada com arquitetura modular multi-jogos e multi-tenant: cada organização (empresa) possui seus próprios dados, usuários, papéis e configurações, isolados no servidor. Atualmente inclui o **Jogo da Memória Gastronômico**, o **Montar Drink** e o **Caça-Palavras**.
+
+Junto com os jogos, o projeto possui uma camada de identidade persistida em **PostgreSQL** (organizações, usuários e papéis). O banco é opcional em desenvolvimento: sem `DATABASE_URL` a aplicação roda em modo fallback, usando a organização de bootstrap definida em `TENANT_DEFAULT_ORG_ID`.
 
 ---
 
@@ -24,9 +26,12 @@ A plataforma transforma o cardápio oficial do restaurante na **única fonte de 
 - **Visualização de Dados:** [Recharts](https://recharts.org/) (Gráficos de evolução temporal)
 - **Animações e Efeitos:** CSS 3D Transforms (Flip de cartas da memória) e [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti)
 - **Áudio:** [Howler.js](https://howlerjs.com/) com efeitos sonoros gerados em memória e controle global de volume
-- **Persistência:** `localStorage` com abstração à prova de SSR e Hydration Mismatch
-- **Autenticação opcional:** NextAuth com provedor Google
-- **Validação:** Zod
+- **Persistência (cliente):** `localStorage` com abstração à prova de SSR e Hydration Mismatch (perfil, histórico e recordes)
+- **Persistência (servidor):** PostgreSQL via [`pg`](https://node-postgres.com/) — organizações, usuários, papéis e memberships (opcional em dev)
+- **Autenticação:** NextAuth (v4) com provedor Google, sessão JWT contendo `organizationId` e `role`
+- **Autorização:** matriz papel × módulo própria (`src/core/tenancy/permissions.ts`), sem biblioteca externa
+- **Validação:** Zod (payloads de API e catálogo normalizado)
+- **Multi-tenancy:** `src/core/tenancy/` + `src/middleware.ts` + política única de rotas públicas em `src/core/routes.ts`
 
 ---
 
