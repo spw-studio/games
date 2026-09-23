@@ -245,6 +245,8 @@ A aplicação não requer banco de dados externo. Os jogos funcionam sem login, 
 
 A área administrativa publicada em produção fica em **https://games-ivory-five.vercel.app/admin/membros** — os requisitos de acesso e as variáveis necessárias estão na seção 17.
 
+A vitrine do cardápio está publicada em **https://games-ivory-five.vercel.app/cardapio** — como acessar, filtros e dados exibidos estão na seção 18.
+
 1. Faça push do código para o GitHub/GitLab.
 2. Acesse [vercel.com](https://vercel.com) e clique em **"Add New Project"**.
 3. Importe o repositório.
@@ -262,6 +264,8 @@ src/
 │   ├── globals.css               # Estilos globais Tailwind e classes 3D
 │   ├── layout.tsx                # Layout raiz com SEO e AppShell
 │   ├── page.tsx                  # Home / Dashboard inicial
+│   ├── cardapio/
+│   │   └── page.tsx              # Vitrine do cardápio (categorias, alérgenos e preços)
 │   ├── jogos/
 │   │   ├── page.tsx              # Hub com vitrine de jogos
 │   │   ├── caca-palavras/
@@ -290,6 +294,9 @@ src/
 │   │   │   └── montar-drink/     # Configuração, jogo, ingredientes e resultado
 │   ├── layout/
 │   │   └── AppShell.tsx          # Shell cliente com Navbar e Footer
+│   ├── cardapio/
+│   │   ├── CatalogFilters.tsx    # Busca, filtro por categoria e restrições alimentares
+│   │   └── ProductCard.tsx       # Cartão do produto (imagem, alérgenos, preços/porções)
 │   ├── audio/
 │   │   ├── AudioProvider.tsx     # Estado global e reprodução via Howler
 │   │   ├── AudioSettingsPanel.tsx # Painel global de áudio
@@ -321,7 +328,7 @@ src/
 │   │   ├── queries.ts            # Consultas ao JSON (server-only)
 │   │   ├── service.ts            # Serviço com autorização + escopo de tenant
 │   │   ├── client.ts             # Cliente HTTP do catálogo (client-only)
-│   │   └── pure.ts               # Funções puras compartilhadas (client-safe)
+│   │   └── pure.ts               # Funções puras client-safe: filtros, busca e grupos
 │   ├── games/
 │   │   ├── drinkAssembly.ts      # Regras do Montar Drink
 │   │   ├── registry.ts           # Registro dinâmico de jogos
@@ -337,6 +344,7 @@ src/
 │   │   ├── records.ts            # Recordes pessoais
 │   │   └── storage.ts            # Wrapper SSR-safe
 │   └── utils/
+│       ├── currency.ts           # Formatação monetária pt-BR (R$ 1.234,50)
 │       └── shuffle.ts            # Fisher-Yates shuffle
 └── types/
     ├── cardapio.ts               # Tipos Category, Product, CardapioRaw
@@ -354,6 +362,9 @@ scripts/
 ├── db-migrate.mjs              # Migrador SQL idempotente (npm run db:migrate)
 ├── db-seed.mjs                 # Cria a organização padrão e vincula OWNER (npm run db:seed)
 └── setup-images.mjs            # Utilitário de preparação de imagens
+test/
+├── verify.mjs                  # Validação do cardápio JSON (categorias, campos e variações)
+└── verify-cardapio-page.mjs    # Regras da vitrine: preços, imagens, busca e filtros
 ```
 
 ---
@@ -430,6 +441,66 @@ Existem dois caminhos para chegar à tela:
 | "Banco de dados não configurado..." | `DATABASE_URL` vazio (modo fallback) | Defina `DATABASE_URL` e rode `npm run db:migrate` |
 | Erro `no_organization` (403) | SUPER_ADMIN sem membership na organização alvo | Informe `organizationId` no payload (permitido apenas a SUPER_ADMIN) ou vincule o usuário a uma organização |
 | 404 em `/admin` | Não existe página na raiz de `admin` | Use `/admin/membros` |
+
+---
+
+## 18. Como Acessar a Página de Cardápio
+
+A vitrine do cardápio fica em **`/cardapio`** e é a interface de leitura do catálogo oficial (`src/data/cardapio.json`) — a mesma base consumida pelos jogos. Ela não altera dados: serve para consulta da equipe (fotos, descrições, alérgenos, ingredientes, acompanhamentos e preços).
+
+| Ambiente | URL |
+|---|---|
+| Local | http://localhost:3000/cardapio |
+| Produção (Vercel) | https://games-ivory-five.vercel.app/cardapio |
+
+### Quem pode acessar
+
+| Camada | Regra | Arquivo |
+|---|---|---|
+| Middleware | Exige sessão — `/cardapio/*` **não** é rota pública; sem token redireciona para `/jogos?authRequired=1` | `src/middleware.ts`, `src/core/routes.ts` |
+| Shell/UI | Sem sessão o AppShell bloqueia a tela e oferece **"Entrar com Google"** | `src/components/layout/AppShell.tsx` |
+| API do catálogo | `requirePermission(ctx, 'CARDAPIO', 'read')` — leitura para OWNER, EDITOR, VIEWER e SUPER_ADMIN | `src/app/api/catalog/*`, `src/core/tenancy/permissions.ts` |
+
+Caminhos de entrada:
+
+1. **Pela interface** — item **"Cardápio"** na barra superior (aparece somente com sessão autenticada; também na barra inferior no mobile).
+2. **Direto pela URL** — `/cardapio`. Depois do login o retorno é para `/jogos`, então navegue novamente até a página.
+
+> SUPER_ADMIN sem membership em nenhuma organização recebe `403 forbidden` na API (não há catálogo de empresa a exibir). Nesse caso, vincule o usuário a uma organização com `npm run db:seed -- seu-email@gmail.com` (ver seção 17).
+
+### O que a tela exibe e filtra
+
+| Recurso | Detalhe |
+|---|---|
+| Busca livre | Nome, código, descrição, ingredientes e acompanhamentos; ignora acentos e maiúsculas |
+| Filtro por categoria | Botões apenas para categorias que possuem itens, com contagem sempre refletindo a busca e a restrição ativas |
+| Restrições alimentares | "Ocultar pratos com" remove os itens que contenham a tag escolhida (Glúten, Lactose, Crustáceos, ...) |
+| Cartão do produto | Imagem (com fallback elegante), categoria, código, descrição, tags de alérgenos, ingredientes expansíveis e acompanhamentos |
+| Preços | Lista de porções/variações quando o item possui variações; valor único caso contrário; "Preço sob consulta" quando não há preço |
+
+### Dados por trás da tela
+
+| Método | Rota | Função |
+|---|---|---|
+| GET | `/api/catalog/categories` | Categorias da organização autenticada |
+| GET | `/api/catalog/products?categoryId=drinks` | Produtos da organização autenticada (filtro opcional por categoria) |
+
+Observações:
+
+- O `organizationId` nunca vem do cliente: o tenant é resolvido no servidor a partir da sessão (`src/core/tenancy/context.ts` + `src/lib/cardapio/service.ts`).
+- Alterações em `src/data/cardapio.json` aparecem na vitrine automaticamente, sem código novo (seções 9 a 11).
+- Os filtros são funções puras em `src/lib/cardapio/pure.ts` (`filterProductsBySearch`, `collectDietaryTags`, `excludeProductsByDietaryTag`), reaproveitáveis por novos jogos.
+- Só aparecem chips das categorias que possuem itens cadastrados (hoje `lancamentos`, `camaroes` e `drinks`) — as demais permanecem reservadas no JSON sem poluir a tela.
+- Para validar as regras da tela depois de editar o catálogo: `node test/verify-cardapio-page.mjs` (confere preços, imagens, busca sem acento, contagens e restrições).
+
+### Solução de problemas
+
+| Sintoma | Causa provável | Como resolver |
+|---|---|---|
+| Redireciona para `/jogos?authRequired=1` | Sem sessão ativa | Faça login com Google e navegue novamente para `/cardapio` |
+| Modal "Não foi possível carregar o cardápio" | Falha nas APIs do catálogo (sessão expirada ou erro de rede) | Autentique-se novamente e clique em **Tentar novamente** |
+| "Nenhum item encontrado" | Busca + categoria + restrição sem resultados | Use **Limpar filtros** ou escolha outra categoria |
+| Catálogo vazio para o usuário | Membership vinculada a outra organização (catálogo é escopado por tenant) | Confira `/api/session/org` e a tabela `organization_members` (seção 17) |
 
 ---
 

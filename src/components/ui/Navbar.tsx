@@ -15,6 +15,7 @@ import {
   User,
   UserRound,
   Users,
+  UtensilsCrossed,
 } from 'lucide-react';
 import { PlayerProfile } from '@/types/player';
 
@@ -33,6 +34,7 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
   const navLinks = [
     { href: '/', label: 'Início', icon: Home },
     { href: '/jogos', label: 'Jogos', icon: Gamepad2 },
+    { href: '/cardapio', label: 'Cardápio', icon: UtensilsCrossed },
     { href: '/perfil', label: 'Desempenho', icon: Trophy },
   ];
 

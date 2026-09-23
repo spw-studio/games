@@ -1,6 +1,15 @@
 import { Product } from '@/types/cardapio';
 import { Group, GroupMember } from '@/types/grouping';
 
+/** Remove acentos e caixa — base das comparações de busca do catálogo. */
+function normalizeForSearch(text: string): string {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
 /**
  * Operações PURAS sobre o catálogo — seguras para o cliente e para o servidor.
  *
@@ -22,6 +31,73 @@ export function filterProductsByCategory(
     return [...products];
   }
   return products.filter((product) => product.categoryId === categoryId);
+}
+
+/**
+ * Filtra produtos por texto livre, ignorando acentos e caixa.
+ * Pesquisa em nome, código, descrição, categoria, ingredientes e acompanhamentos.
+ */
+export function filterProductsBySearch(
+  products: Product[],
+  term: string
+): Product[] {
+  const needle = normalizeForSearch(term);
+  if (!needle) {
+    return [...products];
+  }
+
+  return products.filter((product) => {
+    const haystack = [
+      product.name,
+      product.code ?? '',
+      product.description,
+      product.categoryId,
+      ...(product.ingredients ?? []),
+      ...(product.accompaniments ?? []),
+    ]
+      .map(normalizeForSearch)
+      .join(' ');
+
+    return haystack.includes(needle);
+  });
+}
+
+/** Coleta as tags alimentares distintas do catálogo, em ordem alfabética. */
+export function collectDietaryTags(products: Product[]): string[] {
+  const tags = new Set<string>();
+
+  for (const product of products) {
+    for (const tag of product.dietaryTags ?? []) {
+      const trimmed = tag.trim();
+      if (trimmed.length > 0) {
+        tags.add(trimmed);
+      }
+    }
+  }
+
+  return Array.from(tags).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+}
+
+/**
+ * Oculta os produtos que contenham a tag alimentar informada.
+ * Usado pela vitrine do cardápio para respeitar restrições do usuário.
+ */
+export function excludeProductsByDietaryTag(
+  products: Product[],
+  tag?: string
+): Product[] {
+  if (!tag) {
+    return [...products];
+  }
+
+  const target = normalizeForSearch(tag);
+
+  return products.filter(
+    (product) =>
+      !(product.dietaryTags ?? []).some(
+        (productTag) => normalizeForSearch(productTag) === target
+      )
+  );
 }
 
 /**
