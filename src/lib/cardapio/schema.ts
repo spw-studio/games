@@ -49,6 +49,11 @@ const rawProductSchema = z.object({
   variacoes: z.array(rawVariationSchema).optional(),
   acompanhamentos: z.array(z.string()).optional(),
   ingredientes: z.array(z.string()).optional(),
+  bebida_base: z.string().optional(),
+  baseSpirit: z.string().optional(),
+  metodo: z.string().optional(),
+  copo: z.string().optional(),
+  garnish: z.string().optional(),
 });
 
 export const menuCatalogSchema = z.object({
@@ -140,5 +145,9 @@ export function normalizeLegacyProduct(product: Partial<Product>): Product {
     variations: variations as ProductVariation[],
     accompaniments,
     ingredients,
+    baseSpirit: product.baseSpirit,
+    metodo: product.metodo,
+    copo: product.copo,
+    garnish: product.garnish,
   };
 }

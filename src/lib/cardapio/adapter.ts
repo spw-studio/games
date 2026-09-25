@@ -43,6 +43,10 @@ function normalizeProduct(item?: RawProduct): Product | null {
     variations: productVariations,
     accompaniments: item.acompanhamentos ?? [],
     ingredients: item.ingredientes ?? [],
+    baseSpirit: item.bebida_base || item.baseSpirit || undefined,
+    metodo: item.metodo || undefined,
+    copo: item.copo || undefined,
+    garnish: item.garnish || undefined,
   };
 }
 

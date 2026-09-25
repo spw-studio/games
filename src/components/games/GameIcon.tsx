@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import { BadgeDollarSign, Brain, HelpCircle, Search, Utensils, Wine } from 'lucide-react';
+import { BadgeDollarSign, Brain, HelpCircle, Martini, Search, Utensils, Wine } from 'lucide-react';
 
 type IconType = ComponentType<{ className?: string }>;
 
@@ -16,6 +16,7 @@ const GAME_ICONS: Record<string, IconType> = {
   Wine,
   Search,
   Utensils,
+  Martini,
 };
 
 interface GameIconProps {

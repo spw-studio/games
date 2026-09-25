@@ -506,6 +506,65 @@ Observações:
 
 ---
 
+## 19. Base Master — bebida de base dos drinks
+
+O **Base Master** treina a memória do bar: o jogador precisa associar cada drink do
+cardápio à sua **bebida alcoólica de base** (ex: Mojito → Rum, Margarita → Tequila).
+
+### Fonte de dados
+
+O jogo **não possui lista própria de drinks** — ele consome o catálogo
+(`fetchCatalogProducts()` → `Product[]`) e trabalha apenas com a categoria de bebidas
+(`DRINK_CATEGORY_ID`). A pergunta é construída em tempo de execução:
+
+```text
+CATÁLOGO → DRINK → BEBIDA DE BASE → QUESTION GENERATOR → PERGUNTA
+```
+
+### Como a bebida de base é obtida
+
+1. **Campo explícito (opcional):** `"bebida_base": "Rum"` no item do `cardapio.json`
+   (mapeado para `Product.baseSpirit`). Quando presente, é **autoritativo**.
+2. **Ingredientes do catálogo:** na ausência do campo, a base é resolvida casando os
+   `ingredientes` reais com o vocabulário controlado de bebidas de base em
+   `GAME_CONFIG.BASE_MASTER.SPIRITS` (Rum, Gin, Vodka, Cachaça, Tequila, Whisky,
+   Espumante, Vinho, Conhaque, Sake + apelidos). A comparação ignora caixa/acentos e
+   exige palavra inteira.
+
+Regras de integridade: a base **nunca** é inferida pelo nome do drink; drinks sem base
+identificada ou com mais de uma base distinta (ambíguos) ficam fora da rodada; as
+alternativas são sempre bebidas de base **reais** do catálogo (sem opções inventadas e
+sem duplicatas).
+
+### Modos
+
+| Modo | Objetivo | Pontuação |
+| --- | --- | --- |
+| **Aprender** | Apresenta drink → base, com navegação `Anterior / Próximo` e opção de ocultar/revelar a resposta. | Não pontua |
+| **Treinar** | Recuperação da base, sem pressão de tempo, com feedback imediato. | Pontos + combo |
+| **Desafio** | Recuperação contra o cronômetro (configurável: sem limite, 8s, 12s ou 20s). | Pontos + combo + bônus de rapidez |
+
+### Pontuação
+
+Todos os valores vêm de `GAME_CONFIG`: acerto = `SCORING.BASE_MATCH_POINTS` (100);
+combo cresce a cada acerto consecutivo e usa a tabela compartilhada
+`SCORING.STREAK_BONUSES` (x2 → +25, x3 → +50, x4 → +75, x5+ → +100); erro ou tempo
+esgotado **zera o combo**; no Desafio há bônus de rapidez proporcional ao tempo restante
+(`BASE_MASTER.MAX_SPEED_BONUS`). O total é multiplicado pelo
+`SCORING.DIFFICULTY_MULTIPLIERS[difficulty]` (hoje fixo em `medio`, pronto para um futuro
+seletor de dificuldade).
+
+### Arquivos
+
+- Lógica pura: `src/lib/games/base-master.ts` e `src/lib/scoring/base-master.ts`.
+- Orquestração: `src/hooks/useBaseMaster.ts`.
+- Interface: `src/components/games/base-master/` (`BaseMasterConfigScreen`, `DrinkCard`,
+  `AnswerOptions`, `AnswerFeedback`, `BaseMasterHUD`, `LearningMode`, `TrainingMode`,
+  `ChallengeMode`, `BaseMasterResult`).
+- Página/tema: `src/app/jogos/base-master/page.tsx` + tema `base-master`.
+
+---
+
 ## Apêndice A. Multi-tenancy & API interna (Fase 2)
 
 A plataforma foi preparada para operar como SaaS multi-empresa **sem alterar o `package.json`** (nenhuma dependência foi instalada, removida ou alterada).

@@ -798,6 +798,7 @@
         "acompanhamentos": [],
         "possui_variacoes": false,
         "codigo": "7001",
+        "bebida_base": "Cachaça",
         "preco": 32.00,
         "ingredientes": [
           "Cachaça",
@@ -816,6 +817,7 @@
         "acompanhamentos": [],
         "possui_variacoes": false,
         "codigo": "7002",
+        "bebida_base": "Rum",
         "preco": 36.00,
         "ingredientes": [
           "Rum Branco",
@@ -836,6 +838,7 @@
         "acompanhamentos": [],
         "possui_variacoes": false,
         "codigo": "7003",
+        "bebida_base": "Gin",
         "preco": 39.00,
         "ingredientes": [
           "Gin",
@@ -855,6 +858,7 @@
         "acompanhamentos": [],
         "possui_variacoes": false,
         "codigo": "7004",
+        "bebida_base": "Espumante",
         "preco": 42.00,
         "ingredientes": [
           "Aperol",
@@ -874,6 +878,7 @@
         "acompanhamentos": [],
         "possui_variacoes": false,
         "codigo": "7005",
+        "bebida_base": "Vodka",
         "preco": 38.00,
         "ingredientes": [
           "Vodka",
@@ -896,6 +901,7 @@
         "acompanhamentos": [],
         "possui_variacoes": false,
         "codigo": "7006",
+        "bebida_base": "Rum",
         "preco": 37.00,
         "ingredientes": [
           "Rum Branco",
@@ -915,6 +921,7 @@
         "acompanhamentos": [],
         "possui_variacoes": false,
         "codigo": "7007",
+        "bebida_base": "Tequila",
         "preco": 40.00,
         "ingredientes": [
           "Tequila Prata",
@@ -934,6 +941,7 @@
         "acompanhamentos": [],
         "possui_variacoes": false,
         "codigo": "7008",
+        "bebida_base": "Gin",
         "preco": 44.00,
         "ingredientes": [
           "Gin",
@@ -953,6 +961,7 @@
         "acompanhamentos": [],
         "possui_variacoes": false,
         "codigo": "7009",
+        "bebida_base": "Gin",
         "preco": 45.00,
         "ingredientes": [
           "Gin",
@@ -971,6 +980,7 @@
         "acompanhamentos": [],
         "possui_variacoes": false,
         "codigo": "7010",
+        "bebida_base": "Vodka",
         "preco": 35.00,
         "ingredientes": [
           "Vodka",
@@ -989,6 +999,7 @@
         "acompanhamentos": [],
         "possui_variacoes": false,
         "codigo": "7011",
+        "bebida_base": "Rum",
         "preco": 32.00,
         "ingredientes": [
           "Rum Ouro",

@@ -244,6 +244,27 @@ export const GAME_THEME_OVERRIDES: Record<string, ThemeOverride> = {
     secondarySoftForeground: '#99F6E4',
     radiusCard: '1.25rem',
   },
+  'quiz-produtos': {
+    // "Conhecimento Rápido": herda o petróleo global e recebe um acento âmbar
+    // (visual de painel de quiz), sem criar paleta paralela.
+    primary: brandRamp[500],
+    secondary: amberRamp[600],
+    secondaryForeground: amberRamp[50],
+    secondarySoft: amberRamp[50],
+    secondarySoftForeground: amberRamp[800],
+    radiusCard: '1rem',
+  },
+  'base-master': {
+    // "Base Master": petróleo profundo com acento cobre/âmbar e cantos largos
+    // (coquetelaria + treinamento de bar), reaproveitando as rampas existentes.
+    primary: brandRamp[600],
+    secondary: amberRamp[500],
+    secondaryForeground: amberRamp[50],
+    secondarySoft: amberRamp[50],
+    secondarySoftForeground: amberRamp[700],
+    radiusCard: '1.5rem',
+    radiusControl: '1rem',
+  },
 };
 
 /**

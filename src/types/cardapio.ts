@@ -43,6 +43,19 @@ export interface Product {
   variations?: ProductVariation[];
   accompaniments?: string[];
   ingredients: string[];
+  /**
+   * Bebida alcoólica de base do drink (JSON: `bebida_base`). Campo OPCIONAL e
+   * autoritativo quando presente — os jogos que dependem da base (ex: Base
+   * Master) usam este valor; na ausência dele a base é derivada dos
+   * `ingredients` reais do catálogo.
+   */
+  baseSpirit?: string;
+  /** Método de preparo (JSON: `metodo`) — opcional; alimenta perguntas do Base Master. */
+  metodo?: string;
+  /** Copo/taça de serviço (JSON: `copo`) — opcional. */
+  copo?: string;
+  /** Guarnição do drink (JSON: `garnish`) — opcional. */
+  garnish?: string;
 }
 
 export interface RawProduct {
@@ -58,6 +71,13 @@ export interface RawProduct {
   variacoes?: RawProductVariation[];
   acompanhamentos?: string[];
   ingredientes: string[];
+  /** Bebida alcoólica de base (opcional) — ver `Product.baseSpirit`. */
+  bebida_base?: string;
+  baseSpirit?: string;
+  /** Atributos opcionais do drink usados pelo Base Master. */
+  metodo?: string;
+  copo?: string;
+  garnish?: string;
 }
 
 export interface CardapioRaw {
