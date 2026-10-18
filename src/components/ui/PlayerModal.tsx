@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { ChefHat, Sparkles, UserCheck } from 'lucide-react';
 
+import { isAuthDisabled } from '@/core/auth';
+
 interface PlayerModalProps {
   isOpen: boolean;
   onSave: (nome: string) => void;
@@ -20,6 +22,7 @@ export function PlayerModal({
   const [nome, setNome] = useState(initialName);
   const [error, setError] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const authDisabled = isAuthDisabled();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -110,7 +113,7 @@ export function PlayerModal({
           </div>
 
           <div className="mt-6">
-            {isFirstVisit && (
+            {!authDisabled && isFirstVisit && (
               <button
                 type="button"
                 onClick={() => signIn('google')}

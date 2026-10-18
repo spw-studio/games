@@ -4,12 +4,17 @@
  * testes locais e validação de jogos sem depender do OAuth do Google.
  */
 export function isAuthDisabled(): boolean {
-  if (process.env.NEXT_PUBLIC_DISABLE_AUTH !== undefined) {
-    return process.env.NEXT_PUBLIC_DISABLE_AUTH === 'true';
+  const publicVal = process.env.NEXT_PUBLIC_DISABLE_AUTH?.trim().toLowerCase();
+  if (publicVal !== undefined && publicVal !== '') {
+    return publicVal === 'true' || publicVal === '1' || publicVal === 'yes';
   }
-  if (process.env.DISABLE_AUTH !== undefined) {
-    return process.env.DISABLE_AUTH === 'true';
+
+  const serverVal = process.env.DISABLE_AUTH?.trim().toLowerCase();
+  if (serverVal !== undefined && serverVal !== '') {
+    return serverVal === 'true' || serverVal === '1' || serverVal === 'yes';
   }
-  // Padrão: desativado quando solicitado explicitamente
-  return true;
+
+  // Em produção, se não definido explicitamente, a autenticação fica ATIVA (segurança).
+  // Em desenvolvimento local, fica DESATIVADA por padrão para testes rápidos.
+  return process.env.NODE_ENV !== 'production';
 }

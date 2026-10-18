@@ -153,7 +153,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         onClose={() => setIsAudioSettingsOpen(false)}
       />
       <NoticeModal
-        isOpen={isAuthNoticeOpen}
+        isOpen={!authDisabled && isAuthNoticeOpen}
         title="Login necessário"
         message="Faça login com sua conta Google para acessar a página inicial, seu desempenho e iniciar uma partida."
         variant="warning"
