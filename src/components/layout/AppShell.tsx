@@ -13,6 +13,8 @@ import { AudioSettingsPanel } from '@/components/audio/AudioSettingsPanel';
 import { ChefHat, Heart } from 'lucide-react';
 import Link from 'next/link';
 
+import { isAuthDisabled } from '@/core/auth';
+
 export function AppShell({ children }: { children: ReactNode }) {
   const { player, isLoaded, isModalOpen, setIsModalOpen, setPlayerName } = usePlayer();
   const [isAudioSettingsOpen, setIsAudioSettingsOpen] = useState(false);
@@ -21,23 +23,24 @@ export function AppShell({ children }: { children: ReactNode }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { status } = useSession();
+  const authDisabled = isAuthDisabled();
   const isPublicPage = isPublicPath(pathname);
-  const isAuthenticated = status === 'authenticated';
+  const isAuthenticated = authDisabled || status === 'authenticated';
   // Durante a partida (modo imersivo) o shell esconde navbar/rodapé e usa 100% da tela.
   const { isImmersive } = useGameMode();
 
   useEffect(() => {
-    if (status === 'unauthenticated' && !isPublicPage) {
+    if (!authDisabled && status === 'unauthenticated' && !isPublicPage) {
       router.replace('/jogos');
     }
-  }, [isPublicPage, router, status]);
+  }, [authDisabled, isPublicPage, router, status]);
 
   useEffect(() => {
-    if (isPublicPage && searchParams.get('authRequired') === '1') {
+    if (!authDisabled && isPublicPage && searchParams.get('authRequired') === '1') {
       setIsAuthNoticeOpen(true);
       window.history.replaceState(null, '', '/jogos');
     }
-  }, [isPublicPage, searchParams]);
+  }, [authDisabled, isPublicPage, searchParams]);
 
   // Enquanto o jogo ocupa a tela inteira o documento não rola: elimina a barra
   // de rolagem da página e o "rubber band" no mobile.
@@ -52,7 +55,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     };
   }, [isImmersive]);
 
-  if (!isPublicPage && (status === 'loading' || !isAuthenticated)) {
+  if (!authDisabled && !isPublicPage && (status === 'loading' || !isAuthenticated)) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background p-6 text-center text-foreground">
         <div className="max-w-sm space-y-4">

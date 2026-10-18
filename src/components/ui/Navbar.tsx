@@ -19,6 +19,8 @@ import {
 } from 'lucide-react';
 import { PlayerProfile } from '@/types/player';
 
+import { isAuthDisabled } from '@/core/auth';
+
 interface NavbarProps {
   player: PlayerProfile | null;
   onOpenPlayerModal?: () => void;
@@ -38,17 +40,18 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
     { href: '/perfil', label: 'Desempenho', icon: Trophy },
   ];
 
-  const isAuthenticated = status === 'authenticated';
-  const visibleNavLinks = isAuthenticated ? navLinks : [];
-  const homeHref = isAuthenticated ? '/' : '/jogos';
-  const profileName = session?.user?.name || player?.nome || 'Visitante';
+  const authDisabled = isAuthDisabled();
+  const isAuthenticated = authDisabled || status === 'authenticated';
+  const visibleNavLinks = navLinks;
+  const homeHref = '/';
+  const profileName = session?.user?.name || player?.nome || 'Colaborador';
   const profileEmail = session?.user?.email || player?.email;
   const profileInitials = profileName
     .split(' ')
     .filter(Boolean)
     .slice(0, 2)
     .map((part) => part[0]?.toUpperCase())
-    .join('') || 'V';
+    .join('') || 'C';
 
   useEffect(() => {
     if (!isProfileMenuOpen) return;
@@ -151,7 +154,9 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
               </span>
               <span className="hidden max-w-32 sm:block">
                 <span className="block truncate text-xs font-semibold text-foreground">{profileName}</span>
-                <span className="block text-[10px] text-secondary/80">Conta Google</span>
+                <span className="block text-[10px] text-secondary/80">
+                  {status === 'authenticated' ? 'Conta Google' : 'Modo Livre'}
+                </span>
               </span>
               <ChevronDown className={`hidden h-4 w-4 text-secondary transition-transform sm:block ${isProfileMenuOpen ? 'rotate-180' : ''}`} />
             </button>
@@ -213,20 +218,22 @@ export function Navbar({ player, onOpenPlayerModal, onOpenAudioSettings }: Navba
                 <span>Preferências de som</span>
               </button>
 
-              <div className="mt-2 border-t border-border pt-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    closeProfileMenu();
-                    void signOut({ callbackUrl: '/jogos' });
-                  }}
-                  className="flex w-full items-center gap-3 rounded-control px-3 py-2.5 text-left text-sm text-danger hover:bg-danger/10"
-                  role="menuitem"
-                >
-                  <LogOut className="h-4 w-4" />
-                  <span>Sair da conta Google</span>
-                </button>
-              </div>
+              {status === 'authenticated' && (
+                <div className="mt-2 border-t border-border pt-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      closeProfileMenu();
+                      void signOut({ callbackUrl: '/jogos' });
+                    }}
+                    className="flex w-full items-center gap-3 rounded-control px-3 py-2.5 text-left text-sm text-danger hover:bg-danger/10"
+                    role="menuitem"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Sair da conta Google</span>
+                  </button>
+                </div>
+              )}
             </div>
             )}
             </div>

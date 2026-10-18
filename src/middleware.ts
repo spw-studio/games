@@ -1,10 +1,11 @@
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 import { isPublicPath } from '@/core/routes';
+import { isAuthDisabled } from '@/core/auth';
 
 export async function middleware(request: NextRequest) {
-  // Política de rotas públicas compartilhada com o AppShell (client)
-  if (isPublicPath(request.nextUrl.pathname)) {
+  // Se a autenticação estiver desativada ou for rota pública, permite acesso imediato
+  if (isAuthDisabled() || isPublicPath(request.nextUrl.pathname)) {
     return NextResponse.next();
   }
 

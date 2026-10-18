@@ -46,7 +46,7 @@ export function MemoryCard({
 
   return (
     <div
-      className="group relative h-48 sm:h-56 md:h-64 w-full cursor-pointer select-none [perspective:1000px]"
+      className="group relative h-full w-full min-h-0 min-w-0 cursor-pointer select-none [perspective:1000px]"
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       tabIndex={isFlipped ? -1 : 0}
@@ -56,26 +56,27 @@ export function MemoryCard({
       aria-disabled={disabled || card.isMatched}
     >
       <div
-        className={`relative h-full w-full rounded-2xl shadow-md transition-transform duration-300 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : 'group-hover:-translate-y-1'
-          } ${card.isMatched ? 'ring-2 ring-emerald-500 shadow-emerald-500/20 shadow-lg' : ''}`}
+        className={`relative h-full w-full rounded-xl sm:rounded-2xl shadow-sm transition-transform duration-300 [transform-style:preserve-3d] ${
+          isFlipped ? '[transform:rotateY(180deg)]' : 'hover:-translate-y-0.5 active:scale-98'
+        } ${card.isMatched ? 'ring-2 ring-emerald-500 shadow-emerald-500/20 shadow-md' : ''}`}
       >
         {/* =========================================================
             FACE FRONTAL (CARTA OCULTA)
             Mostra o padrão da marca usando os tokens do tema
         ========================================================= */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl border-2 border-primary/70 bg-primary p-4 text-center text-primary-foreground shadow-inner [backface-visibility:hidden]">
+        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl sm:rounded-2xl border-2 border-primary/70 bg-primary p-1.5 sm:p-2 md:p-3 text-center text-primary-foreground shadow-inner [backface-visibility:hidden]">
           {/* Padrão geométrico requintado */}
-          <div className="absolute inset-2 rounded-xl border border-secondary/25 opacity-70" />
-          <div className="absolute inset-0 bg-[radial-gradient(var(--theme-secondary)_1px,transparent_1px)] [background-size:16px_16px] opacity-15" />
+          <div className="absolute inset-1 sm:inset-1.5 rounded-lg sm:rounded-xl border border-secondary/25 opacity-70 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(var(--theme-secondary)_1px,transparent_1px)] [background-size:12px_12px] sm:[background-size:16px_16px] opacity-15 pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col items-center">
-            <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-primary-foreground/5 border border-secondary/40 shadow-inner group-hover:scale-110 transition-transform">
-              <ChefHat className="h-6 w-6 sm:h-7 sm:w-7 text-secondary" />
+          <div className="relative z-10 flex flex-col items-center justify-center min-h-0">
+            <div className="flex h-7 w-7 sm:h-9 sm:w-9 md:h-11 md:w-11 items-center justify-center rounded-lg sm:rounded-xl bg-primary-foreground/5 border border-secondary/40 shadow-inner group-hover:scale-105 transition-transform shrink-0">
+              <ChefHat className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-secondary" />
             </div>
-            <span className="mt-2.5 font-serif text-xs sm:text-sm font-semibold tracking-widest text-secondary uppercase">
+            <span className="mt-1 sm:mt-1.5 font-serif text-[9px] sm:text-xs font-semibold tracking-widest text-secondary uppercase truncate max-w-full px-1">
               GASTRONOMIA
             </span>
-            <div className="mt-1 flex items-center gap-1 text-[10px] text-primary-foreground/60 uppercase tracking-widest">
+            <div className="hidden sm:flex mt-0.5 items-center gap-1 text-[8px] sm:text-[9px] text-primary-foreground/60 uppercase tracking-widest">
               <Sparkles className="w-2.5 h-2.5 text-secondary" />
               <span>Toque para virar</span>
             </div>
@@ -86,73 +87,73 @@ export function MemoryCard({
             FACE TRASEIRA (CARTA REVELADA)
             [transform:rotateY(180deg)]
         ========================================================= */}
-        <div className="absolute inset-0 flex flex-col overflow-hidden rounded-2xl border border-secondary/30 bg-surface shadow-xl [backface-visibility:hidden] [transform:rotateY(180deg)]">
+        <div className="absolute inset-0 flex flex-col overflow-hidden rounded-xl sm:rounded-2xl border border-secondary/30 bg-surface shadow-md [backface-visibility:hidden] [transform:rotateY(180deg)]">
           {/* Badge de Match quando o par já foi encontrado */}
           {card.isMatched && (
-            <div className="absolute top-2 right-2 z-20 flex items-center gap-1 rounded-full bg-emerald-600 px-2 py-0.5 text-[10px] font-bold text-white shadow-md animate-in fade-in zoom-in-75">
-              <CheckCircle2 className="w-3 h-3" />
-              <span>PAR ENCONTRADO</span>
+            <div className="absolute top-1 right-1 sm:top-1.5 sm:right-1.5 z-20 flex items-center gap-0.5 sm:gap-1 rounded-full bg-emerald-600 px-1.5 py-0.5 text-[8px] sm:text-[10px] font-bold text-white shadow-md animate-in fade-in zoom-in-75">
+              <CheckCircle2 className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+              <span className="hidden sm:inline">PAR</span>
             </div>
           )}
 
           {card.type === 'image' ? (
             /* CARTA TIPO A: IMAGEM DO PRODUTO */
-              <div className="relative flex h-full w-full flex-col justify-between bg-muted">
-              <div className="relative h-32 sm:h-40 md:h-44 w-full">
+            <div className="relative flex h-full w-full min-h-0 flex-col bg-muted">
+              <div className="relative min-h-0 flex-1 w-full overflow-hidden">
                 <ProductImage
                   src={product.image}
                   alt={product.name}
                   category={product.categoryId}
-                  className="h-full w-full"
+                  className="h-full w-full object-cover"
                 />
               </div>
-              <div className="flex flex-1 flex-col justify-center px-3 py-2 text-center bg-surface border-t border-border">
-                <span className="font-serif text-xs sm:text-sm font-bold text-primary line-clamp-2 leading-tight">
+              <div className="flex shrink-0 flex-col justify-center px-1.5 py-0.5 sm:py-1 text-center bg-surface border-t border-border">
+                <span className="font-serif text-[9px] sm:text-xs font-bold text-primary truncate leading-tight block">
                   {product.name}
                 </span>
-                <span className="mt-0.5 text-[10px] uppercase tracking-wider text-secondary font-semibold">
-                  Categoria: {product.categoryId}
+                <span className="hidden sm:block text-[8px] sm:text-[9px] uppercase tracking-wider text-secondary font-semibold truncate">
+                  {categoryName || product.categoryId}
                 </span>
               </div>
             </div>
           ) : (
             /* CARTA TIPO B: DESCRIÇÃO DO PRODUTO */
-            <div className="flex h-full w-full flex-col justify-between bg-muted/60 p-3 sm:p-4 text-left border-t-4 border-primary">
-              <div className="flex items-center justify-between gap-1 border-b border-border pb-1.5">
-                <div className="flex items-center gap-1.5 text-primary">
-                  <FileText className="w-3.5 h-3.5 text-secondary shrink-0" />
-                  <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-primary">
+            <div className="flex h-full w-full min-h-0 flex-col justify-between bg-muted/60 p-1.5 sm:p-2 md:p-2.5 text-left border-t-2 sm:border-t-4 border-primary">
+              <div className="flex items-center justify-between gap-1 border-b border-border pb-1 shrink-0">
+                <div className="flex items-center gap-1 min-w-0 text-primary">
+                  <FileText className="w-3 h-3 text-secondary shrink-0" />
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-primary truncate">
                     {product.name}
                   </span>
                 </div>
-
-              </div>
-
-              {/* Descrição textual do prato */}
-              <div className="my-auto overflow-y-auto pr-1 py-1 space-y-1">
                 {categoryName && (
-                  <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] font-semibold text-primary border border-border shrink-0">
+                  <span className="hidden md:inline-block rounded bg-muted px-1 py-0.2 text-[8px] sm:text-[9px] font-semibold text-primary border border-border shrink-0 truncate max-w-[80px]">
                     {categoryName}
                   </span>
                 )}
-                <p className="text-[11px] sm:text-xs text-foreground leading-relaxed font-normal">
+              </div>
 
+              {/* Descrição textual do prato */}
+              <div className="my-auto min-h-0 flex-1 overflow-y-auto pr-0.5 py-0.5 scrollbar-thin">
+                <p className="text-[9px] sm:text-[11px] md:text-xs text-foreground leading-tight sm:leading-relaxed font-normal">
                   {product.description}
                 </p>
                 {(product.accompaniments ?? []).length > 0 && (
-                  <div className="pt-0.5">
-                    <span className="text-[10px] font-semibold text-primary">Acomp: </span>
-                    <span className="text-[10px] text-muted-foreground italic">
+                  <div className="hidden sm:block pt-0.5 truncate">
+                    <span className="text-[8px] sm:text-[9px] font-semibold text-primary">Acomp: </span>
+                    <span className="text-[8px] sm:text-[9px] text-muted-foreground italic">
                       {(product.accompaniments ?? []).join(', ')}
                     </span>
                   </div>
                 )}
               </div>
 
-              <div className="flex items-center justify-between border-t border-border pt-1.5 text-[10px] text-muted-foreground">
-                <span className="italic text-secondary font-medium">Associe à foto correspondente</span>
+              <div className="flex items-center justify-between border-t border-border pt-0.5 sm:pt-1 text-[8px] sm:text-[9px] text-muted-foreground shrink-0">
+                <span className="italic text-secondary font-medium truncate pr-1">
+                  Associe à foto
+                </span>
                 {product.price !== undefined && (
-                  <span className="font-semibold text-primary">
+                  <span className="font-semibold text-primary shrink-0">
                     R$ {product.price.toFixed(2)}
                   </span>
                 )}

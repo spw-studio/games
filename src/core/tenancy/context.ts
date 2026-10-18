@@ -1,7 +1,8 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { TenantContext } from './types';
+import { TenantContext, getBootstrapOrganizationId } from './types';
 import { normalizeRole } from './permissions';
+import { isAuthDisabled } from '@/core/auth';
 
 /**
  * Resolve o TenantContext a partir da sessão autenticada (server-only).
@@ -15,6 +16,16 @@ import { normalizeRole } from './permissions';
  *   (serviços de domínio respondem 403; SUPER_ADMIN segue permitido).
  */
 export async function getTenantContext(): Promise<TenantContext | null> {
+  // Quando a autenticação está desativada, fornece contexto padrão de desenvolvimento
+  if (isAuthDisabled()) {
+    return {
+      userId: 'dev-user',
+      organizationId: getBootstrapOrganizationId(),
+      role: 'OWNER',
+      isSuperAdmin: true,
+    };
+  }
+
   const session = await getServerSession(authOptions);
   const user = session?.user;
 

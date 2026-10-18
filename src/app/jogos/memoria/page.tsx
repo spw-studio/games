@@ -106,10 +106,12 @@ export default function MemoryGamePage() {
   const isCatalogLoading = !catalogError && (!categories || !products);
 
   return (
-    <ThemeProvider themeId={memoryTheme} className="flex min-h-0 flex-1 flex-col">
+    <ThemeProvider themeId={memoryTheme} className="flex h-full min-h-0 flex-1 flex-col">
       <div
         className={`animate-in fade-in duration-300 ${
-          gameState === 'playing' ? 'flex min-h-0 flex-1 flex-col p-2' : 'py-2'
+          gameState === 'playing'
+            ? 'flex h-full min-h-0 flex-1 flex-col p-1 sm:p-2 overflow-hidden'
+            : 'py-2'
         }`}
       >
         {isCatalogLoading && <LoadingScreen label="Carregando catálogo..." />}

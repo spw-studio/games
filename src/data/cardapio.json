@@ -2,1033 +2,414 @@
   "cardapio": {
     "categorias": [
       {
-        "id": "lancamentos",
-        "nome": "Lançamentos"
-      },
-      {
-        "id": "entradas",
-        "nome": "Entradas"
+        "id": "cafe-da-manha",
+        "nome": "Café da Manhã"
       },
       {
         "id": "saladas",
         "nome": "Saladas"
       },
       {
-        "id": "camaroes",
-        "nome": "Camarões"
+        "id": "sopas-cremes",
+        "nome": "Sopas & Cremes"
       },
       {
-        "id": "carnes",
-        "nome": "Carnes"
+        "id": "do-mar",
+        "nome": "Do Mar"
       },
       {
-        "id": "peixes",
-        "nome": "Peixes"
+        "id": "da-fazenda",
+        "nome": "Da Fazenda"
       },
       {
-        "id": "moquecas",
-        "nome": "Moquecas e Peixadas"
+        "id": "risotos",
+        "nome": "Risotos"
       },
       {
-        "id": "frutos-do-mar",
-        "nome": "Frutos do Mar"
+        "id": "massas",
+        "nome": "Massas"
       },
       {
-        "id": "lagostas",
-        "nome": "Lagostas"
-      },
-      {
-        "id": "frango",
-        "nome": "Frango"
-      },
-      {
-        "id": "kids",
-        "nome": "Kids"
-      },
-      {
-        "id": "inclusivos",
-        "nome": "Inclusivos"
-      },
-      {
-        "id": "gelatos",
-        "nome": "Gelatos"
+        "id": "sanduiches",
+        "nome": "Sanduíches"
       },
       {
         "id": "sobremesas",
         "nome": "Sobremesas"
       },
       {
-        "id": "tortas",
-        "nome": "Tortas Inteiras"
-      },
-      {
         "id": "bebidas",
         "nome": "Bebidas"
-      },
-      {
-        "id": "drinks",
-        "nome": "drinks"
       }
     ],
     "itens": [
       {
-        "id": "bacalhau-bras",
-        "nome": "Bacalhau à Brás",
-        "categoria": "lancamentos",
-        "descricao": "Clássico português feito com lombo de bacalhau desfiado refogado no azeite de oliva com ovos cremosos e batata palha crocante, finalizado com salsinha e azeitonas Azapa.",
-        "imagem": "/images/cardapio/bacalhau-a-bras.png",
-        "tags_alimentares": [
-          "Peixes",
-          "Ovo",
-          "Glúten",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Batata palha crocante",
-          "Azeitonas Azapa"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "5099",
-            "porcao": "Meia Porção",
-            "detalhe_peso": "250g de Bacalhau",
-            "preco": 147.00
-          },
-          {
-            "codigo": "5098",
-            "porcao": "Porção Inteira",
-            "detalhe_peso": "500g de Bacalhau",
-            "preco": 289.00
-          }
-        ]
+        "id": "cafe-tropical",
+        "nome": "Café Tropical",
+        "categoria": "cafe-da-manha",
+        "descricao": "Café, chá, leite ou chocolate, suco de frutas, seleção de pães, bolos regionais, tapioca com queijo coalho, omelete, geléias, mel, manteiga, cream cheese, seleção de frios, variedade de frutas, iogurte e cereais.[cite: 5]",
+        "preco": 74.00,
+        "possui_variacoes": false
       },
       {
-        "id": "camarao-al-mare-rosso",
-        "nome": "Camarão al Mare Rosso",
-        "categoria": "lancamentos",
-        "descricao": "06 unidades de camarões GG salteados com alho, cebola e manjericão, envolvidos em molho de tomate italiano fresco com parmesão, servidos com fettuccine.",
-        "imagem": "/images/cardapio/camarao-al-mare-rosso.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Fettuccine ao molho de tomate fresco"
-        ],
-        "possui_variacoes": false,
-        "codigo": "3136",
-        "preco": 154.00
+        "id": "salada-caesar-frango",
+        "nome": "Salada Caesar com Filé de Frango Grelhado",
+        "categoria": "saladas",
+        "descricao": "Alface americana, Peito de frango grelhado com molho de ervas, parmesão ralado, croutons, bacon e molho caesar.[cite: 5]",
+        "preco": 54.00,
+        "possui_variacoes": false
       },
       {
-        "id": "bombinha-camarao",
-        "nome": "Bombinha de Camarão",
-        "categoria": "lancamentos",
-        "descricao": "Bolinhas crocantes recheadas com camarão, cream cheese e Catupiry, empanadas e acompanhadas de molho cremoso de maionese e mostarda levemente picante.",
-        "imagem": "/images/cardapio/bombinha-camarao.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Molho cremoso de maionese e mostarda"
-        ],
-        "possui_variacoes": false,
-        "codigo": "1295",
-        "preco": 59.00
+        "id": "cuscuz-marroquino-camaroes",
+        "nome": "Cuscuz Marroquino com Camarões",
+        "categoria": "saladas",
+        "descricao": "Cuscuz marroquino com tomates concassé, raspa de limão siciliano e camarões flambados.[cite: 5]",
+        "preco": 64.00,
+        "possui_variacoes": false
       },
       {
-        "id": "arpao-pescador",
-        "nome": "Arpão do Pescador",
-        "categoria": "lancamentos",
-        "descricao": "Camarões GG defumados e grelhados no charbroiler, servidos com delicioso molho provençal e alho frito laminado.",
-        "imagem": "/images/cardapio/arpao-pescador.png",
-        "tags_alimentares": [
-          "Crustáceos"
-        ],
-        "acompanhamentos": [
-          "Molho provençal",
-          "Alho frito laminado"
-        ],
-        "possui_variacoes": false,
-        "codigo": "1296",
-        "preco": 102.00
+        "id": "salada-caprese",
+        "nome": "Salada Caprese",
+        "categoria": "saladas",
+        "descricao": "Tomates laminados com queijo de búfala e pesto de manjericão.[cite: 5]",
+        "preco": 49.00,
+        "possui_variacoes": false
       },
       {
-        "id": "camarao-pistola-alho",
-        "nome": "Camarão Pistola ao Alho",
-        "categoria": "lancamentos",
-        "descricao": "Majestosos camarões Pistola (tamanho GG) refogados em azeite fervilhante, lâminas de alho dourado e um leve toque de pimenta. Inspirado no clássico Gambas al Ajillo. Acompanha pão rústico para aproveitar o molho.",
-        "imagem": "/images/cardapio/camarao-pistola-alho.png",
-        "tags_alimentares": [
-          "Crustáceos"
-        ],
-        "acompanhamentos": [
-          "Pão rústico"
-        ],
-        "possui_variacoes": false,
-        "codigo": "1297",
-        "preco": 116.00
-      },
-      {
-        "id": "surf-and-turf",
-        "nome": "Coco Bambu Surf and Turf",
-        "categoria": "lancamentos",
-        "descricao": "Tornedor de filé mignon grelhado, acompanhado de camarões GG grelhados e finalizado com um cremoso molho de frutos do mar perfumado com salsinha fresca. Servido com arroz à parte.",
-        "imagem": "/images/cardapio/surf-and-turf.png",
-        "tags_alimentares": [
-          "Carnes",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Arroz branco"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "6130",
-            "porcao": "Meia Porção",
-            "detalhe_peso": "200g de Carne e 03 Camarões GG",
-            "preco": 176.00
-          },
-          {
-            "codigo": "6129",
-            "porcao": "Porção Inteira",
-            "detalhe_peso": "400g de Carne e 06 Camarões GG",
-            "preco": 264.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-ao-forno",
-        "nome": "Camarão ao Forno",
-        "categoria": "camaroes",
-        "descricao": "Camarões inteiros (com cabeça) levados ligeiramente ao forno, regados com suave molho provençal. Acompanha risoto de limão siciliano.",
-        "imagem": "/images/cardapio/camarao-ao-forno.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Risoto de limão siciliano"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3009",
-            "porcao": "600g de Camarão",
-            "preco": 147.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-em-crosta",
-        "nome": "Camarão em Crosta",
-        "categoria": "camaroes",
-        "descricao": "Camarões em crosta de pão de alho. Acompanha salada de alface americana, tomate, azeitona verde, palmito, pimentão e cebola. Acompanha risoto de limão siciliano.",
-        "imagem": "/images/cardapio/camarao-em-crosta.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Salada fresca",
-          "Risoto de limão siciliano"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3017",
-            "porcao": "2 Pessoas - 380g de Camarão",
-            "preco": 215.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-ipanema",
-        "nome": "Camarão Ipanema",
-        "categoria": "camaroes",
-        "descricao": "Camarões salteados no azeite com alho, cebola, pimentão, coentro e tomate. Servidos sobre arroz regado com um toque de leite de coco e batata palha.",
-        "imagem": "/images/cardapio/camarao-ipanema.png",
-        "tags_alimentares": [
-          "Crustáceos"
-        ],
-        "acompanhamentos": [
-          "Arroz com leite de coco",
-          "Batata palha"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3061",
-            "porcao": "2 Pessoas - 220g de Camarão",
-            "preco": 173.00
-          },
-          {
-            "codigo": "3026",
-            "porcao": "4 Pessoas - 380g de Camarão",
-            "preco": 241.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-mucuripe",
-        "nome": "Camarão Mucuripe",
-        "categoria": "camaroes",
-        "descricao": "Camarões com espaguete italiano coberto com delicioso molho de tomate fresco acrescido de tomate seco, nata, azeitona preta e rúcula.",
-        "imagem": "/images/cardapio/camarao-mucuripe.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Espaguete italiano ao molho de tomate fresco"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3089",
-            "porcao": "2 Pessoas - 220g de Camarão",
-            "preco": 185.00
-          },
-          {
-            "codigo": "3032",
-            "porcao": "4 Pessoas - 380g de Camarão",
-            "preco": 272.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-provencal",
-        "nome": "Camarão Provençal",
-        "categoria": "camaroes",
-        "descricao": "Camarões puxados no azeite extra virgem, alho e cebola, flambados com vinho branco, aromatizados com ervas de Provence, com molho de tomate fresco. Servido sobre fettuccine italiano com molho à base de creme de leite e um toque de limão siciliano.",
-        "imagem": "/images/cardapio/camarao-provençal.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Fettuccine ao molho cremoso"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3035",
-            "porcao": "420g de Camarão",
-            "preco": 252.00
-          }
-        ]
-      },
-      {
-        "id": "carbonara-coco-bambu",
-        "nome": "Carbonara Coco Bambu",
-        "categoria": "camaroes",
-        "descricao": "Carbonara de camarão com fettuccine e molho feito com gema de ovo, queijo parmesão, creme de leite fresco, pimenta do reino, bacon e finalizado com farofa crocante de panko.",
-        "imagem": "/images/cardapio/carbonara-coco-bambu.png",
-        "tags_alimentares": [
-          "Ovo",
-          "Glúten",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Fettuccine ao molho carbonara",
-          "Farofa crocante de panko"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3065",
-            "porcao": "2 Pessoas - 220g de Camarão",
-            "preco": 228.00
-          },
-          {
-            "codigo": "3040",
-            "porcao": "4 Pessoas - 380g de Camarão",
-            "preco": 361.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-grelhado",
-        "nome": "Camarão Grelhado",
-        "categoria": "camaroes",
-        "descricao": "Um prato rico em proteína com 8 unidades de camarões grandes grelhados com tomate, brócolis, abóbora, abobrinha, palmito, cenoura, batata e cebola.",
-        "imagem": "/images/cardapio/camarao-grelhado.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Legumes variados"
-        ],
-        "possui_variacoes": false,
-        "codigo": "3022",
-        "preco": 104.00
-      },
-      {
-        "id": "camarao-coco-bambu",
-        "nome": "Camarão Coco Bambu",
-        "categoria": "camaroes",
-        "descricao": "Camarões recheados com Catupiry® e empanados, servidos sobre arroz cremoso com camarão, ervilhas e presunto, cobertos com molho branco e gratinados com muçarela e parmesão. Acompanha batata palha artesanal.",
-        "imagem": "/images/cardapio/camarao-coco-bambu.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose",
-          "Leite"
-        ],
-        "acompanhamentos": [
-          "Arroz cremoso com camarão, ervilhas e presunto",
-          "Batata palha artesanal"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3107",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "276g de Camarão",
-            "preco": 228.00
-          },
-          {
-            "codigo": "3056",
-            "porcao": "3 Pessoas",
-            "detalhe_peso": "409g de Camarão",
-            "preco": 270.00
-          },
-          {
-            "codigo": "3014",
-            "porcao": "6 Pessoas",
-            "detalhe_peso": "758g de Camarão",
-            "preco": 440.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-coco-brasil",
-        "nome": "Camarão Coco Brasil",
-        "categoria": "camaroes",
-        "descricao": "Camarões empanados recheados com Catupiry®, servidos sobre arroz cremoso de moqueca com camarão e coentro, cobertos com batata palha. Acompanha farofa de panko com bacon e pimenta-da-jamaica.",
-        "imagem": "/images/cardapio/camarao-coco-brasil.png",
-        "tags_alimentares": [
-          "Ovo",
-          "Glúten",
-          "Peixes",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Arroz de moqueca cremoso",
-          "Farofa de panko com bacon"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3100",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "276g de Camarão",
-            "preco": 209.00
-          },
-          {
-            "codigo": "3055",
-            "porcao": "3 Pessoas",
-            "detalhe_peso": "409g de Camarão",
-            "preco": 252.00
-          },
-          {
-            "codigo": "3011",
-            "porcao": "6 Pessoas",
-            "detalhe_peso": "758g de Camarão",
-            "preco": 426.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-noronha",
-        "nome": "Camarão Grelhado Fernando de Noronha",
-        "categoria": "camaroes",
-        "descricao": "Camarões salteados no azeite e alho, acompanhados de legumes, palmito, batata recheada, tomates cereja e muçarela de búfala, cobertos com escalivada leve e óleo de ervas. Servido com arroz de brócolis.",
-        "imagem": "/images/cardapio/camarao-noronha.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Arroz de brócolis",
-          "Legumes variados"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3018",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "380g de Camarão",
-            "preco": 215.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-internacional",
-        "nome": "Camarão Internacional",
-        "categoria": "camaroes",
-        "descricao": "Camarões servidos sobre arroz cremoso com ervilhas e presunto, envolvidos em molho branco e gratinados com muçarela e parmesão. Acompanha batata palha artesanal.",
-        "imagem": "/images/cardapio/camarao-internacional.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose",
-          "Leite"
-        ],
-        "acompanhamentos": [
-          "Arroz cremoso com ervilhas e presunto",
-          "Batata palha artesanal"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3060",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "220g de Camarão",
-            "preco": 185.00
-          },
-          {
-            "codigo": "3025",
-            "porcao": "4 Pessoas",
-            "detalhe_peso": "380g de Camarão",
-            "preco": 272.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-jurere",
-        "nome": "Camarão Jurerê",
-        "categoria": "camaroes",
-        "descricao": "Camarões salteados no azeite com alho e cebola, flambados no vinho branco e aromatizados com ervas de Provence. Servidos com molho de tomate fresco sobre fettuccine italiano ao creme de leite e limão siciliano.",
-        "imagem": "/images/cardapio/camarao-jurere.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose"
-        ],
-        "acompanhamentos": [
-          "Fettuccine ao molho cremoso"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3029",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "220g de Camarão",
-            "preco": 194.00
-          },
-          {
-            "codigo": "3122",
-            "porcao": "4 Pessoas",
-            "detalhe_peso": "380g de Camarão",
-            "preco": 274.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-monaco",
-        "nome": "Camarão Mônaco",
-        "categoria": "camaroes",
-        "descricao": "Camarões empanados servidos com risoto de aspargos e parmesão, finalizados com lâminas de amêndoas torradas.",
-        "imagem": "/images/cardapio/camarao-monaco.png",
-        "tags_alimentares": [
-          "Ovo",
-          "Glúten",
-          "Crustáceos",
-          "Lactose",
-          "Oleaginosas"
-        ],
-        "acompanhamentos": [
-          "Risoto de aspargos e parmesão",
-          "Amêndoas torradas"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3071",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "220g de Camarão",
-            "preco": 165.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-siciliano",
-        "nome": "Camarão Siciliano",
-        "categoria": "camaroes",
-        "descricao": "06 camarões recheados com Catupiry® e empanados, servidos sobre risoto de limão siciliano, decorados com salsinha e acompanhados de batata palha.",
-        "imagem": "/images/cardapio/camarao-siciliano.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose",
-          "Ovo",
-          "Leite"
-        ],
-        "acompanhamentos": [
-          "Risoto de limão siciliano",
-          "Batata palha artesanal"
-        ],
-        "possui_variacoes": false,
-        "codigo": "3101",
-        "preco": 166.00
-      },
-      {
-        "id": "praia-boa-viagem",
-        "nome": "Praia de Boa Viagem",
-        "categoria": "camaroes",
-        "descricao": "Camarões refogados com alho e cebola, flambados no vinho branco. Servidos sobre espaguete ao molho bechamel e espinafre, gratinados com muçarela e parmesão.",
-        "imagem": "/images/cardapio/praia-boa-viagem.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose",
-          "Leite"
-        ],
-        "acompanhamentos": [
-          "Espaguete ao molho bechamel e espinafre"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3066",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "220g de Camarão",
-            "preco": 187.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-florentina",
-        "nome": "Camarão Florentina",
-        "categoria": "camaroes",
-        "descricao": "Camarões refogados com alho e cebola, flambados no vinho branco. Servidos sobre espaguete ao molho bechamel e espinafre, gratinados com muçarela e parmesão.",
-        "imagem": "/images/cardapio/camarao-florentina.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose",
-          "Leite"
-        ],
-        "acompanhamentos": [
-          "Espaguete ao molho bechamel e espinafre"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3057",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "220g de Camarão",
-            "preco": 198.00
-          },
-          {
-            "codigo": "3020",
-            "porcao": "4 Pessoas",
-            "detalhe_peso": "380g de Camarão",
-            "preco": 284.00
-          }
-        ]
-      },
-      {
-        "id": "praia-buzios",
-        "nome": "Praia de Búzios",
-        "categoria": "camaroes",
-        "descricao": "Arroz de leite com queijo coalho coberto com camarões refogados com coentro, cebola, alho, tomate fresco e nata. Gratinado com queijo coalho e coberto com batata palha.",
-        "imagem": "/images/cardapio/praia-buzios.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose",
-          "Leite"
-        ],
-        "acompanhamentos": [
-          "Arroz de leite com queijo coalho",
-          "Batata palha artesanal"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3067",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "220g de Camarão",
-            "preco": 173.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-iracema",
-        "nome": "Camarão Iracema",
-        "categoria": "camaroes",
-        "descricao": "Arroz de queijo coalho coberto com camarões refogados com coentro, cebola, alho, tomate fresco e nata. Gratinado com queijo coalho e servido com mandioca frita.",
-        "imagem": "/images/cardapio/camarao-iracema.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose",
-          "Leite"
-        ],
-        "acompanhamentos": [
-          "Arroz de queijo coalho",
-          "Mandioca frita"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3062",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "220g de Camarão",
-            "preco": 185.00
-          },
-          {
-            "codigo": "3027",
-            "porcao": "4 Pessoas",
-            "detalhe_peso": "380g de Camarão",
-            "preco": 253.00
-          }
-        ]
-      },
-      {
-        "id": "praia-olinda",
-        "nome": "Praia de Olinda",
-        "categoria": "camaroes",
-        "descricao": "Camarões refogados com alho e cebola, servidos sobre arroz cremoso com manjericão, envolvido em molho branco e gratinado com muçarela. Acompanha batata palha.",
-        "imagem": "/images/cardapio/praia-olinda.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose",
-          "Leite"
-        ],
-        "acompanhamentos": [
-          "Arroz cremoso com manjericão",
-          "Batata palha artesanal"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3069",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "220g de Camarão",
-            "preco": 173.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-mediterraneo",
-        "nome": "Camarão Mediterrâneo",
-        "categoria": "camaroes",
-        "descricao": "Camarões refogados no azeite com alho e cebola, servidos sobre arroz cremoso com manjericão, cobertos com molho branco e gratinados com muçarela e parmesão. Acompanha batata palha.",
-        "imagem": "/images/cardapio/camarao-mediterraneo.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos",
-          "Lactose",
-          "Leite"
-        ],
-        "acompanhamentos": [
-          "Arroz cremoso com manjericão",
-          "Batata palha artesanal"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3064",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "220g de Camarão",
-            "preco": 184.00
-          },
-          {
-            "codigo": "3031",
-            "porcao": "4 Pessoas",
-            "detalhe_peso": "380g de Camarão",
-            "preco": 255.00
-          }
-        ]
-      },
-      {
-        "id": "camarao-scampi",
-        "nome": "Camarão Scampi",
-        "categoria": "camaroes",
-        "descricao": "Espaguete com camarões, manteiga, alho, bacon crocante, parmesão, farinha panko e limão siciliano.",
-        "imagem": "/images/cardapio/camarao-scampi.png",
-        "tags_alimentares": [
-          "Glúten",
-          "Crustáceos"
-        ],
-        "acompanhamentos": [
-          "Espaguete ao molho Scampi"
-        ],
-        "possui_variacoes": true,
-        "variacoes": [
-          {
-            "codigo": "3085",
-            "porcao": "2 Pessoas",
-            "detalhe_peso": "220g de Camarão",
-            "preco": 154.00
-          },
-          {
-            "codigo": "3083",
-            "porcao": "4 Pessoas",
-            "detalhe_peso": "380g de Camarão",
-            "preco": 254.00
-          }
-        ]
-      },
-      {
-        "id": "caipirinha-tradicional",
-        "nome": "Caipirinha Tradicional",
-        "categoria": "drinks",
-        "descricao": "Clássico brasileiro elaborado com cachaça artesanal, limão fresco macerado, açúcar e cubos de gelo.",
-        "imagem": "/images/cardapio/caipirinha.png",
-        "tags_alimentares": [],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7001",
-        "bebida_base": "Cachaça",
-        "preco": 32.00,
-        "ingredientes": [
-          "Cachaça",
-          "Limão",
-          "Açúcar",
-          "Gelo"
-        ]
-      },
-      {
-        "id": "mojito-cubano",
-        "nome": "Mojito Cubano",
-        "categoria": "drinks",
-        "descricao": "Refrescante coquetel de origem caribenha com rum branco, folhas de hortelã fresca, suco de limão, açúcar, água com gás e gelo.",
-        "imagem": "/images/cardapio/mojito.png",
-        "tags_alimentares": [],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7002",
-        "bebida_base": "Rum",
-        "preco": 36.00,
-        "ingredientes": [
-          "Rum Branco",
-          "Hortelã",
-          "Limão",
-          "Açúcar",
-          "Água com Gás",
-          "Gelo"
-        ]
-      },
-      {
-        "id": "gin-tonica-classico",
-        "nome": "Gin Tônica Clássico",
-        "categoria": "drinks",
-        "descricao": "Harmoniosa combinação botânica de gin premium, água tônica cristalina, rodelas de limão siciliano, bagas de zimbro e muito gelo.",
-        "imagem": "/images/cardapio/gin-tonica.png",
-        "tags_alimentares": [],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7003",
-        "bebida_base": "Gin",
-        "preco": 39.00,
-        "ingredientes": [
-          "Gin",
-          "Água Tônica",
-          "Limão Siciliano",
-          "Zimbro",
-          "Gelo"
-        ]
-      },
-      {
-        "id": "aperol-spritz",
-        "nome": "Aperol Spritz",
-        "categoria": "drinks",
-        "descricao": "Ícone do aperitivo italiano composto por Aperol, espumante Prosecco, um splash de água com gás, meia-lua de laranja e gelo.",
-        "imagem": "/images/cardapio/aperol-spritz.png",
-        "tags_alimentares": [],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7004",
-        "bebida_base": "Espumante",
+        "id": "canja-galinha-caipira",
+        "nome": "Canja de Galinha Caipira 24hs",
+        "categoria": "sopas-cremes",
+        "descricao": "Caldo de galinha com ervas aromáticas e frango em cubos, arroz branco e legumes.[cite: 5]",
         "preco": 42.00,
-        "ingredientes": [
-          "Aperol",
-          "Espumante Prosecco",
-          "Água com Gás",
-          "Laranja",
-          "Gelo"
-        ]
+        "possui_variacoes": false
       },
       {
-        "id": "moscow-mule",
-        "nome": "Moscow Mule",
-        "categoria": "drinks",
-        "descricao": "Servido na tradicional caneca de cobre: vodka destilada, suco de limão taiti, xarope aromático de gengibre e suave espuma artesanal de gengibre com gelo.",
-        "imagem": "/images/cardapio/moscow-mule.png",
-        "tags_alimentares": [],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7005",
-        "bebida_base": "Vodka",
-        "preco": 38.00,
-        "ingredientes": [
-          "Vodka",
-          "Suco de Limão",
-          "Xarope de Gengibre",
-          "Espuma de Gengibre",
-          "Gelo"
-        ]
+        "id": "creme-macaxeira",
+        "nome": "Creme de Macaxeira",
+        "categoria": "sopas-cremes",
+        "descricao": "Creme de macaxeira com carne seca desfiada.[cite: 5]",
+        "preco": 48.00,
+        "possui_variacoes": false
       },
       {
-        "id": "pina-colada",
-        "nome": "Piña Colada",
-        "categoria": "drinks",
-        "descricao": "Bebida cremosa tropical que equilibra rum branco suave, leite de coco aveludado, suco de abacaxi selecionado, leite condensado e gelo batido.",
-        "imagem": "/images/cardapio/pina-colada.png",
-        "tags_alimentares": [
-          "Lactose",
-          "Leite"
-        ],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7006",
-        "bebida_base": "Rum",
-        "preco": 37.00,
-        "ingredientes": [
-          "Rum Branco",
-          "Leite de Coco",
-          "Suco de Abacaxi",
-          "Leite Condensado",
-          "Gelo"
-        ]
+        "id": "camaroes-du-chef",
+        "nome": "Camarões Du Chef",
+        "categoria": "do-mar",
+        "descricao": "Camarões grelhados à provençal. Servido com arroz cremoso de tomate seco e rúcula.[cite: 5]",
+        "preco": 94.00,
+        "possui_variacoes": false
       },
       {
-        "id": "margarita-classica",
-        "nome": "Margarita Tradicional",
-        "categoria": "drinks",
-        "descricao": "Clássico mexicano combinando tequila prata pura, licor fino de laranja Cointreau, suco de limão fresco e borda decorada com crosta de sal marinho.",
-        "imagem": "/images/cardapio/margarita.png",
-        "tags_alimentares": [],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7007",
-        "bebida_base": "Tequila",
-        "preco": 40.00,
-        "ingredientes": [
-          "Tequila Prata",
-          "Licor de Laranja",
-          "Suco de Limão",
-          "Sal",
-          "Gelo"
-        ]
+        "id": "camaroes-a-grega",
+        "nome": "Camarões a Grega",
+        "categoria": "do-mar",
+        "descricao": "Camarões empanados e recheados com queijo mussarela, servido com arroz a grega.[cite: 5]",
+        "preco": 86.00,
+        "possui_variacoes": false
       },
       {
-        "id": "negroni",
-        "nome": "Negroni Clássico",
-        "categoria": "drinks",
-        "descricao": "Coquetel secular italiano que reúne partes iguais de gin seco, bitter Campari e vermute tinto doce, finalizado com twist aromático de casca de laranja.",
-        "imagem": "/images/cardapio/negroni.png",
-        "tags_alimentares": [],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7008",
-        "bebida_base": "Gin",
-        "preco": 44.00,
-        "ingredientes": [
-          "Gin",
-          "Campari",
-          "Vermute Tinto",
-          "Casca de Laranja",
-          "Gelo"
-        ]
+        "id": "salmao-grelhado",
+        "nome": "Salmão Grelhado 24hs",
+        "categoria": "do-mar",
+        "descricao": "Salmão grelhado ao molho laranja com musseline de batata e arroz de castanha.[cite: 5]",
+        "preco": 93.00,
+        "possui_variacoes": false
       },
       {
-        "id": "dry-martini",
-        "nome": "Dry Martini",
-        "categoria": "drinks",
-        "descricao": "A sofisticação máxima em taça martini: gin London Dry gelado, toque sutil de vermute dry e azeitona verde premium espetada no palito.",
-        "imagem": "/images/cardapio/dry-martini.png",
-        "tags_alimentares": [],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7009",
-        "bebida_base": "Gin",
+        "id": "salmao-com-risoto",
+        "nome": "Salmão com Risoto",
+        "categoria": "do-mar",
+        "descricao": "Filé de salmão grelhado ao molho de laranja, acompanhado com risoto de camarão.[cite: 4]",
+        "preco": 98.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "peixe-belle-meuniere",
+        "nome": "Peixe a Belle Meunière",
+        "categoria": "do-mar",
+        "descricao": "Filé de peixe grelhado ao molho belle meunière (camarões, champignon, limão, alcaparras, manteiga e salsinha) Acompanhado de arroz branco e musseline de batata.[cite: 4]",
+        "preco": 84.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "peixe-do-dia",
+        "nome": "Peixe do Dia 24hs",
+        "categoria": "do-mar",
+        "descricao": "Filé de peixe grelhado em crosta de castanha, tomates e alho, com musseline de batata.[cite: 4]",
+        "preco": 65.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "medalhao-mignon-funghi",
+        "nome": "Medalhão de Mignon ao Funghi",
+        "categoria": "da-fazenda",
+        "descricao": "200 Gramas de filé mignon envolvidos com bacon, ao molho funghi, acompanhado de risoto de funghi e roti de ervas.[cite: 4]",
+        "preco": 94.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "file-mignon-molho-madeira",
+        "nome": "Filé Mignon ao Molho Madeira 24hs",
+        "categoria": "da-fazenda",
+        "descricao": "200 Gramas de filé mignon grelhado, com molho madeira tradicional, acompanhado de arroz à grega e batata frita.[cite: 4]",
+        "preco": 84.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "picadinho-carioca",
+        "nome": "Picadinho Carioca",
+        "categoria": "da-fazenda",
+        "descricao": "Picadinho de mignon com champignon, arroz branco, ovo pochê e batata frita.[cite: 4]",
+        "preco": 68.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "tapa-de-quadril",
+        "nome": "Tapa de Quadril",
+        "categoria": "da-fazenda",
+        "descricao": "Picanha importada grelhada com arroz biro biro, farofa de ovos e batata rústica.[cite: 4]",
+        "preco": 94.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "carne-de-sol-sertaneja",
+        "nome": "Carne de Sol Sertaneja",
+        "categoria": "da-fazenda",
+        "descricao": "Carne de sol com queijo coalho assado, sobre cama de macaxeira cozida, na manteiga de garrafa, baião de dois e molho vinagrete.[cite: 4]",
+        "preco": 89.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "file-mignon-parmegiana",
+        "nome": "Filé Mignon à Parmegiana",
+        "categoria": "da-fazenda",
+        "descricao": "Filé mignon à parmegiana com espaguete pomodoro.[cite: 4]",
+        "preco": 79.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "paillard-de-frango",
+        "nome": "Paillard de Frango",
+        "categoria": "da-fazenda",
+        "descricao": "Paillard de frango grelhado ao molho de ervas, acompanhado de fettuccine ao alfredo.[cite: 4]",
+        "preco": 59.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "peito-frango-grelhado",
+        "nome": "Peito de Frango Grelhado 24hs",
+        "categoria": "da-fazenda",
+        "descricao": "Peito de frango grelhado ao molho de ervas com arroz branco e legumes na manteiga.[cite: 4]",
+        "preco": 51.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "risoto-de-mignon",
+        "nome": "Risoto de Mignon",
+        "categoria": "risotos",
+        "descricao": "Arroz italiano com cubos de mignon, queijo parmesão, funghi, e tomates brullé.[cite: 3]",
+        "preco": 82.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "risoto-de-camarao",
+        "nome": "Risoto de Camarão",
+        "categoria": "risotos",
+        "descricao": "Arroz italiano com manjericão, queijo parmesão, rúcula, tomate seco e camarões.[cite: 3]",
+        "preco": 78.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "ravioli-04-queijos",
+        "nome": "Ravioli 04 Queijos",
+        "categoria": "massas",
+        "descricao": "Massa fresca com recheio de 04 queijos, ao molho de tomates frescos com manjericão e tomates confitados.[cite: 3]",
+        "preco": 63.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "espaguete-ragu-bolonhesa",
+        "nome": "Espaguete com Ragu de Bolonhesa 24hs",
+        "categoria": "massas",
+        "descricao": "Espaguete puxado ao molho bolonhesa, tomates frescos, manjericão e parmesão.[cite: 3]",
+        "preco": 57.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "misto-quente",
+        "nome": "Misto Quente 24hs",
+        "categoria": "sanduiches",
+        "descricao": "Pão de forma com queijo mussarela, presunto e tomate. Todos os sanduíches acompanham batata frita.[cite: 3]",
+        "preco": 39.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "club-sanduiche",
+        "nome": "Club Sanduíche 24hs",
+        "categoria": "sanduiches",
+        "descricao": "Pão de forma, peito de peru, bacon, ovos cozidos, alface, tomate e maionese. Todos os sanduíches acompanham batata frita.[cite: 3]",
         "preco": 45.00,
-        "ingredientes": [
-          "Gin",
-          "Vermute Dry",
-          "Azeitona Verde",
-          "Gelo"
-        ]
+        "possui_variacoes": false
       },
       {
-        "id": "caipiroska-morango",
-        "nome": "Caipiroska de Morango",
-        "categoria": "drinks",
-        "descricao": "Variação vibrante e frutada preparada com vodka selecionada, morangos frescos macerados na taça, açúcar e pedras de gelo.",
-        "imagem": "/images/cardapio/caipiroska-morango.png",
-        "tags_alimentares": [],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7010",
-        "bebida_base": "Vodka",
-        "preco": 35.00,
-        "ingredientes": [
-          "Vodka",
-          "Morango",
-          "Açúcar",
-          "Gelo"
-        ]
+        "id": "sanduiche-especial",
+        "nome": "Sanduíche Especial 24hs",
+        "categoria": "sanduiches",
+        "descricao": "Filé mignon grelhado, tomate seco, alface, ovo frito, queijo derretido e cream cheese no pão baguete. Todos os sanduíches acompanham batata frita.[cite: 3]",
+        "preco": 64.00,
+        "possui_variacoes": false
       },
       {
-        "id": "cuba-libre",
-        "nome": "Cuba Libre",
-        "categoria": "drinks",
-        "descricao": "Combinação clássica de rum carta ouro envelhecido, refrigerante de cola gelado, gotas de suco de limão taiti fresco e pedras de gelo.",
-        "imagem": "/images/cardapio/cuba-libre.png",
-        "tags_alimentares": [],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7011",
-        "bebida_base": "Rum",
+        "id": "hamburguer-premium",
+        "nome": "Hambúrguer Premium 24hs",
+        "categoria": "sanduiches",
+        "descricao": "Pão bola, hambúrguer artesanal de 180g, queijo derretido, cebolas caramelizadas, alface, tomate e molho da casa. Todos os sanduíches acompanham batata frita.[cite: 3]",
+        "preco": 52.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "x-salada",
+        "nome": "X Salada 24hs",
+        "categoria": "sanduiches",
+        "descricao": "Pão bola, hambúrguer de 180gr, queijo, tomate e alface com maionese artesanal. Todos os sanduíches acompanham batata frita.[cite: 3]",
+        "preco": 49.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "petit-gateau-chocolate",
+        "nome": "Petit Gateau de Chocolate",
+        "categoria": "sobremesas",
+        "descricao": "Petit gateau de chocolate com sorvete de creme.[cite: 2]",
+        "preco": 37.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "banana-flambada-sorvete",
+        "nome": "Banana Flambada com Sorvete",
+        "categoria": "sobremesas",
+        "descricao": "Banana flambada no conhaque, com canela e especiarias, servida com sorvete de creme.[cite: 2]",
         "preco": 32.00,
-        "ingredientes": [
-          "Rum Ouro",
-          "Refrigerante de Cola",
-          "Limão",
-          "Gelo"
-        ]
+        "possui_variacoes": false
       },
       {
-        "id": "coquetel-frutas-sem-alcool",
-        "nome": "Coquetel de Frutas Tropical",
-        "categoria": "drinks",
-        "descricao": "Opção refrescante sem álcool preparada com suco de laranja natural, suco de abacaxi fresco, xarope de groselha, leite condensado e gelo batido.",
-        "imagem": "/images/cardapio/coquetel-frutas.png",
-        "tags_alimentares": [
-          "Lactose",
-          "Leite"
-        ],
-        "acompanhamentos": [],
-        "possui_variacoes": false,
-        "codigo": "7012",
+        "id": "cartola-regional",
+        "nome": "Cartola (Regional) 24hs",
+        "categoria": "sobremesas",
+        "descricao": "Banana coberta de queijo coalho, açúcar e canela, servida com sorvete de creme.[cite: 2]",
+        "preco": 32.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "pudim-leite-condensado",
+        "nome": "Pudim de Leite Condensado 24hs",
+        "categoria": "sobremesas",
+        "descricao": "Pudim de leite condensado.[cite: 2]",
+        "preco": 25.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "frutas-da-estacao",
+        "nome": "Frutas da Estação 24hs",
+        "categoria": "sobremesas",
+        "descricao": "Frutas da estação.[cite: 2]",
+        "preco": 23.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "creme-papaya-cassis",
+        "nome": "Creme de Papaya com Cassis",
+        "categoria": "sobremesas",
+        "descricao": "Creme de papaya com licor de cassis.[cite: 2]",
         "preco": 28.00,
-        "ingredientes": [
-          "Suco de Laranja",
-          "Suco de Abacaxi",
-          "Groselha",
-          "Leite Condensado",
-          "Gelo"
-        ]
+        "possui_variacoes": false
+      },
+      {
+        "id": "taca-de-sorvete",
+        "nome": "Taça de Sorvete",
+        "categoria": "sobremesas",
+        "descricao": "Taça de sorvete.[cite: 2]",
+        "preco": 34.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "agua-mineral",
+        "nome": "Água Mineral Com e Sem Gás",
+        "categoria": "bebidas",
+        "descricao": "Água mineral com e sem gás.[cite: 2]",
+        "preco": 9.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "refrigerantes",
+        "nome": "Refrigerantes",
+        "categoria": "bebidas",
+        "descricao": "Refrigerantes variados.[cite: 2]",
+        "preco": 10.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "suco-frutas-copo",
+        "nome": "Suco de Frutas - Copo",
+        "categoria": "bebidas",
+        "descricao": "Copo de suco de frutas.[cite: 2]",
+        "preco": 14.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "suco-frutas-jarra",
+        "nome": "Suco de Frutas - Jarra",
+        "categoria": "bebidas",
+        "descricao": "Jarra de suco de frutas.[cite: 2]",
+        "preco": 29.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "energetico",
+        "nome": "Energético",
+        "categoria": "bebidas",
+        "descricao": "Energético.[cite: 2]",
+        "preco": 24.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "agua-tonica",
+        "nome": "Água Tônica",
+        "categoria": "bebidas",
+        "descricao": "Água tônica.[cite: 2]",
+        "preco": 12.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "agua-coco-copo",
+        "nome": "Água de Coco - Copo",
+        "categoria": "bebidas",
+        "descricao": "Copo de água de coco.[cite: 2]",
+        "preco": 14.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "agua-coco-jarra",
+        "nome": "Água de Coco - Jarra",
+        "categoria": "bebidas",
+        "descricao": "Jarra de água de coco.[cite: 2]",
+        "preco": 32.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "cafe-expresso",
+        "nome": "Café Expresso",
+        "categoria": "bebidas",
+        "descricao": "Café expresso.[cite: 2]",
+        "preco": 10.00,
+        "possui_variacoes": false
+      },
+      {
+        "id": "cafe-expresso-leite",
+        "nome": "Café Expresso com Leite",
+        "categoria": "bebidas",
+        "descricao": "Café expresso com leite.[cite: 2]",
+        "preco": 14.00,
+        "possui_variacoes": false
       }
     ]
   }

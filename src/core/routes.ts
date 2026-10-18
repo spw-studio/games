@@ -1,3 +1,5 @@
+import { isAuthDisabled } from './auth';
+
 /**
  * Rotas públicas (não exigem sessão).
  *
@@ -8,5 +10,9 @@
 const PUBLIC_PATHS = ['/jogos'] as const;
 
 export function isPublicPath(pathname: string): boolean {
+  if (isAuthDisabled()) {
+    return true;
+  }
   return (PUBLIC_PATHS as readonly string[]).includes(pathname);
 }
+

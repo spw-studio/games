@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { PlayerProfile } from '@/types/player';
+import { isAuthDisabled } from '@/core/auth';
 import {
   createDefaultPlayerProfile,
   createGooglePlayerProfile,
@@ -18,6 +19,21 @@ export function usePlayer() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    // Com autenticação desativada, usamos o perfil local do navegador
+    if (isAuthDisabled()) {
+      const existing = getPlayerProfile();
+      if (existing) {
+        touchPlayerActivity();
+        setPlayer(existing);
+      } else {
+        const defaultProfile = createDefaultPlayerProfile('Colaborador');
+        setPlayer(defaultProfile);
+      }
+      setIsModalOpen(false);
+      setIsLoaded(true);
+      return;
+    }
+
     if (status === 'loading') return;
 
     const existing = getPlayerProfile();
